@@ -3,11 +3,14 @@
     --color-text-alpha:#08518B;
     --color-alpha-yellow: #F8F067;
     --color-alpha-yellowII:#D4CB2F;
+    
+    /* font */
+    --font-family: Sniglet;
 
 }
 html{
     /* font */
-    font-family:'Sniglet', cursive;
+    font-family:var(--font-family);
     
     /* background afbeelding */
     background-image: url(/site/img/background.svg);
@@ -35,6 +38,7 @@ a{
 
 /* voor responsive add css grid */
 .c-button{ 
+    font-family: var(--font-family);
     height: 101px;
     margin-top: 10%;
     margin-left: 8%;

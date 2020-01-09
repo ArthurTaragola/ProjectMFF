@@ -20,6 +20,7 @@ html{
     width: auto;
     background-size: cover;
     background-attachment: fixed;
+    color: var(--color-text-alpha);
 
     
 }
@@ -54,4 +55,26 @@ a{
     background-color: #FFFAA3;
     border-color: var(--color-alpha-yellow);
     transition-duration: 0.4s;
+}
+
+.c-global{
+    display: grid;
+    grid-template-columns: 33% auto 33%;
+    grid-gap: 0;
+}
+
+.c-card
+{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    background-color: var(--color-alpha-yellow);
+    border: solid 8px var(--color-alpha-yellowII);
+    margin-top: 20%;
+    margin-bottom: 10%;
+    height: 500px;
+}
+
+.c-form{
+    margin-left: 10%;
 }

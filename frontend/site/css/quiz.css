@@ -1,0 +1,74 @@
+/*------------------------------------*\
+#Variables
+\*------------------------------------*/
+
+:root {
+    /* Global colors */
+
+    --global-color-alpha: #08518B;
+
+
+
+    --global-color-neutral: #F8F067;
+    --global-color-neutral-dark: #D4CB2F;
+
+
+    /* Baseline settings */
+    --global-baseline: 8px;         
+    --global-whitespace: calc(var(--global-baseline) * 3); /* = 24px */
+
+    --global-whitespace-xs: calc(var(--global-baseline) / 2); /* = 4px */
+    --global-whitespace-sm: calc(var(--global-baseline) * 1); /*  = 8px */
+    --global-whitespace-md: calc(var(--global-baseline) * 2); /*  = 16px */
+    --global-whitespace-lg: calc(var(--global-baseline) * 4); /*  = 32px */
+    --global-whitespace-xl: calc(var(--global-whitespace) * 2); /*  = 48px */
+    --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
+}
+
+html{
+    font-family:'Sniglet', cursive;
+    color: #08518B;
+    background-image: url("../img/background.svg");
+    top:0;
+  
+    /* Full height */
+    width:auto;
+    height:auto;
+  
+    /* Center and scale the image nicely */
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    
+}
+.title{
+    font-size: 60px;
+    margin-left: 64px;
+    margin-top: 64px;
+}
+
+.c-buttons{
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 120px;
+}
+
+.c-button{
+    font-size: 42px;
+    font-family:'Sniglet', cursive;
+    color: var(--global-color-alpha);
+
+
+    background-color: var(--global-color-neutral);
+
+
+    border: 4px solid var(--global-color-neutral-dark); 
+    padding-left: 153px;
+    padding-right: 153px; 
+    padding-top: 34px;
+    padding-bottom: 34px; 
+}

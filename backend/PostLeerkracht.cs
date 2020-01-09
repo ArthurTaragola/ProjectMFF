@@ -15,40 +15,39 @@ namespace MoveForFortune
 {
     public static class PostLeerkracht
     {
-        [FunctionName("PostLeerkracht")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "v2/leerkrachten")] HttpRequest req,
-            ILogger log)
-        {
-            try
-            {
-                string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
+    //    [FunctionName("PostLeerkracht")]
+    //    public static async Task<IActionResult> Run(
+    //        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "v2/leerkrachten")] HttpRequest req,
+    //        ILogger log)
+    //    {
+    //        try
+    //        {
+    //            string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
+    //            string json = await new StreamReader(req.Body).ReadToEndAsync();
+    //            Leerkracht newLeerkracht = JsonConvert.DeserializeObject<Leerkracht>(json);
+    //            //newLeerkracht.RegistrationId = Guid.NewGuid().ToString();//guid genereert een uniek id
 
-                string json = await new StreamReader(req.Body).ReadToEndAsync();
-                //newLeerkracht.RegistrationId = Guid.NewGuid().ToString();//guid genereert een uniek id
+    //            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+    //            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+    //            CloudTable table = tableClient.GetTableReference("Leerkracht");
 
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
-                CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-                CloudTable table = tableClient.GetTableReference("Leerkracht");
+    //            Leerkracht leerkracht = new Leerkracht()
+    //            {
+    //                Voornaam = newLeerkracht.Voornaam,
+    //                Naam = newLeerkracht.Naam,
+    //                Email = newLeerkracht.Email,
+    //                Wachtwoord = newLeerkracht.Wachtwoord
+    //            };
 
-                Leerkracht newLeerkracht = JsonConvert.DeserializeObject<Leerkracht>(json);
-                {
-                    VoorNaam = newLeerkracht.Voornaam,
-                    Naam = newLeerkracht.Naam,
-                    Email = newLeerkracht.Email,
-                    Wachtwoord = newLeerkracht.Wachtwoord,
-                    ThemaId = newLeerkracht.ThemaId,
-                };
-
-                TableOperation insertOperation = TableOperation.Insert(ent);
-                await table.ExecuteAsync(insertOperation);
-                return new OkObjectResult(newLeerkracht);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, "AddRegistrationV2");
-                return new StatusCodeResult(500);
-            }
-        }
+    //            TableOperation insertOperation = TableOperation.Insert(leerk racht);
+    //            await table.ExecuteAsync(insertOperation);
+    //            return new OkObjectResult(newLeerkracht);
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            log.LogError(ex, "AddRegistrationV2");
+    //            return new StatusCodeResult(500);
+    //        }
+    //    }
     }
 }

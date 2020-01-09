@@ -86,7 +86,7 @@
      transform="translate(0,-308.26774)"
      style="display:inline;opacity:1">
     <rect
-       style="display:inline;opacity:1;fill:#e9f6fe;fill-opacity:1;stroke:none;stroke-width:35.40826797;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="display:inline;opacity:1;fill:#B7DAEF;fill-opacity:1;stroke:none;stroke-width:35.40826797;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6824"
        width="1511.8069"
        height="741.1792"
@@ -1405,7 +1405,7 @@
     </g>
     <g
        id="g9531"
-       transform="matrix(0.14211636,0,0,0.14211636,-1334.1994,1019.2835)"
+       transform="matrix(0.14211636,0,0,0.14211636,-1450.1994,920.2835)"
        style="stroke:none">
       <path
          inkscape:connector-curvature="0"

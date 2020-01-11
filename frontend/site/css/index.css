@@ -14,7 +14,7 @@ html{
     font-family:var(--font-family);
     
     /* background afbeelding */
-    background-image: url(/site/img/background.svg);
+    background-image: url(../img/background.svg);
     background-repeat:no-repeat;
     height: auto;
     width: auto;
@@ -41,14 +41,23 @@ a{
 /* voor responsive add css grid */
 .c-button{ 
     font-family: var(--font-family);
+    border: 4px solid var(--color-alpha-yellowII);
+    color: var(--color-text-alpha);
+    background-color: var(--color-alpha-yellow);
+}
+
+.c-button-index{
     height: 101px;
     font-size: 30px;
     margin-top: 10%;
     margin-left: 8%;
     width: 351px;
-    border: 4px solid var(--color-alpha-yellowII);
-    color: var(--color-text-alpha);
-    background-color: var(--color-alpha-yellow);
+}
+
+.c-button-login{
+    height: 73px;
+    width: 230px;
+    font-size: 20px;
 }
 
 .c-button:hover{
@@ -73,6 +82,9 @@ a{
     margin-top: 20%;
     margin-bottom: 10%;
     height: 500px;
+    display: grid;
+    grid-template-columns: 64px auto 64px;
+    grid-template-rows: auto auto auto auto auto auto;
 }
 
 .c-form{

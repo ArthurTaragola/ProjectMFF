@@ -83,10 +83,25 @@ a{
     margin-bottom: 10%;
     height: 500px;
     display: grid;
-    grid-template-columns: 64px auto 64px;
-    grid-template-rows: auto auto auto auto auto auto;
+    /* grid-template-columns: 64px auto 64px;
+    grid-template-rows: auto auto auto auto auto auto; */
 }
 
 .c-form{
+    display: grid;
     margin-left: 10%;
+}
+
+.u-grid-collumnspan-1
+{
+    grid-column: span 1;
+}
+
+.u-grid-collumnspan-4
+{
+    grid-column: span 4;
+}
+
+.u-grid-collumnspan-6{
+    grid-column: span 6;
 }

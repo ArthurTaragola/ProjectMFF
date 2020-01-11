@@ -8,13 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using MoveForFortune.Models;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
 using System.Data.SqlClient;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Net.Http;
 
 namespace MoveForFortune
 {

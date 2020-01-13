@@ -15,14 +15,13 @@ using System.Diagnostics;
 
 namespace MoveForFortune
 {
-    public static class OphalenData
+    public static class GetVragen
     {
-        [FunctionName("OphalenData")]
-
-        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
+        [FunctionName("GetVragen")]
+        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/vragen")] HttpRequest req, ILogger log)
         {
             string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
-            List<Leerkracht> LeerkrachtList = new List<Leerkracht>();
+            List<Vraag> VraagList = new List<Vraag>();
             log.LogInformation("C# HTTP trigger function processed a request.");
             try
             {
@@ -33,24 +32,26 @@ namespace MoveForFortune
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = connection;
-                        sqlCommand.CommandText = "SELECT * FROM Leerkracht"; //SQL command
+                        sqlCommand.CommandText = "SELECT * FROM Vragen"; //SQL command
                         SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
 
                         // while not always needed
                         while (await reader.ReadAsync())
                         {
-                            LeerkrachtList.Add(new Leerkracht()
+                            VraagList.Add(new Vraag()
                             {
-                                LeerkrachtId = int.Parse(reader["LeerkrachtId"].ToString()),
-                                Voornaam = reader["Voornaam"].ToString(),
-                                Naam = reader["Naam"].ToString(),
-                                Email = reader["Email"].ToString(),
-                                Wachtwoord = reader["Wachtwoord"].ToString()
+                                VraagId = int.Parse(reader["VraagId"].ToString()),
+                                Vraagstelling = reader["Vraagstelling"].ToString(),
+                                JuistAntwoord = reader["JuistAntwoord"].ToString(),
+                                FoutAntwoord1 = reader["Foutantwoord1"].ToString(),
+                                FoutAntwoord2 = reader["Foutantwoord2"].ToString(),
+                                Niveau = int.Parse(reader["Niveau"].ToString()),
+                                ThemaId = int.Parse(reader["ThemaId"].ToString())
                             });
                         }
                     }
                 }
-                return new OkObjectResult(LeerkrachtList);
+                return new OkObjectResult(VraagList);
             }
             catch (Exception x)
             {

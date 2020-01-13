@@ -12,14 +12,23 @@
 </head>
 <body>
     <h1 class="title">Kies het gewenste thema!</h1>
-    <div class= "c-buttons-thema">
-        <a href="../site/thema's.html"><button class= "c-button-thema">Cultuur</button></a>
-        <a href="../site/thema's.html"><button class= "c-button-thema">Sport</button></a>
-        <a href="../site/thema's.html"><button class= "c-button-thema">Technologie</button></a>
-        <a href="../site/thema's.html"><button class= "c-button-thema">Natuur</button></a>
-        <a href="../site/thema's.html"><button class= "c-button-thema">Actua</button></a>
-        <a href="../site/thema's.html"><button class= "c-button-thema">Wetenschap</button></a>
+    <div >
+        <form action="" method="post">
+            <div class= "c-buttons-thema" >
+                <input type="checkbox" name="thema1" value="Cultuur" class="hidden" name="cb" id="cb"> 
+                <label for="cb">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="addbutton" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    Cultuur</label>
+                <input type="checkbox" name="thema2" value="Sport" class="hidden" name="cb1" id="cb1"> <label for="cb1">Sport</label>
+                <input type="checkbox" name="thema3" value="Technologie" class="hidden" name="cb2" id="cb2"> <label for="cb2">Technologie</label>
+                <input type="checkbox" name="thema4" value="Natuur" class="hidden" name="cb3" id="cb3"> <label for="cb3">Natuur</label>
+                <input type="checkbox" name="thema5" value="Actua" class="hidden" name="cb4" id="cb4"> <label for="cb4">Actua</label>
+                <input type="checkbox" name="thema6" value="Wetenschap" class="hidden" name="cb5" id="cb5"> <label for="cb5">Wetenschap</label>
+            </div>
+            <a href="../site/vragenquiz.html"><button class= "c-button-start">Start Quiz</button></a>
+        </form>
     </div>
-    <button class= "c-button-start">Start Quiz</button>
+    
 </body>
 </html>

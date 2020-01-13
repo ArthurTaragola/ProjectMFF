@@ -15,6 +15,7 @@ using System.Diagnostics;
 
 namespace MoveForFortune
 {
+
     public static class DeleteVraag
     {
         [FunctionName("DeleteVraag")]

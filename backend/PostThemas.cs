@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 
 namespace MoveForFortune
 {
+
     public static class PostThemas
     {
         [FunctionName("PostThemas")]

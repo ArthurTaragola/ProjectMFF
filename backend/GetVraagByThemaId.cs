@@ -24,7 +24,6 @@ namespace MoveForFortune
             log.LogInformation("C# HTTP trigger function processed a request.");
             try
             {
-
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();

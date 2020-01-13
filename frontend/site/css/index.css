@@ -60,6 +60,14 @@ a{
     font-size: 20px;
 }
 
+.c-card-vragen{
+    height: 300px;
+    width: 200px;
+    background-color: var(--color-alpha-yellow);
+    border: 4px solid var(--color-alpha-yellowII);
+    margin-top: 60px;
+}
+
 .c-button:hover{
     background-color: #FFFAA3;
     border-color: var(--color-alpha-yellow);
@@ -124,3 +132,64 @@ input:focus {
     outline: none; */
     /* box-shadow: 0 30px 40px var(--color-alpha-yellowII); */
   }
+
+.c-grid
+{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    min-height: 100%;
+}
+
+.c-grid__item
+{
+    /* grid-column: span 6; */
+    grid-column: 1/-1;
+}
+
+.u-grid-col-span-3
+{
+    grid-column: span 3;
+}
+
+.u-grid-col-span-2
+{
+    grid-column: span 2;
+}
+
+.u-grid-col-span-1
+{
+    grid-column: span 1;
+}
+
+.u-grid-col-span-4
+{
+    grid-column: span 4;
+}
+
+.u-grid-col-span-5
+{
+    grid-column: span 5;
+}
+
+.u-grid-col-span-6
+{
+    grid-column: span 6;
+}
+
+
+
+
+.u-grid-row-span-3
+{
+    grid-row: span 3;
+}
+
+.u-grid-row-span-2
+{
+    grid-row: span 2;
+}
+
+.u-grid-row-span-1
+{
+    grid-row: span 1;
+}

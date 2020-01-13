@@ -43,8 +43,8 @@ namespace MoveForFortune
                                 VraagId = int.Parse(reader["VraagId"].ToString()),
                                 Vraagstelling = reader["Vraagstelling"].ToString(),
                                 JuistAntwoord = reader["JuistAntwoord"].ToString(),
-                                Foutantwoord1 = reader["Foutantwoord1"].ToString(),
-                                Foutantwoord2 = reader["Foutantwoord2"].ToString(),
+                                FoutAntwoord1 = reader["Foutantwoord1"].ToString(),
+                                FoutAntwoord2 = reader["Foutantwoord2"].ToString(),
                                 Niveau = int.Parse(reader["Niveau"].ToString()),
                                 ThemaId = int.Parse(reader["ThemaId"].ToString())
                             });

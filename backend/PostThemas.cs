@@ -12,18 +12,18 @@ using System.Data.SqlClient;
 
 namespace MoveForFortune
 {
-    public static class PostLeerkracht
+    public static class PostThemas
     {
-        [FunctionName("PostLeerkracht")]
+        [FunctionName("PostThemas")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "v2/leerkrachten")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous ,"post", Route = "v2/themas")] HttpRequest req,
             ILogger log)
         {
             try
             {
                 string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
                 string json = await new StreamReader(req.Body).ReadToEndAsync();
-                Leerkracht leerkracht = JsonConvert.DeserializeObject<Leerkracht>(json);
+                Thema thema = JsonConvert.DeserializeObject<Thema>(json);
                 using (SqlConnection con = new SqlConnection())
                 {
                     con.ConnectionString = connectionString;
@@ -31,19 +31,16 @@ namespace MoveForFortune
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "Insert into Leerkracht values (@Voornaam, @Naam,  @Email, @Wachtwoord)";
-                        cmd.Parameters.AddWithValue("@Voornaam", leerkracht.Voornaam);
-                        cmd.Parameters.AddWithValue("@Naam", leerkracht.Naam);
-                        cmd.Parameters.AddWithValue("@Email", leerkracht.Email);
-                        cmd.Parameters.AddWithValue("@Wachtwoord", leerkracht.Wachtwoord);
+                        cmd.CommandText = "Insert into Themas values (@Naam)";
+                        cmd.Parameters.AddWithValue("@Naam", thema.Naam);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
                 return new StatusCodeResult(200);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.LogError(ex + "     -Leerkracht");
+                log.LogError(ex + "     -Themas");
                 return new StatusCodeResult(500);
             }
         }

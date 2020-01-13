@@ -103,6 +103,10 @@ a{
     margin-top: 32px;
 }
 
+.c-card-item__btnaanmelden{
+    margin-top: 16px;
+}
+
 .c-card-item__form{
     max-width: 50%;
     margin-left: 15%;

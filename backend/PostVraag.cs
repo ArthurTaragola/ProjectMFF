@@ -31,7 +31,7 @@ namespace MoveForFortune
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "Insert into Leerkracht values (@Vraagstelling, @JuistAntwoord,  @FoutAntwoord1, @FoutAntwoord2, @Niveau, @ThemaId)";
+                        cmd.CommandText = "Insert into Vragen values (@ThemaId,@Vraagstelling, @JuistAntwoord,  @FoutAntwoord1, @FoutAntwoord2, @Niveau)";
                         cmd.Parameters.AddWithValue("@Vraagstelling", vraag.Vraagstelling);
                         cmd.Parameters.AddWithValue("@JuistAntwoord", vraag.JuistAntwoord);
                         cmd.Parameters.AddWithValue("@FoutAntwoord1", vraag.FoutAntwoord1);

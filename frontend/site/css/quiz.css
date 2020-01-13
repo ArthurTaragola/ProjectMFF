@@ -46,7 +46,7 @@ html{
 
 .hidden {position:absolute;visibility:hidden;opacity:0;}
 input[type=checkbox] + label {
-    font-size: 42px;
+    font-size: 36px;
     padding-top: 5%;
     padding-bottom: 5%; 
     margin-bottom: 5%;
@@ -60,7 +60,7 @@ input[type=checkbox] + label {
 
 } 
 input[type=checkbox]:checked + label {
-    font-size: 42px;
+    font-size: 36px;
     padding-top: 5%;
     padding-bottom: 5%; 
     margin-bottom: 5%;
@@ -71,8 +71,6 @@ input[type=checkbox]:checked + label {
     background-color: var(--global-color-neutral);
     border: 4px solid var(--global-color-neutral-dark); 
     text-align: center;
-    --button-add: hidden;
-    --button-check: visible;
 
 }
 
@@ -83,7 +81,11 @@ input[type=checkbox]:checked + label {
 }
 
 .checkbutton{
-    visibility: hidden;
+    display: none;
+}
+
+.svg-button{
+    margin-right: 5%;
 }
 
 .c-buttons{
@@ -174,4 +176,47 @@ input[type=checkbox]:checked + label {
     border-color: var(--global-color-neutral);
     transition-duration: 0.4s;
 }
+.question{
+    font-family:'Sniglet', cursive;
+    font-size: 64px;
+    text-align: center;
+    margin-top: 6%;
+}
 
+.progress-bar {
+    margin-top: 15%;
+    width: 70%;
+    margin-left: 15%;
+    height: 10px;
+    background: var(--global-color-neutral);
+    padding: 3px;
+    border: none; 
+}
+
+.progress-bar-fill {
+    display: block;
+    height: 10px;
+    background: #73AC40;
+    /*transition: width 250ms ease-in-out;*/
+    transition: width 10s ease-in-out;
+}
+
+.answer{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 15%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10%;
+}
+
+.c-button-antwoord{
+    font-size: 42px;
+    font-family:'Sniglet', cursive;
+    color: var(--global-color-alpha);
+    background-color: var(--global-color-neutral);
+    border: 4px solid var(--global-color-neutral-dark); 
+    padding-top: 8%;
+    padding-bottom: 8%; 
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}

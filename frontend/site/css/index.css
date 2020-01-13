@@ -35,7 +35,7 @@ a{
     color: var(--color-text-alpha);
     text-align: center;
     margin-top: 10%;
-    font-size: 40px;
+    font-size: 32px;
 }
 
 /* voor responsive add css grid */
@@ -87,21 +87,36 @@ a{
     grid-template-rows: auto auto auto auto auto auto; */
 }
 
-.c-form{
-    display: grid;
-    margin-left: 10%;
+.c-card-item__input{
+    margin-left: 15%;
 }
 
-.u-grid-collumnspan-1
-{
-    grid-column: span 1;
+.c-card-item__home{
+    margin-left: 16px;
+    margin-top: 10px;
 }
 
-.u-grid-collumnspan-4
-{
-    grid-column: span 4;
+.c-card-item__btn{
+    margin-left: 20%;
+    max-width: 50%;
+    text-align: center;
+    margin-top: 32px;
 }
 
-.u-grid-collumnspan-6{
-    grid-column: span 6;
+.c-card-item__form{
+    max-width: 50%;
+    margin-left: 15%;
+    margin-top: 32px;
 }
+
+.c-input{
+    width: 300px;
+}
+
+input:focus {
+    /* outline-color: coral; */
+    outline-color: var(--color-text-alpha);
+    /* border: 3px solid var(--color-alpha-yellowII);
+    outline: none; */
+    /* box-shadow: 0 30px 40px var(--color-alpha-yellowII); */
+  }

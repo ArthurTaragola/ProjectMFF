@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Move For Fortune - QUIZ</title>
+    <link rel="stylesheet" href="/css/quiz.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+
+</head>
+<body>
+    <div class="question" >Hoelang duurt een voetbalwedstrijd?</div>
+    <div class="progress-bar" id="progress-bar">
+        <span class="progress-bar-fill" style="width: 0%"></span>
+    </div>
+    <div class= "answer" id="answer">
+        <button class= "c-button-antwoord">A) 120 min</button>
+        <button class= "c-button-antwoord">B) 40 min</button>
+        <button class= "c-button-antwoord">C) 90 min</button>
+    </div>
+</body>
+<script type="text/javascript">
+    $('.progress-bar-fill').delay(1000).queue(function () {$(this).css('width', '100%')});
+    setTimeout(function() {$('#progress-bar').fadeOut('fast');}, 10000);
+    $(document).ready(function () {
+          // Hide the div
+          $("#answer").hide();
+          // Show the div after 5s
+          $("#answer").delay(10100).fadeIn('fast');  
+      });    
+</script>
+</html>

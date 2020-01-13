@@ -10,14 +10,14 @@ const toggleStatus = function(thema)
     if (added)
     {
         console.log("added thema "+thema);
-        document.getElementById(`js-addbutton_thema${thema+1}`).style.visibility = 'hidden';
-        document.getElementById(`js-checkbutton_thema${thema+1}`).style.visibility = 'visible';
+        document.getElementById(`js-addbutton_thema${thema+1}`).style.display = 'none';
+        document.getElementById(`js-checkbutton_thema${thema+1}`).style.display = 'inline';
     }
     else
     {
         console.log("removed thema "+thema);
-        document.getElementById(`js-addbutton_thema${thema+1}`).style.visibility = 'visible';
-        document.getElementById(`js-checkbutton_thema${thema+1}`).style.visibility = 'hidden';
+        document.getElementById(`js-addbutton_thema${thema+1}`).style.display = 'inline';
+        document.getElementById(`js-checkbutton_thema${thema+1}`).style.display = 'none';
     }
 
 }

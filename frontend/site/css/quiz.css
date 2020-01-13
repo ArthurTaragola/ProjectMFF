@@ -82,6 +82,10 @@ input[type=checkbox]:checked + label {
     margin-top: 6%;
 }
 
+.checkbutton{
+    visibility: hidden;
+}
+
 .c-buttons{
     margin-left: 35%;
     margin-right: 35%;

@@ -33,6 +33,7 @@ namespace MoveForFortune
                         sqlCommand.Connection = connection;
                         sqlCommand.CommandText = "Delete FROM Vragen WHERE VraagId = @vraagId;"; //SQL command
                         sqlCommand.Parameters.AddWithValue("@vraagId", vraagId);
+                        await sqlCommand.ExecuteNonQueryAsync();
                     }
                 }
                 return new StatusCodeResult(200);

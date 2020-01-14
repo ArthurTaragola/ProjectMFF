@@ -12,11 +12,12 @@ using System.Data.SqlClient;
 
 namespace MoveForFortune
 {
+
     public static class PostVraag
     {
         [FunctionName("PostVraag")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "v2/vragen")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v2/vragen")] HttpRequest req,
             ILogger log)
         {
             try

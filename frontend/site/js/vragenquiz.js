@@ -8,7 +8,7 @@ let answerteam1;
 let answerteam2;
 
 let shuffledAnswers;
-let correctAnswer;
+let correctAnswerIndex;
 
 let fastestTeam;
 
@@ -74,7 +74,7 @@ const getData = function(data)
     htmlAnswer = `<button class= "c-button-antwoord" id="C">C) ${shuffledAnswers[2]}</button>`;
     document.getElementById("js-C").innerHTML = htmlAnswer;
     //console.log(shuffledAnswers);
-    correctAnswer = shuffledAnswers.indexOf(answers[0]);
+    correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
 }
 
 const shuffle = function(list)
@@ -161,11 +161,12 @@ const assignAnswer = function(team, answer)
 const bothTeamsAnswered = function()
 {
     let possibleAnswers = ["A", "B", "C"];
+    let correctAnswer = shuffledAnswers[correctAnswerIndex];
     //go to next page (show right answer)
     console.log("team 1: " + answerteam1);
     console.log("team 2: " + answerteam2);
-    setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswer]}`).style.backgroundColor = '#75C461';}, 2000);
-    setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswer]}`).style.borderColor = '#63AC70';}, 2000);
+    setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.backgroundColor = '#75C461';}, 2000);
+    setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.borderColor = '#63AC70';}, 2000);
     if (fastestTeam == 1)
     {
         if (answerteam1 == correctAnswer)

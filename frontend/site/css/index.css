@@ -4,6 +4,7 @@
     --color-text-alpha:#08518B;
     --color-alpha-yellow: #F8F067;
     --color-alpha-yellowII:#D4CB2F;
+    --color-alpha-yellow-light: #FFFAA3;
     
     /* font */
     --font-family: Sniglet;
@@ -25,6 +26,11 @@ html{
     
 }
 
+tr:nth-child(even) 
+{
+    background-color: var(--color-alpha-yellow-light);
+}
+
 a{
     text-decoration: none;
     color:var(--color-text-alpha);
@@ -40,6 +46,25 @@ a{
     text-align: center;
     margin-top: 10%;
     font-size: 32px;
+}
+
+.c-title-vragen{
+    text-align: left;
+}
+
+.c-titletable{
+    font-size: 24px;
+}
+
+.c-title-table{
+    background-color: var(--color-alpha-yellowII);
+    text-align: left;
+    width: 100%;
+}
+
+.c-table{
+    width: 100%;
+    background-color: var(--color-alpha-yellow);
 }
 
 /* voor responsive add css grid */
@@ -150,6 +175,8 @@ input:focus {
     grid-column: 1/-1;
 }
 
+
+/* UTILITIES */
 .u-grid-col-span-3
 {
     grid-column: span 3;

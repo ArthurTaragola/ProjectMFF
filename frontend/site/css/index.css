@@ -10,6 +10,10 @@
     --font-family: Sniglet;
 
 }
+
+table{
+    border-spacing: 0px;
+}
 html{
     /* font */
     font-family:var(--font-family);
@@ -24,11 +28,6 @@ html{
     color: var(--color-text-alpha);
 
     
-}
-
-tr:nth-child(even) 
-{
-    background-color: var(--color-alpha-yellow-light);
 }
 
 a{
@@ -65,6 +64,11 @@ a{
 .c-table{
     width: 100%;
     background-color: var(--color-alpha-yellow);
+}
+
+.c-table-color:nth-child(even) 
+{
+    background-color: var(--color-alpha-yellow-light);
 }
 
 /* voor responsive add css grid */

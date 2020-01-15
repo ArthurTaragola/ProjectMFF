@@ -41,7 +41,8 @@ namespace MoveForFortune
                             VraagList.Add(new Thema()
                             {
                                 ThemaId = int.Parse(reader["ThemaId"].ToString()),
-                                Naam = reader["Naam"].ToString()
+                                Naam = reader["Naam"].ToString(),
+                                LeerkrachtId = int.Parse(reader["LeerkrachtId"].ToString())
                             });
                         }
                     }

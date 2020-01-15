@@ -176,15 +176,6 @@ input[type=checkbox]:checked + label {
     margin-right: 5%;
     margin-top: 7%;
 }
-
-<<<<<<< HEAD
-=======
-.c-button-start:hover{
-    background-color: #FFFAA3;
-    border-color: var(--global-color-neutral);
-    transition-duration: 0.4s;
-}
-
 .c-button-volgende{
     font-size: 32px;
     font-family:'Sniglet', cursive;
@@ -197,13 +188,11 @@ input[type=checkbox]:checked + label {
     margin-right: 5%;
     margin-top: 3%;
 }
-
 .c-button-volgende:hover{
     background-color: #FFFAA3;
     border-color: var(--global-color-neutral);
     transition-duration: 0.4s;
 }
->>>>>>> develop
 .question{
     font-family:'Sniglet', cursive;
     font-size: 64px;

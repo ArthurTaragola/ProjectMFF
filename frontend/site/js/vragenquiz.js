@@ -5,12 +5,17 @@ let team1answered;
 let team2answered;
 
 let answerteam1;
+let answerteam1Index;
 let answerteam2;
+let answerteam2Index;
 
 let shuffledAnswers;
 let correctAnswerIndex;
 
 let fastestTeam;
+
+let audioTeam1 = new Audio('/sounds/Yeet.mp3');
+let audioTeam2 = new Audio('/sounds/Quack.mp3')
 
 
 const loadbar = function()
@@ -133,8 +138,10 @@ const assignAnswer = function(team, answer)
     {
         if (!team1answered)
         {
+            answerteam1Index = answer;
             answerteam1 = shuffledAnswers[answer];
             console.log("team " + team + ", answered " + answerteam1);
+            audioTeam1.play();
             team1answered = true;
             if (team2answered)
             {
@@ -147,8 +154,10 @@ const assignAnswer = function(team, answer)
     {
         if (!team2answered)
         {
+            answerteam2Index = answer;
             answerteam2 = shuffledAnswers[answer];
             console.log("team "+ team +", answered "+ answerteam2);
+            audioTeam2.play();
             team2answered = true;
             if (team1answered)
             {
@@ -167,6 +176,16 @@ const bothTeamsAnswered = function()
     console.log("team 2: " + answerteam2);
     setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.backgroundColor = '#75C461';}, 2000);
     setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.borderColor = '#63AC70';}, 2000);
+    if (answerteam1 != correctAnswer)
+    {
+        setTimeout(() => {document.getElementById(`${possibleAnswers[answerteam1Index]}`).style.backgroundColor = '#E98B5D';}, 2000);
+        setTimeout(() => {document.getElementById(`${possibleAnswers[answerteam1Index]}`).style.borderColor = '#E96220';}, 2000);
+    }
+    if (answerteam2 != correctAnswer)
+    {
+        setTimeout(() => {document.getElementById(`${possibleAnswers[answerteam2Index]}`).style.backgroundColor = '#E98B5D';}, 2000);
+        setTimeout(() => {document.getElementById(`${possibleAnswers[answerteam2Index]}`).style.borderColor = '#E96220';}, 2000);
+    }
     if (fastestTeam == 1)
     {
         if (answerteam1 == correctAnswer)

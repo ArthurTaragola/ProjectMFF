@@ -25,6 +25,7 @@ const toggleStatus = function(thema)
 const init = function()
 {
     console.log("DOM Loaded");
+    console.log(localStorage.getItem("niveauLevel"));
     for (let i = 0; i < amountOfThemes; i++)
     {
         temp = document.querySelector(`.js-thema${i+1}`);

@@ -17,8 +17,7 @@ namespace MoveForFortune
     {
         [FunctionName("PostThemas")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous ,"post", Route = "v2/themas")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous ,"post", Route = "v2/themas/{leerkrachtId}")] HttpRequest req, int leerkrachtId, ILogger log)
         {
             try
             {
@@ -32,8 +31,9 @@ namespace MoveForFortune
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "Insert into Themas values (@Naam)";
+                        cmd.CommandText = "Insert into Themas values (@Naam, @LeerkrachtId)";
                         cmd.Parameters.AddWithValue("@Naam", thema.Naam);
+                        cmd.Parameters.AddWithValue("@LeerkrachtId", leerkrachtId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }

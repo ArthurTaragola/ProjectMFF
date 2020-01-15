@@ -8,5 +8,6 @@ namespace MoveForFortune.Models
     {
         public int ThemaId { get; set; }
         public string Naam { get; set; }
+        public int LeerkrachtId { get; set; }
     }
 }

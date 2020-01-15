@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
-    <title>Move For Fortune - Aanmelden</title>
+    <script src="js/registreren.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Move For Fortune - Registreren</title>
 </head>
 <body>
     <div class="c-global">
@@ -18,11 +20,11 @@
                     <a href="index.html">Home</a>                
                 </div>
                 <div class="c-card__item c-card-item__title">
-                    <h1 class="c-title">Move for fortune - Aanmelden</h1>
+                    <h1 class="c-title">Move for fortune - Registreren</h1>
                 </div>
             </div>
             <div class="u-columnspan-1">
-                <form class="c-form" action="">
+                <form class="c-form" name="theForm" action="" onsubmit="return false">
                     <div class="c-form__item c-card-item__input">
                         <label for="voornaam" class="c-form__item">Voornaam</label> <br>
                         <input class="c-input" type="text" id="voornaam">
@@ -35,15 +37,15 @@
                     <br>
                     <div class="c-form__item c-card-item__input">
                         <label for="email" class="wachtwoord c-form__item">E-mail:</label> <br>
-                        <input class="c-input" type="text" id="email">
+                        <input class="c-input" type="email" id="email">
                     </div>
                     <br>
                     <div class="c-form__item c-card-item__input">
                         <label for="ww" class="wachtwoord c-form__item">Wachtwoord:</label> <br>
                         <input class="c-input" type="password" id="ww">
                     </div>
-                    <div class="c-form__item c-card-item__btn c-card-item__btnaanmelden">
-                        <input class="c-button c-button-login" type="submit" value="Aanmelden">
+                    <div class="c-form__item c-card-item__btn c-card-item__btnregistreren">
+                        <input class="c-button c-button-login" type="submit" value="Registreren" onclick="DoSubmit()">
                         <br>
                         <a href="login.html">Inloggen?</a>
                     </div>      

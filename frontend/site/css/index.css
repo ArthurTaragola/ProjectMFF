@@ -10,6 +10,10 @@
     --font-family: Sniglet;
 
 }
+
+table{
+    border-spacing: 0px;
+}
 html{
     /* font */
     font-family:var(--font-family);
@@ -26,6 +30,7 @@ html{
     
 }
 
+<<<<<<< HEAD
 table{
     border-spacing: 0px;
 }
@@ -35,6 +40,8 @@ tr:nth-child(even)
     background-color: var(--color-alpha-yellow-light);
 }
 
+=======
+>>>>>>> develop
 a{
     text-decoration: none;
     color:var(--color-text-alpha);
@@ -71,6 +78,11 @@ a{
     background-color: var(--color-alpha-yellow);
     border-color: blue;
     border: 5px;
+}
+
+.c-table-color:nth-child(even) 
+{
+    background-color: var(--color-alpha-yellow-light);
 }
 
 /* voor responsive add css grid */

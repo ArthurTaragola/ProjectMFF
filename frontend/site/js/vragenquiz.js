@@ -14,6 +14,8 @@ let correctAnswerIndex;
 
 let fastestTeam;
 
+let themaList = [];
+
 let audioTeam1 = new Audio('/sounds/Yeet.mp3');
 let audioTeam2 = new Audio('/sounds/Quack.mp3')
 
@@ -31,6 +33,16 @@ const loadbar = function()
     });
 }
 
+const getThemas = function ()
+{
+    let = themas = (localStorage.getItem("thema's"));
+    for (let i = 0; i < themas.length; i+=2)
+    {
+        themaList.push(parseInt(themas[i]));
+    }
+    console.log(themaList);
+}
+
 const fetchData = function(url)
 {
     return fetch(url, {headers: customHeaders})
@@ -43,20 +55,30 @@ const getAPI = async function()
     team1answered = false;
     team2answered = false;
     shuffledAnswers = [];
-    try
+    let dataList = [];
+    console.log(themaList.length)
+    for (let i = 0; i < themaList.length; i++)
     {
-        const data = await fetchData('https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/4');
-        //console.log(data);
-        getData(data);
+        try
+        {
+            const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${themaList[i]}`);
+            for (let k = 0; k < data.length; k++)
+            {
+                dataList.push(data[k]);
+            }
+        }
+        catch(error)
+        {
+            console.error('An error occured', error);
+        }
     }
-    catch(error)
-    {
-        console.error('An error occured', error);
-    }
+    console.log(dataList);
+    getData(dataList);
 }
 
 const getData = function(data)
 {
+    console.log(data);
     let answers = [];
     let randomQuestion = Math.floor(Math.random()*data.length);
     let vraag = data[randomQuestion].vraagstelling;
@@ -80,6 +102,8 @@ const getData = function(data)
     document.getElementById("js-C").innerHTML = htmlAnswer;
     //console.log(shuffledAnswers);
     correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
+
+    data.pop(randomQuestion); //verwijder vraag uit de lijst
 }
 
 const shuffle = function(list)
@@ -221,8 +245,9 @@ const bothTeamsAnswered = function()
 const init = function()
 {
     console.log("DOM Loaded");
-    loadbar();
+    getThemas();
     getAPI();
+    loadbar();
     setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
 }
 

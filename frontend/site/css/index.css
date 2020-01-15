@@ -26,22 +26,14 @@ html{
     background-size: cover;
     background-attachment: fixed;
     color: var(--color-text-alpha);
-
+  
     
 }
 
-<<<<<<< HEAD
 table{
     border-spacing: 0px;
 }
 
-tr:nth-child(even) 
-{
-    background-color: var(--color-alpha-yellow-light);
-}
-
-=======
->>>>>>> develop
 a{
     text-decoration: none;
     color:var(--color-text-alpha);
@@ -76,8 +68,6 @@ a{
 .c-table{
     width: 100%;
     background-color: var(--color-alpha-yellow);
-    border-color: blue;
-    border: 5px;
 }
 
 .c-table-color:nth-child(even) 

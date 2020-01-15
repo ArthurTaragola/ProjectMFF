@@ -50,7 +50,7 @@ namespace MoveForFortune
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = connection;
-                        sqlCommand.CommandText = $"SELECT Leerkracht.Email , Leerkracht.Wachtwoord FROM Leerkracht where Leerkracht.Email = @Email;"; //SQL command
+                        sqlCommand.CommandText = $"SELECT Leerkracht.LeerkrachtId, Leerkracht.Wachtwoord FROM Leerkracht where Leerkracht.Email = @Email;"; //SQL command
                         sqlCommand.Parameters.AddWithValue("@Email", Email);
                         SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
 
@@ -59,10 +59,12 @@ namespace MoveForFortune
                             while (await reader.ReadAsync())
                             {
                                 string ww = reader["Wachtwoord"].ToString();
+                                int id = int.Parse(reader["LeerkrachtId"].ToString());
+
                                 if (ww == wachtwoord)
                                 {
                                     Debug.WriteLine("corect");
-                                    return new OkObjectResult("wachtwoord juist");
+                                    return new OkObjectResult(id);
                                 }
                                 else
                                 {

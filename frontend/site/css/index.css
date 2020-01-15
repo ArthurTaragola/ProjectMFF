@@ -102,7 +102,7 @@ a{
 }
 
 .c-button:hover{
-    background-color: #FFFAA3;
+    background-color: var(--color-alpha-yellow-light);
     border-color: var(--color-alpha-yellow);
     transition-duration: 0.4s;
 }
@@ -240,6 +240,18 @@ input:focus {
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+
+  .c-button__popup{
+    width: 100%; 
+    border:none; 
+    font-family: var(--font-family); 
+    color:var(--color-text-alpha); 
+    background-color:var(--color-alpha-yellow-light);
+}
+
+.c-button__popup:hover{
+    background-color: var(--color-alpha-yellow);
+}
 
 /* UTILITIES */
 .u-grid-col-span-3

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <script src="js/login.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
     <title>Move for fortune - login</title>
 </head>
@@ -22,7 +23,7 @@
                 </div>
             </div>
             <div class="u-columnspan-1">
-                <form class="c-form" action="">
+                <form class="c-form" action="" onsubmit="return false">
                     <div class="c-form__item c-card-item__input">
                         <label for="email" class="email c-form__item">E-mail:</label> <br>
                         <input class="c-input" type="text" id="email">
@@ -33,7 +34,7 @@
                         <input class="c-input" type="password" id="ww">
                     </div>
                     <div class="c-form__item c-card-item__btn">
-                        <input class="c-button c-button-login" type="submit" value="Login">
+                        <input class="c-button c-button-login" type="submit" value="Login" onclick="DoSubmit()">
                         <br>
                         <a href="aanmelden.html">Nog geen account?</a>
                     </div>      

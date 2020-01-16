@@ -68,7 +68,8 @@ const goToNewPage = function ()
 {
     if (oneThemeSelected)
     {
-        localStorage.setItem("thema's", themaList);
+        localStorage.setItem("thema's",  JSON.stringify(themaList));
+        localStorage.setItem("firstQuestion",  JSON.stringify(true));
         window.location.href = "vragenquiz.html";
     }
     else

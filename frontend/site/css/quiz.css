@@ -288,14 +288,14 @@ input[type=checkbox]:checked + label {
     margin-top: 7%;
     width: 50%
 }
-.card-inputs{
+.card-inputs{ /*1. tonen 2. weg 3. display weg*/
     margin-left: 15%;
     margin-top: 10%;
     width: 70%;
     
 }
 
-.card-inputs2{
+.card-inputs2{ /*1. weg 2. tonen 3. display weg*/
     margin-left: 15%;
     margin-top: 10%;
     width: 70%;
@@ -303,10 +303,10 @@ input[type=checkbox]:checked + label {
     
 }
 
-.card-inline{
+.card-inline{ /*1. afblijven 2. afblijven 3. weg*/
 }
 
-.card-einde{
+.card-einde{ /*1. afblijven 2. afblijven 3. tonen*/
     display: none;
 }
 

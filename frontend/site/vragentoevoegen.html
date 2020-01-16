@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Move For Fortune - VragenToevoegen</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card">
+        <div class="card-inline">
+            <h1 class="card-title">Nieuwe vraag:</h1>
+            <form class= "card-inputs" action="">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Vraag: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="vraag">
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="juist">Juist antwoord: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="juistantwoord">
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Verkeerd antwoord 1: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="verkeerdantwoord1">
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Verkeerd antwoord 2: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="verkeerdantwoord2">
+                </div>
+                <button class= "card-button">Volgende</button> 
+            </form>
+            <form class= "card-inputs2" action="">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="Niveau">Niveau: </label> <br><br>
+                    <select class="card-input-option">
+                        <option value="Niveau1">Niveau 1</option>
+                        <option value="Niveau2">Niveau 2</option>
+                        <option value="Niveau3">Niveau 3</option>
+                    </select>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="Thema">Thema:</label> <br><br>
+                    <select class="card-input-option">
+                        <option value="Cultuur">Cultuur</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Technologie">Technologie</option>
+                        <option value="Natuur">Natuur</option>
+                        <option value="Actua">Actua</option>
+                        <option value="Wetenschap">Wetenschap</option>
+                        <option value="Nieuwthema">Nieuw thema</option>
+                    </select>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Voeg een nieuw thema toe: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="nieuwthema">
+                </div>
+                <button class= "card-button">Toevoegen</button>
+            </form>
+        </div>
+        <div class="card-einde">
+            <h1 class= "card-toegevoegd">Nieuwe vraag <br> succesvol toegevoegd!</h1>
+            <button class= "card-button">Volgende</button>
+        </div>
+    </div>
+</body>
+</html>

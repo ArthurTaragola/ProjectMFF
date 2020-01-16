@@ -18,7 +18,7 @@ namespace MoveForFortune
     public static class GetThema
     {
         [FunctionName("GetThema")]
-        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/themas")] HttpRequest req, ILogger log)
+        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/themas/{leerkrachtId}")] HttpRequest req, int leerkrachtId, ILogger log)
         {
             string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
             List<Thema> VraagList = new List<Thema>();
@@ -32,7 +32,8 @@ namespace MoveForFortune
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = connection;
-                        sqlCommand.CommandText = "SELECT * FROM Themas"; //SQL command
+                        sqlCommand.CommandText = "SELECT * from Themas where Themas.LeerkrachtId = @leerkrachtId;"; //SQL command
+                        sqlCommand.Parameters.AddWithValue("@leerkrachtId", leerkrachtId);
                         SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
 
                         // while not always needed

@@ -21,6 +21,7 @@ const loadGraph = function (){
         },
         options: {
             defaultFontFamily: Chart.defaults.global.defaultFontFamily = 'Sniglet',
+            defaultFontSize: Chart.defaults.global.defaultFontSize = 24,
             "hover": {
               "animationDuration": 0
             },

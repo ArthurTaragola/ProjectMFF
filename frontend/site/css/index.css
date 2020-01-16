@@ -35,6 +35,10 @@ a{
     color:var(--color-text-alpha);
 }
 
+td{
+    padding: 8px;
+}
+
 .color-svg{
     fill: var(--color-text-alpha);
 }

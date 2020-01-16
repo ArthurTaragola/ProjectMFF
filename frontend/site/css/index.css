@@ -252,6 +252,11 @@ input:focus {
     background-color:var(--color-alpha-yellow-light);
 }
 
+.position-logout{
+    text-align: right;
+    padding: 32px;
+}
+
 .c-button__popup:hover{
     background-color: var(--color-alpha-yellow);
 }

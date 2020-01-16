@@ -126,7 +126,7 @@ td{
 {
     background-color: var(--color-alpha-yellow);
     border: solid 8px var(--color-alpha-yellowII);
-    margin-top: 20%;
+    /* margin-top: 20%; */
     margin-bottom: 10%;
     height: 500px;
     display: grid;

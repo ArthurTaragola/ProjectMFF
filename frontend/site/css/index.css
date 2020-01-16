@@ -126,7 +126,7 @@ td{
 {
     background-color: var(--color-alpha-yellow);
     border: solid 8px var(--color-alpha-yellowII);
-    margin-top: 20%;
+    /* margin-top: 20%; */
     margin-bottom: 10%;
     height: 500px;
     display: grid;
@@ -250,6 +250,11 @@ input:focus {
     font-family: var(--font-family); 
     color:var(--color-text-alpha); 
     background-color:var(--color-alpha-yellow-light);
+}
+
+.position-logout{
+    text-align: right;
+    padding: 32px;
 }
 
 .c-button__popup:hover{

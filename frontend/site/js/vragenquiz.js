@@ -15,6 +15,7 @@ let correctAnswerIndex;
 let fastestTeam;
 
 let themaList = [];
+let questionList = [];
 
 let audioTeam1 = new Audio('/sounds/Yeet.mp3');
 let audioTeam2 = new Audio('/sounds/Quack.mp3')
@@ -33,16 +34,6 @@ const loadbar = function()
     });
 }
 
-const getThemas = function ()
-{
-    let = themas = (localStorage.getItem("thema's"));
-    for (let i = 0; i < themas.length; i+=2)
-    {
-        themaList.push(parseInt(themas[i]));
-    }
-    console.log(themaList);
-}
-
 const fetchData = function(url)
 {
     return fetch(url, {headers: customHeaders})
@@ -54,8 +45,6 @@ const getAPI = async function()
 {
     team1answered = false;
     team2answered = false;
-    shuffledAnswers = [];
-    let dataList = [];
     console.log(themaList.length)
     for (let i = 0; i < themaList.length; i++)
     {
@@ -64,7 +53,7 @@ const getAPI = async function()
             const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${themaList[i]}`);
             for (let k = 0; k < data.length; k++)
             {
-                dataList.push(data[k]);
+                questionList.push(data[k]);
             }
         }
         catch(error)
@@ -72,21 +61,22 @@ const getAPI = async function()
             console.error('An error occured', error);
         }
     }
-    console.log(dataList);
-    getData(dataList);
+    console.log(questionList);
+    getData();
 }
 
-const getData = function(data)
+const getData = function()
 {
-    console.log(data);
+    shuffledAnswers = [];
+    console.log(questionList);
     let answers = [];
-    let randomQuestion = Math.floor(Math.random()*data.length);
-    let vraag = data[randomQuestion].vraagstelling;
+    let randomQuestion = Math.floor(Math.random()*questionList.length);
+    let vraag = questionList[randomQuestion].vraagstelling;
     let htmlQuestion = `<div class="question">${vraag}</div>`;
     document.getElementById("js-question").innerHTML = htmlQuestion;
-    answers.push(data[randomQuestion].juistAntwoord);
-    answers.push(data[randomQuestion].foutAntwoord1);
-    answers.push(data[randomQuestion].foutAntwoord2);
+    answers.push(questionList[randomQuestion].juistAntwoord);
+    answers.push(questionList[randomQuestion].foutAntwoord1);
+    answers.push(questionList[randomQuestion].foutAntwoord2);
     console.log(vraag);
     shuffle(answers);
     //console.log(answers);
@@ -103,7 +93,7 @@ const getData = function(data)
     //console.log(shuffledAnswers);
     correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
 
-    data.pop(randomQuestion); //verwijder vraag uit de lijst
+    questionList.splice(randomQuestion, 1); //verwijder 1 vraag uit de lijst
 }
 
 const shuffle = function(list)
@@ -124,7 +114,7 @@ const shuffle = function(list)
 
 const keyPressed = function(e)
 {
-    if(!team1answered || !team2answered || e.key == 'Enter')
+    if(!team1answered || !team2answered)
     {
         switch(e.key)
         {
@@ -146,16 +136,17 @@ const keyPressed = function(e)
             case 'g':
                 assignAnswer(2, 2);
                 break;
-            case 'Enter':
-                console.clear();
-                getAPI();
-                break;
             default:
                 console.log("not a valid answer");
                 break;
         }
     }
+    else if (e.code == 'Space' || e.key == 'Enter')
+    {
+        goToNewPage();
+    }
 }
+
 const assignAnswer = function(team, answer)
 {
     if (team == 1)
@@ -242,11 +233,30 @@ const bothTeamsAnswered = function()
     }
 }
 
+const goToNewPage = function ()
+{
+    console.log(questionList);
+    localStorage.setItem("questions", JSON.stringify(questionList));
+    localStorage.setItem("firstQuestion", JSON.stringify(false));
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!laat onderaan de tekst "(druk op spatie of enter om door te gaan)" tevoorschijn komen
+    window.location.href = "Scoreboard.html";
+}
+
 const init = function()
 {
     console.log("DOM Loaded");
-    getThemas();
-    getAPI();
+    let firstQuestion = JSON.parse(localStorage.getItem("firstQuestion"));
+    console.log(firstQuestion);
+    if (firstQuestion)
+    {
+        themaList =  JSON.parse(localStorage.getItem("thema's"));
+        getAPI();
+    }
+    else
+    {
+        questionList = JSON.parse(localStorage.getItem("questions"));
+        getData();
+    }
     loadbar();
     setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
 }

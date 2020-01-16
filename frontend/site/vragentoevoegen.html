@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="css/normalize.css">
 
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+
+    <script src="js/vragentoevoegen.js"></script>
 </head>
 <body>
     <div class="card">
-        <div class="card-inline">
+        <div class="card-inline" id='js-addQuestion'>
             <h1 class="card-title">Nieuwe vraag:</h1>
-            <form class= "card-inputs" action="">
+            <form class= "card-inputs" id="js-newQuestion" action="" onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Vraag: </label> <br><br>
                     <input class= "card-input-field"type="text" id="vraag">
@@ -31,37 +33,37 @@
                     <label class= "card-vraag" for="vraag">Verkeerd antwoord 2: </label> <br><br>
                     <input class= "card-input-field"type="text" id="verkeerdantwoord2">
                 </div>
-                <button class= "card-button">Volgende</button> 
+                <button class= "card-button js-buttonQuestionAdded" onclick="SubmitQuestion()">Volgende</button> 
             </form>
-            <form class= "card-inputs2" action="">
+            <form class= "card-inputs2" id='js-selectTheme' action="" onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="Niveau">Niveau: </label> <br><br>
-                    <select class="card-input-option">
-                        <option value="Niveau1">Niveau 1</option>
-                        <option value="Niveau2">Niveau 2</option>
-                        <option value="Niveau3">Niveau 3</option>
+                    <select class="card-input-option" id='niveau'>
+                        <option value="1">Niveau 1</option>
+                        <option value="2">Niveau 2</option>
+                        <option value="3">Niveau 3</option>
                     </select>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="Thema">Thema:</label> <br><br>
-                    <select class="card-input-option">
-                        <option value="Cultuur">Cultuur</option>
-                        <option value="Sport">Sport</option>
-                        <option value="Technologie">Technologie</option>
-                        <option value="Natuur">Natuur</option>
-                        <option value="Actua">Actua</option>
-                        <option value="Wetenschap">Wetenschap</option>
-                        <option value="Nieuwthema">Nieuw thema</option>
+                    <select class="card-input-option" id='thema'>
+                        <option value="1">Cultuur</option>
+                        <option value="2">Sport</option>
+                        <option value="3">Technologie</option>
+                        <option value="4">Natuur</option>
+                        <option value="5">Actua</option>
+                        <option value="6">Wetenschap</option>
+                        <!--<option value="Nieuwthema">Nieuw thema</option>-->
                     </select>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Voeg een nieuw thema toe: </label> <br><br>
                     <input class= "card-input-field"type="text" id="nieuwthema">
                 </div>
-                <button class= "card-button">Toevoegen</button>
+                <button class= "card-button js-buttonThemeAdded" onclick="SubmitTheme()">Toevoegen</button>
             </form>
         </div>
-        <div class="card-einde">
+        <div class="card-einde" id='js-successfullAdded'>
             <h1 class= "card-toegevoegd">Nieuwe vraag <br> succesvol toegevoegd!</h1>
             <button class= "card-button">Volgende</button>
         </div>

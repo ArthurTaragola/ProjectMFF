@@ -18,7 +18,7 @@ namespace MoveForFortune
     {
         [FunctionName("LogIn")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "v1/login")] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/login")] HttpRequest req, ILogger log)
         {
             string connectionString = Environment.GetEnvironmentVariable("ServerConnectionString");
             string json = await new StreamReader(req.Body).ReadToEndAsync();

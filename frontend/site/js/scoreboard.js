@@ -20,6 +20,8 @@ const loadGraph = function (){
             }]
         },
         options: {
+            defaultFontFamily: Chart.defaults.global.defaultFontFamily = 'Sniglet',
+            defaultFontSize: Chart.defaults.global.defaultFontSize = 24,
             "hover": {
               "animationDuration": 0
             },
@@ -77,11 +79,25 @@ const loadGraph = function (){
     });
 }
 
+const goToNewPage = function ()
+{
+    questionList = JSON.parse(localStorage.getItem("questions"));
+    if (questionList.length > 0)
+    {
+        window.location.href = "vragenquiz.html";
+    }
+    else
+    {
+        console.log("that's all kids");
+    }
+}
 
 const init = function()
 {
     console.log("DOM Loaded");
     loadGraph();
+    nextQuestion = document.querySelector('.js-nextButton');
+    nextQuestion.addEventListener('click', goToNewPage);
 }
 
 document.addEventListener('DOMContentLoaded', init);

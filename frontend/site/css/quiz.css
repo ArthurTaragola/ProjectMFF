@@ -239,3 +239,91 @@ input[type=checkbox]:checked + label {
     padding-bottom: 8%; 
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
+
+.card{
+    margin-left: 36.5%;
+    margin-top: 7%;
+    background-color: var(--global-color-neutral);
+    border: 4px solid var(--global-color-neutral-dark); 
+    width: 27vw;
+    height: 33vw;
+
+}
+
+.card-title{
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.card-inputs{
+    margin-left: 15%;
+    margin-top: 10%;
+    width: 70%;
+}
+
+.card-input{
+    margin-bottom: 5%;
+}
+
+.card-vraag{
+    padding-bottom: 10%;
+}
+
+.card-input-field{
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    line-height: 2em;
+}
+
+.card-button{
+    font-size: 24px;
+    font-family:'Sniglet', cursive;
+    color: #6E6E6E;
+    background-color: #D9D9D9;
+    border: 4px solid #A8A8A8; 
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 1% 5% 1% 5%;
+    margin-left: 25%;
+    margin-top: 7%;
+    width: 50%
+}
+.card-inputs{
+    margin-left: 15%;
+    margin-top: 10%;
+    width: 70%;
+    
+}
+
+.card-inputs2{
+    margin-left: 15%;
+    margin-top: 10%;
+    width: 70%;
+    display: none;
+    
+}
+
+.card-inline{
+}
+
+.card-einde{
+    display: none;
+}
+
+.card-input-option{
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 2%;
+}
+
+
+
+.card-toegevoegd{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 45%;
+    text-align: center;
+}
+
+

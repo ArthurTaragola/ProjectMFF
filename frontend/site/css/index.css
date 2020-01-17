@@ -135,7 +135,7 @@ td{
 }
 
 .c-card-item__input{
-    margin-left: 15%;
+    width: 100%;
 }
 
 .c-card-item__home{
@@ -359,6 +359,11 @@ input:focus {
 
 
 
+
+.u-grid-row-span-4
+{
+    grid-row: span 4;
+}
 
 .u-grid-row-span-3
 {

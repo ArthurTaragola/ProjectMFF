@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <title>Move For Fortune - VragenToevoegen</title>
+
     <link rel="stylesheet" href="css/quiz.css">
     <link rel="stylesheet" href="css/normalize.css">
-
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
 
     <script src="js/vragentoevoegen.js"></script>
@@ -19,19 +28,19 @@
             <form class= "card-inputs" id="js-newQuestion" action="" onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Vraag: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="vraag">
+                    <input class= "card-input-field"type="text" id="vraag" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="juist">Juist antwoord: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="juistantwoord">
+                    <input class= "card-input-field"type="text" id="juistantwoord" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Verkeerd antwoord 1: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="verkeerdantwoord1">
+                    <input class= "card-input-field"type="text" id="verkeerdantwoord1" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Verkeerd antwoord 2: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="verkeerdantwoord2">
+                    <input class= "card-input-field"type="text" id="verkeerdantwoord2" required>
                 </div>
                 <button class= "card-button js-buttonQuestionAdded" onclick="SubmitQuestion()">Volgende</button> 
             </form>
@@ -56,12 +65,20 @@
                         <!--<option value="Nieuwthema">Nieuw thema</option>-->
                     </select>
                 </div>
-                <div class= "card-input">
-                    <label class= "card-vraag" for="vraag">Voeg een nieuw thema toe: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="nieuwthema">
-                </div>
+                <div class="card-toevoegen">Voeg een nieuw thema toe</div>
                 <button class= "card-button js-buttonThemeAdded" onclick="SubmitTheme()">Toevoegen</button>
             </form>
+            <form class= "card-inputs3" action="">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Nieuw thema: </label> <br><br>
+                    <input class= "card-input-field"type="text" id="nieuwthema">
+                </div>
+                <button class= "card-thema-toevoegen" onclick="SubmitTheme()">Toevoegen</button>
+            </form>
+        </div>
+        <div class="card-thema-toegevoegd" id='js-successfullAdded'>
+            <h1 class= "card-toegevoegd">Nieuw thema is <br> succesvol toegevoegd!</h1>
+            <button class= "card-button">Volgende</button>
         </div>
         <div class="card-einde" id='js-successfullAdded'>
             <h1 class= "card-toegevoegd">Nieuwe vraag <br> succesvol toegevoegd!</h1>

@@ -1,6 +1,9 @@
+let customHeaders = new Headers();
+customHeaders.append('Accept', 'application/json');
 let objectList = [];
-let themaList = []; //haal uit api
+let themaList = [];
 let addedThemaList = [];
+let themas = [];
 let amountOfThemes = 6; //verander
 
 let oneThemeSelected;
@@ -78,10 +81,55 @@ const goToNewPage = function ()
     }
 }
 
-const init = function()
+const fetchData = function(url)
 {
-    console.log("DOM Loaded");
-    console.log(localStorage.getItem("niveauLevel")); //get api with this
+    return fetch(url, {headers: customHeaders})
+        .then(r => r.json()) // idem aan: function(r){return r.json()}
+        .then(data => data);
+}
+
+const getAPI = async function (leerkrachtId)
+{
+    try
+    {
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
+        for (let i = 0; i < data.length; i++)
+        {
+            themas.push(data[i].naam);
+        }
+    }
+    catch(error)
+    {
+        console.error('An error occured', error);
+    }
+    console.log(themas);
+    showThemes();
+}
+
+const showThemes = function ()
+{
+    let htmlTheme = `<input type="checkbox" value="Cultuur" class="hidden js-thema1" name="cb" id="cb1"> 
+    <label for="cb1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema1" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema1" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        ${themas[0]}
+    </label>`;
+
+    for (let i = 1; i < themas.length; i++)
+    {
+        htmlTheme += `<input type="checkbox" value="Cultuur" class="hidden js-thema${i+1}" name="cb" id="cb${i+1}"> 
+        <label for="cb${i+1}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema${i+1}" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema${i+1}" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            ${themas[i]}
+        </label>`;
+    }
+    document.getElementById("js-themas").innerHTML = htmlTheme;
+    listenToThemes();
+}
+
+const listenToThemes = function ()
+{
     for (let i = 0; i < amountOfThemes; i++)
     {
         temp = document.querySelector(`.js-thema${i+1}`);
@@ -89,6 +137,13 @@ const init = function()
         objectList.push(temp);
         addedThemaList.push(false);
     }
+}
+
+const init = function()
+{
+    console.log("DOM Loaded");
+    getAPI(25);
+    //console.log(localStorage.getItem("niveauLevel")); //get api with this
     startButton = document.querySelector('#js-start_button');
     startButton.addEventListener('click', goToNewPage);
 }

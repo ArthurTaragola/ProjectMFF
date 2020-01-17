@@ -17,6 +17,9 @@ let fastestTeam;
 let themaList = [];
 let questionList = [];
 
+let pointsTeam1;
+let pointsTeam2;
+
 let audioTeam1 = new Audio('/sounds/Yeet.mp3');
 let audioTeam2 = new Audio('/sounds/Quack.mp3')
 
@@ -205,30 +208,42 @@ const bothTeamsAnswered = function()
     {
         if (answerteam1 == correctAnswer)
         {
-            console.log("team 1 is victorious");
-        }
-        else if (answerteam2 == correctAnswer)
-        {
-            console.log("team 2 is victorious (team 1 is dumb)");
+            console.log("team 1 krijgt 150 punten");
+            pointsTeam1 += 150;
         }
         else
         {
-            console.log("they both stupid");
+            console.log("team 1 krijgt 0 punten");
+        }
+        if (answerteam2 == correctAnswer)
+        {
+            console.log("team 2 krijgt 100 punten");
+            pointsTeam2 += 100;
+        }
+        else
+        {
+            console.log("team 2 krijgt 0 punten");
         }
     }
     else
     {
         if (answerteam2 == correctAnswer)
         {
-            console.log("team 2 is victorious");
-        }
-        else if (answerteam1 == correctAnswer)
-        {
-            console.log("team 1 is victorious (team 2 is dumb)");
+            console.log("team 2 krijgt 150 punten");
+            pointsTeam2 += 150;
         }
         else
         {
-            console.log("they both stupid");
+            console.log("team 2 krijgt 0 punten");
+        }
+        if (answerteam1 == correctAnswer)
+        {
+            console.log("team 1 krijgt 100 punten");
+            pointsTeam1 += 100;
+        }
+        else
+        {
+            console.log("team 1 krijgt 0 punten");
         }
     }
 }
@@ -236,6 +251,8 @@ const bothTeamsAnswered = function()
 const goToNewPage = function ()
 {
     console.log(questionList);
+    localStorage.setItem("pointsTeam1", JSON.stringify(pointsTeam1));
+    localStorage.setItem("pointsTeam2", JSON.stringify(pointsTeam2));
     localStorage.setItem("questions", JSON.stringify(questionList));
     localStorage.setItem("firstQuestion", JSON.stringify(false));
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!laat onderaan de tekst "(druk op spatie of enter om door te gaan)" tevoorschijn komen
@@ -250,11 +267,15 @@ const init = function()
     if (firstQuestion)
     {
         themaList =  JSON.parse(localStorage.getItem("thema's"));
+        pointsTeam1 = 0;
+        pointsTeam2 = 0;
         getAPI();
     }
     else
     {
         questionList = JSON.parse(localStorage.getItem("questions"));
+        pointsTeam1 = JSON.parse(localStorage.getItem("pointsTeam1"));
+        pointsTeam2 = JSON.parse(localStorage.getItem("pointsTeam2"));
         getData();
     }
     loadbar();

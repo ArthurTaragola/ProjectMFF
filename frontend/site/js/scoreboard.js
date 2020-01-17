@@ -11,6 +11,14 @@ const loadGraph = function (){
     let img2 = document.getElementById("bird2");
     let img3 = document.getElementById("crown");
     var ctx = document.getElementById('myChart').getContext("2d");
+    if (pointsTeam1 == 0)
+    {
+        pointsTeam1 = null;
+    }
+    if (pointsTeam2 == 0)
+    {
+        pointsTeam2 = null;
+    }
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
@@ -30,6 +38,7 @@ const loadGraph = function (){
             }]
         },
         options: {
+
             layout: {
                 padding: {
                     right: 80
@@ -51,8 +60,7 @@ const loadGraph = function (){
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'right';
                 ctx.fillStyle  = "#035266";
-                
-        
+
                 this.data.datasets.forEach(function(dataset, i) {
                   var meta = chartInstance.controller.getDatasetMeta(i);
                   meta.data.forEach(function(bar, index) {
@@ -60,6 +68,10 @@ const loadGraph = function (){
                     ctx.fillText(data, bar._model.x - 30, bar._model.y);
                     if (team1)
                     {
+                        if (pointsTeam1 == null)
+                        {
+                            bar._model.x = 100;
+                        }
                         ctx.drawImage(img, bar._model.x + 10, bar._model.y - 38);
                         if (quizIsFinished && winningTeam == 1 || winningTeam == 0)
                         {
@@ -69,6 +81,10 @@ const loadGraph = function (){
                     }
                     else
                     {
+                        if (pointsTeam2 == null)
+                        {
+                            bar._model.x = 100;
+                        }
                         ctx.drawImage(img2, bar._model.x + 10, bar._model.y - 38);
                         if (quizIsFinished && winningTeam == 2 || winningTeam == 0)
                         {
@@ -133,6 +149,12 @@ const checkQuestions = function ()
             winningTeam = 3;
             console.log("Both teams win with a total of "+pointsTeam1);
         }
+
+        let html = `<h1 class="question">Eindstand!</h1></button>`;
+        document.getElementById("js-title").innerHTML = html;
+
+        html = `<button class= "c-button-volgende js-stopButton">Stop quiz</button>`;
+        document.getElementById("js-endButton").innerHTML = html;
     }
 }
 
@@ -156,6 +178,11 @@ const goToNewPage = function ()
     }
 }
 
+const goToHomePage = function ()
+{
+    window.location.href = "quiz.html";
+}
+
 const init = function()
 {
     console.log("DOM Loaded");
@@ -164,8 +191,16 @@ const init = function()
     questionList = JSON.parse(localStorage.getItem("questions"));
     checkQuestions();
     loadGraph();
-    nextQuestion = document.querySelector('.js-nextButton');
-    nextQuestion.addEventListener('click', goToNewPage);
+    if (!quizIsFinished)
+    {
+        nextQuestion = document.querySelector('.js-nextButton');
+        nextQuestion.addEventListener('click', goToNewPage);
+    }
+    else
+    {
+        stopQuiz = document.querySelector('.js-stopButton');
+        stopQuiz.addEventListener('click', goToHomePage);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -95,7 +95,7 @@ td{
 .c-button-login{
     height: 73px;
     width: 100%;
-    font-size: 20px;
+    font-size: 24px;
     margin-right: 10%;
 }
 
@@ -325,6 +325,13 @@ input:focus {
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+.transparant{
+    border: none;
+    width: 60px;
+    background-color: transparent;
+    height: 60px;
+}
 
 /* UTILITIES */
 .u-grid-col-span-3

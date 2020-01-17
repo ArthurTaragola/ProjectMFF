@@ -94,8 +94,9 @@ td{
 
 .c-button-login{
     height: 73px;
-    width: 230px;
+    width: 100%;
     font-size: 20px;
+    margin-right: 10%;
 }
 
 .c-card-vragen{
@@ -144,8 +145,6 @@ td{
 }
 
 .c-card-item__btn{
-    margin-left: 20%;
-    max-width: 50%;
     text-align: center;
     margin-top: 32px;
 }
@@ -161,7 +160,8 @@ td{
 }
 
 .c-input{
-    width: 300px;
+    width: 99%;
+    
 }
 
 input:focus {

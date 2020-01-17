@@ -73,7 +73,7 @@ const loadGraph = function (){
                             bar._model.x = 100;
                         }
                         ctx.drawImage(img, bar._model.x + 10, bar._model.y - 38);
-                        if (quizIsFinished && winningTeam == 1 || winningTeam == 0)
+                        if ((quizIsFinished && winningTeam == 1) || winningTeam == 3)
                         {
                             ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
                         }
@@ -86,7 +86,7 @@ const loadGraph = function (){
                             bar._model.x = 100;
                         }
                         ctx.drawImage(img2, bar._model.x + 10, bar._model.y - 38);
-                        if (quizIsFinished && winningTeam == 2 || winningTeam == 0)
+                        if ((quizIsFinished && winningTeam == 2) || winningTeam == 3)
                         {
                             ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
                         }

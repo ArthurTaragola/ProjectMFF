@@ -1,16 +1,3 @@
-/*  grey button
-    document.getElementById('js-validInputs').style.backgroundColor = '#D9D9D9';
-    document.getElementById('js-validInputs').style.borderColor = '#A8A8A8';
-    document.getElementById('js-validInputs').style.color = '#6E6E6E';
-*/
-
-/*  yellow button
-    document.getElementById('js-start_button').style.backgroundColor = '#F8F067';
-    document.getElementById('js-start_button').style.borderColor = '#D4CB2F';
-    document.getElementById('js-start_button').style.color = '#08518B';
-*/
-
-
 let customHeaders = new Headers();
 customHeaders.append('Accept', 'application/json');
 let questionValue;
@@ -27,6 +14,8 @@ let eventListeners = [];
 let eventListenersValid = [false, false, false, false];
 let alleventListenersValid = false;
 
+let validThemeInput = false;
+
 const enableListeners = function()
 {
     question.addEventListener('input', function() {checkValue(0)});
@@ -35,6 +24,8 @@ const enableListeners = function()
     wrongAnswer2.addEventListener('input', function() {checkValue(3)});
     
     eventListeners.push(question, correctAnswer, wrongAnswer1, wrongAnswer2);
+
+    newThemeInput.addEventListener('input', function() {checkValueTheme(newThemeInput)});
 }
 const isEmpty = function(fieldValue)
 {
@@ -45,22 +36,10 @@ const checkValue = function(input)
     if (isEmpty(eventListeners[input].value))
     {
         eventListenersValid[input] = false;
-        if (eventListenersValid[0] || eventListenersValid[1] || eventListenersValid[2] || eventListenersValid[3])
+        if (!eventListenersValid[0] || !eventListenersValid[1] || !eventListenersValid[2] || !eventListenersValid[3])
         {
             alleventListenersValid = false;
-            document.getElementById('js-validInputs').style.backgroundColor = '#D9D9D9';
-            document.getElementById('js-validInputs').style.borderColor = '#A8A8A8';
-            document.getElementById('js-validInputs').style.color = '#6E6E6E';
-            document.getElementById("js-validInputs").onmouseover = function()
-            {
-                this.style.backgroundColor = '#D9D9D9';
-                this.style.borderColor = '#A8A8A8';
-            }
-            document.getElementById("js-validInputs").onmouseout = function()
-            {
-                this.style.backgroundColor = '#D9D9D9';
-                this.style.borderColor = '#A8A8A8';
-            }
+            grayButton('js-validInputs')
         }
     }
     else
@@ -71,33 +50,72 @@ const checkValue = function(input)
             if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && eventListenersValid[3])
             {
                 alleventListenersValid = true;
-                document.getElementById('js-validInputs').style.backgroundColor = '#F8F067';
-                document.getElementById('js-validInputs').style.borderColor = '#D4CB2F';
-                document.getElementById('js-validInputs').style.color = '#08518B';
-                document.getElementById("js-validInputs").onmouseover = function()
-                {
-                    this.style.backgroundColor = '#FFFAA3';
-                    this.style.borderColor = '#F8F067';
-                }
-                document.getElementById("js-validInputs").onmouseout = function()
-                {
-                    this.style.backgroundColor = '#F8F067';
-                    this.style.borderColor = '#D4CB2F';
-                }
+                yellowButton('js-validInputs');
             }
         }
+    }
+}
+
+const checkValueTheme = function (input)
+{
+    if (isEmpty(input.value))
+    {
+        validThemeInput = false;
+        grayButton('js-validThemeInput');
+    }
+    else
+    {
+        if (validThemeInput == false)
+        {
+            validThemeInput = true;
+            yellowButton('js-validThemeInput');
+        }
+    }
+}
+
+const grayButton = function (buttonId)
+{
+    document.getElementById(buttonId).style.backgroundColor = '#D9D9D9';
+    document.getElementById(buttonId).style.borderColor = '#A8A8A8';
+    document.getElementById(buttonId).style.color = '#6E6E6E';
+    document.getElementById(buttonId).onmouseover = function()
+    {
+        this.style.backgroundColor = '#D9D9D9';
+        this.style.borderColor = '#A8A8A8';
+    }
+    document.getElementById(buttonId).onmouseout = function()
+    {
+        this.style.backgroundColor = '#D9D9D9';
+        this.style.borderColor = '#A8A8A8';
+    }
+}
+
+const yellowButton = function (buttonId)
+{
+    document.getElementById(buttonId).style.backgroundColor = '#F8F067';
+    document.getElementById(buttonId).style.borderColor = '#D4CB2F';
+    document.getElementById(buttonId).style.color = '#08518B';
+    document.getElementById(buttonId).onmouseover = function()
+    {
+        this.style.backgroundColor = '#FFFAA3';
+        this.style.borderColor = '#F8F067';
+    }
+    document.getElementById(buttonId).onmouseout = function()
+    {
+        this.style.backgroundColor = '#F8F067';
+        this.style.borderColor = '#D4CB2F';
     }
 }
 
 
 const submitQuestion = function ()
 {
-    questionValue = document.getElementById("vraag").value;
-    correctAnswerValue = document.getElementById("juistantwoord").value;
-    wrongAnswer1Value = document.getElementById("verkeerdantwoord1").value;
-    wrongAnswer2Value = document.getElementById("verkeerdantwoord2").value;
     if (alleventListenersValid)
     {
+        questionValue = document.getElementById("vraag").value;
+        correctAnswerValue = document.getElementById("juistantwoord").value;
+        wrongAnswer1Value = document.getElementById("verkeerdantwoord1").value;
+        wrongAnswer2Value = document.getElementById("verkeerdantwoord2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
     }
@@ -137,29 +155,32 @@ const submitTheme = function ()
 
 const submitNewTheme = function ()
 {
-    let thema = document.getElementById("nieuwthema").value;
-    
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/themas/28");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        "naam": thema
-    }));
-    xhr.onreadystatechange = function ()
+    if (validThemeInput)
     {
-        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+        let thema = document.getElementById("nieuwthema").value;
+        
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/themas/28");
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            "naam": thema
+        }));
+        xhr.onreadystatechange = function ()
         {
-            console.log("the theme has succesfully been added");
-            document.getElementById('js-addThema').style.display = 'none';
-            document.getElementById('js-addQuestion').style.display = 'none';
-            document.getElementById('js-themaSuccessfullAdded').style.display = 'block';
-            noNewThemes = false;
-            //document.getElementById('js-selectTheme').style.display = 'block';
-            getThemes(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!select new theme
-        }
-        else if (xhr.readyState == XMLHttpRequest.DONE)
-        {
-            console.log("something went wrong, please try again later");
+            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+            {
+                console.log("the theme has succesfully been added");
+                document.getElementById('js-addThema').style.display = 'none';
+                document.getElementById('js-addQuestion').style.display = 'none';
+                document.getElementById('js-themaSuccessfullAdded').style.display = 'block';
+                noNewThemes = false;
+                //document.getElementById('js-selectTheme').style.display = 'block';
+                getThemes(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!select new theme
+            }
+            else if (xhr.readyState == XMLHttpRequest.DONE)
+            {
+                console.log("something went wrong, please try again later");
+            }
         }
     }
 }
@@ -250,7 +271,10 @@ const init = function()
     wrongAnswer1 = document.querySelector('#verkeerdantwoord1');
     wrongAnswer2 = document.querySelector('#verkeerdantwoord2');
 
+    newThemeInput = document.querySelector('#nieuwthema');
+
     enableListeners();
+    checkValue(0);
 }
 
 document.addEventListener('DOMContentLoaded', init);

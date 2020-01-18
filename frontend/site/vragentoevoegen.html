@@ -67,9 +67,9 @@
             <form class= "card-inputs3" action="" id='js-addThema' onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Nieuw thema: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="nieuwthema">
+                    <input class= "card-input-field"type="text" id="nieuwthema" required>
                 </div>
-                <button class= "card-thema-toevoegen" onclick="submitNewTheme()">Toevoegen</button>
+                <button class= "card-thema-toevoegen" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
             </form>
         </div>
         <div class="card-thema-toegevoegd" id='js-themaSuccessfullAdded'>

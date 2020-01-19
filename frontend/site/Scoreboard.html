@@ -15,10 +15,17 @@
 
 </head>
 <body>
-    <h1 class="question">Tussenstand!</h1>
-    <div class= "chart">
-        <canvas  id="myChart" width="50" height="20"></canvas>
+    <div id="js-title">
+        <h1 class="question">Tussenstand!</h1>
     </div>
-    <button class= "c-button-volgende js-nextButton">Volgende vraag</button>
+    <div class= "chart">
+        <canvas id="myChart" width="50" height="20"></canvas>
+        <img src="img/birdTeam1.png" id="bird1" style="display: none;"> <!--!!!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!!!!-->
+        <img src="img/birdTeam2.png" id="bird2" style="display: none;">
+        <img src="img/crown.png" id="crown" style="display: none;">
+    </div>
+    <div id="js-endButton">
+        <button class= "c-button-volgende js-nextButton">Volgende vraag</button>
+    </div>
 </body>
 </html>

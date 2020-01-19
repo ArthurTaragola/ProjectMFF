@@ -20,6 +20,8 @@ function DoSubmit()
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
         {
             console.log("the account has succesfully been made");
+            response = xhr.responseText; 
+            console.log(response); //expect leerkrachtId
             //go to new page
         }
     }

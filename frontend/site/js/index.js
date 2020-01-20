@@ -6,7 +6,7 @@ const goToLoginPage = function ()
 const goToQuizPage = function ()
 {
     localStorage.setItem("leerkrachtId", 25);
-    window.location.href = "thema's.html";
+    window.location.href = "niveau.html";
 }
 
 const goToRegisterPage = function ()

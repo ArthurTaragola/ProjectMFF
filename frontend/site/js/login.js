@@ -2,6 +2,8 @@ const DoSubmit = function()
 {
     let xhr = new XMLHttpRequest();
 
+    var response;
+
     let email = document.getElementById("email").value;
     let password = document.getElementById("ww").value;
 
@@ -16,12 +18,18 @@ const DoSubmit = function()
     {
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
         {
-            var response = xhr.responseText; 
+            response = xhr.responseText; 
             console.log(response);
+            if (response == parseInt(response, 10))
+            {
+                console.log("succesfull login");
+                localStorage.setItem("leerkrachtId", response);
+                window.location.href = "quiz.html";
+            }
         }
     }
     console.log(email)
-    console.log(password)
+    //console.log(password)
 }
 
 const init = function()

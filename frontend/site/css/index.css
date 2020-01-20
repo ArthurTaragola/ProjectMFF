@@ -329,6 +329,23 @@ input:focus {
 .select-selected {
     background-color: white;
   }
+
+/* custom dropdown list */
+/*the container must be positioned relative:*/
+.custom-select1 {
+    position: relative;
+    font-family: var(--font-family);
+    width:150px;
+    
+  }
+  
+.custom-select1 select {
+    display: none;  /* hide original SELECT element: */
+  }
+  
+.select-selected {
+    background-color: white;
+  }
   
 /*style the arrow inside the select element:*/
 .select-selected:after {

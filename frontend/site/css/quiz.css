@@ -193,6 +193,17 @@ input[type=checkbox]:checked + label {
     border-color: var(--global-color-neutral);
     transition-duration: 0.4s;
 }
+
+.c-dropdown{
+    font-family: "sniglet";
+    color: var(--global-color-alpha);
+}
+
+.c-input{
+    font-family: "sniglet";
+    color: var(--global-color-alpha);
+}
+
 .question{
     font-family:'Sniglet', cursive;
     font-size: 64px;

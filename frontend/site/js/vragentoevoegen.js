@@ -213,11 +213,11 @@ const getThemes = async function ()
 
 const showThemes = function ()
 {
-    let htmlTheme = `<option class="c-dropdown" value=${themaIndexes[0]}>${themas[0]}</option>`;
+    let htmlTheme = `<option value=${themaIndexes[0]}>${themas[0]}</option>`;
 
     for (let i = 1; i < themas.length; i++)
     {
-        htmlTheme += `<option class="c-dropdown" value=${themaIndexes[i]}>${themas[i]}</option>`;
+        htmlTheme += `<option value=${themaIndexes[i]}>${themas[i]}</option>`;
     }
     let selectThema = document.getElementById("thema");
     selectThema.innerHTML = htmlTheme;
@@ -274,7 +274,7 @@ const init = function()
     newThemeInput = document.querySelector('#nieuwthema');
 
     enableListeners();
-    checkValue(0);
+    grayButton('js-validInputs');
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -87,11 +87,11 @@ const getData = function()
     {
         console.log(shuffledAnswers[i]);
     }
-    let htmlAnswer = `<button class= "c-button-antwoord" id="A">A) ${shuffledAnswers[0]}</button>`;
+    let htmlAnswer = `<button class="c-button c-button-index" id="A">A) ${shuffledAnswers[0]}</button>`;
     document.getElementById("js-A").innerHTML = htmlAnswer;
-    htmlAnswer = `<button class= "c-button-antwoord" id="B">B) ${shuffledAnswers[1]}</button>`;
+    htmlAnswer = `<button class="c-button c-button-index" id="B">B) ${shuffledAnswers[1]}</button>`;
     document.getElementById("js-B").innerHTML = htmlAnswer;
-    htmlAnswer = `<button class= "c-button-antwoord" id="C">C) ${shuffledAnswers[2]}</button>`;
+    htmlAnswer = `<button class="c-button c-button-index" id="C">C) ${shuffledAnswers[2]}</button>`;
     document.getElementById("js-C").innerHTML = htmlAnswer;
     //console.log(shuffledAnswers);
     correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);

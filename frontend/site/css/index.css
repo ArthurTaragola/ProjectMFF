@@ -39,6 +39,7 @@ td{
     padding: 8px;
 }
 
+
 .color-svg{
     fill: var(--color-text-alpha);
 }
@@ -94,8 +95,9 @@ td{
 
 .c-button-login{
     height: 73px;
-    width: 230px;
-    font-size: 20px;
+    width: 100%;
+    font-size: 24px;
+    margin-right: 10%;
 }
 
 .c-card-vragen{
@@ -144,8 +146,6 @@ td{
 }
 
 .c-card-item__btn{
-    margin-left: 20%;
-    max-width: 50%;
     text-align: center;
     margin-top: 32px;
 }
@@ -161,7 +161,8 @@ td{
 }
 
 .c-input{
-    width: 300px;
+    width: 99%;
+    
 }
 
 input:focus {
@@ -277,6 +278,23 @@ input:focus {
 .select-selected {
     background-color: white;
   }
+
+/* custom dropdown list */
+/*the container must be positioned relative:*/
+.custom-select1 {
+    position: relative;
+    font-family: var(--font-family);
+    width:150px;
+    
+  }
+  
+.custom-select1 select {
+    display: none;  /* hide original SELECT element: */
+  }
+  
+.select-selected {
+    background-color: white;
+  }
   
 /*style the arrow inside the select element:*/
 .select-selected:after {
@@ -325,6 +343,13 @@ input:focus {
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+.transparant{
+    border: none;
+    width: 60px;
+    background-color: transparent;
+    height: 60px;
+}
 
 /* UTILITIES */
 .u-grid-col-span-3

@@ -13,11 +13,11 @@ const loadGraph = function (){
     var ctx = document.getElementById('myChart').getContext("2d");
     if (pointsTeam1 == 0)
     {
-        pointsTeam1 = null;
+        pointsTeam1 = "";
     }
     if (pointsTeam2 == 0)
     {
-        pointsTeam2 = null;
+        pointsTeam2 = "";
     }
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',

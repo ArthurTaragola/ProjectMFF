@@ -274,7 +274,7 @@ const init = function()
     newThemeInput = document.querySelector('#nieuwthema');
 
     enableListeners();
-    checkValue(0);
+    grayButton('js-validInputs');
 }
 
 document.addEventListener('DOMContentLoaded', init);

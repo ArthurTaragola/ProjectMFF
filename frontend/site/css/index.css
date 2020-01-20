@@ -39,6 +39,11 @@ td{
     padding: 8px;
 }
 
+.chart{
+    font-family: var(--font-family);
+    color: var(--color-text-alpha);
+    height: 100%;
+}
 
 .color-svg{
     fill: var(--color-text-alpha);
@@ -51,6 +56,7 @@ td{
     margin-top: 10%;
     font-size: 32px;
 }
+
 
 .c-title-vragen{
     text-align: left;
@@ -98,6 +104,11 @@ td{
     width: 100%;
     font-size: 24px;
     margin-right: 10%;
+}
+
+.c-button-volgende{
+    width: 75%;
+    height: 40px;
 }
 
 .c-card-vragen{

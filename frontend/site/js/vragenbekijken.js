@@ -1,9 +1,9 @@
 let customHeaders = new Headers();
 customHeaders.append('Accept', 'application/json');
 
-let questionList = [];
-let niveau
-let thema
+let questionList;
+let niveau = 1;
+let thema = 1;
 
 const DropDown1 = function()
 {
@@ -34,7 +34,9 @@ const DropDown1 = function()
                 for (i = 1; i < s.length; i++) {
                   if (s.options[i].innerHTML == this.innerHTML) {
                     s.selectedIndex = i;
-                    console.log(i);
+                    niveau = i;
+                    getAPI(niveau,thema);
+                    console.log(niveau);
                     h.innerHTML = this.innerHTML;
                     y = this.parentNode.getElementsByClassName("same-as-selected");
                     for (k = 0; k < y.length; k++) {
@@ -111,7 +113,9 @@ const DropDown = function()
                 for (i = 1; i < s.length; i++) {
                   if (s.options[i].innerHTML == this.innerHTML) {
                     s.selectedIndex = i;
-                    console.log(i);
+                    thema = i;
+                    console.log(thema);
+                    getAPI(niveau,thema);
                     h.innerHTML = this.innerHTML;
                     y = this.parentNode.getElementsByClassName("same-as-selected");
                     for (k = 0; k < y.length; k++) {
@@ -166,11 +170,30 @@ const fetchData = function(url)
         .then(data => data);
 }
 
-const getAPI = async function()
+// const getAPI = async function()
+// {
+//     try
+//     {
+//         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/1/1`);
+//         for (let k = 0; k < data.length; k++)
+//         {
+//             questionList.push(data[k]);
+//         }
+//     }
+//     catch(error)
+//     {
+//         console.error('An error occured', error);
+//     }
+//     FillInData()
+// }
+
+
+const getAPI = async function(niveau, thema)
 {
+  questionList = [];
     try
     {
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/1/1`);
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${thema}`);
         for (let k = 0; k < data.length; k++)
         {
             questionList.push(data[k]);
@@ -184,10 +207,8 @@ const getAPI = async function()
 }
 
 
-
 const FillInData = function()
 {
-    shuffledAnswers = [];
     console.log(questionList);
     
     let htmlQuestion = 
@@ -271,7 +292,7 @@ const init = function()
     console.log("DOM loaded");
     DropDown();
     DropDown1();
-    getAPI();
+    getAPI(niveau,thema);
 };
 
 document.addEventListener('DOMContentLoaded', init);

@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Move For Fortune - Scoreboard</title>
-    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/normalize.css">
     <script src="js/scoreboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
@@ -24,17 +24,29 @@
 
 </head>
 <body>
-    <div id="js-title">
-        <h1 class="question">Tussenstand!</h1>
-    </div>
-    <div class= "chart">
-        <canvas id="myChart" width="50" height="20"></canvas>
-        <img src="img/birdTeam1.png" id="bird1" style="display: none;"> <!--!!!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!!!!-->
-        <img src="img/birdTeam2.png" id="bird2" style="display: none;">
-        <img src="img/crown.png" id="crown" style="display: none;">
-    </div>
-    <div id="js-endButton">
-        <button class= "c-button-volgende js-nextButton">Volgende vraag</button>
+    <div class="c-grid">
+        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-2">
+            <h1 id="js-title" class="c-title">Tussenstand!</h1>
+        </div>
+        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-1"></div>
+        <div class="c-grid__item u-grid-col-span-4 chart">
+            
+                <canvas id="myChart" width="50" height="20"></canvas>
+                <img src="img/birdTeam1.png" id="bird1" style="display: none;"> <!--!!!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!!!!-->
+                <img src="img/birdTeam2.png" id="bird2" style="display: none;">
+                <img src="img/crown.png" id="crown" style="display: none;">
+            
+        </div>
+        <div class="c-grid__item u-grid-col-span-1"></div>
+        <div class="c-grid__item u-grid-col-span-1"></div>
+        <div class="c-grid__item u-grid-col-span-4"></div>
+        <div class="c-grid__item u-grid-col-span-1">
+            <div id="js-endButton">
+                <button class="c-button c-button-volgende js-nextButton">Volgende vraag</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

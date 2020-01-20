@@ -226,7 +226,7 @@ input[type=checkbox]:checked + label {
     height: 10px;
     background: #73AC40;
     /*transition: width 250ms ease-in-out;*/
-    transition: width 10s ease-in-out;
+    transition: width 10s ease;
 }
 
 .answer{

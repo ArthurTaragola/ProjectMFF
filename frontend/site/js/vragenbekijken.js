@@ -289,9 +289,16 @@ const FillInData = function()
     // correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
 }
 
+const addQuestion = function ()
+{
+    window.location.href = "vragentoevoegen.html";
+}
+
 const init = function()
 {
     console.log("DOM loaded");
+    AddQuestionButton = document.querySelector('.js-addQuestion');
+    AddQuestionButton.addEventListener('click', addQuestion);
     DropDown();
     DropDown1();
     getAPI(niveau,thema);

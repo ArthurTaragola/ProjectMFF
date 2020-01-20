@@ -125,6 +125,13 @@ input[type=checkbox]:checked + label {
     background-color: var(--color-alpha-yellow);
 }
 
+.c-button-vragen{
+    height: 100px;
+    font-size: var(--standard-pixels);
+    width: 50%;
+    margin-left: 25%;
+}
+
 .c-button-index{
     height: 101px;
     font-size: 30px;
@@ -307,7 +314,7 @@ input:focus {
 
 .position-logout{
     text-align: right;
-    padding: 32px;
+    padding: var(--standard-pixels);
     cursor: pointer;
 }
 

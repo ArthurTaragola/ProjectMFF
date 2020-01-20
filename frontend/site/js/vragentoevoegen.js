@@ -16,6 +16,8 @@ let alleventListenersValid = false;
 
 let validThemeInput = false;
 
+let leerkrachtId = localStorage.getItem("leerkrachtId");
+
 const enableListeners = function()
 {
     question.addEventListener('input', function() {checkValue(0)});
@@ -160,7 +162,7 @@ const submitNewTheme = function ()
         let thema = document.getElementById("nieuwthema").value;
         
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/themas/28");
+        xhr.open("POST", `https://moveforfortunefunction.azurewebsites.net/api/v2/themas/${leerkrachtId}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             "naam": thema
@@ -197,7 +199,7 @@ const getThemes = async function ()
     themaIndexes = [];
     try
     {
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/28`);
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
         for (let i = 0; i < data.length; i++)
         {
             themas.push(data[i].naam);

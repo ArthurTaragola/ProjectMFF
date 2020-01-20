@@ -30,26 +30,26 @@
             <form class= "card-inputs" id="js-newQuestion" action="" onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Vraag: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="vraag" required>
+                    <input class= "card-input-field c-input"type="text" id="vraag" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="juist">Juist antwoord: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="juistantwoord" required>
+                    <input class= "card-input-field c-input"type="text" id="juistantwoord" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Verkeerd antwoord 1: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="verkeerdantwoord1" required>
+                    <input class= "card-input-field c-input"type="text" id="verkeerdantwoord1" required>
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Verkeerd antwoord 2: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="verkeerdantwoord2" required>
+                    <input class= "card-input-field c-input"type="text" id="verkeerdantwoord2" required>
                 </div>
                 <button class= "card-button" id="js-validInputs" onclick="submitQuestion()">Volgende</button> 
             </form>
             <form class= "card-inputs2" id='js-selectTheme' action="" onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="Niveau">Niveau: </label> <br><br>
-                    <select class="card-input-option" id='niveau'>
+                    <select class="card-input-option c-dropdown" id='niveau'>
                         <option value="1">Niveau 1</option>
                         <option value="2">Niveau 2</option>
                         <option value="3">Niveau 3</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class= "card-input">
                     <label class= "card-vraag" for="Thema">Thema:</label> <br><br>
-                    <select class="card-input-option" id='thema'>
+                    <select class="card-input-option c-dropdown" id='thema'>
 
                     </select>
                 </div>
@@ -67,7 +67,7 @@
             <form class= "card-inputs3" action="" id='js-addThema' onsubmit="return false">
                 <div class= "card-input">
                     <label class= "card-vraag" for="vraag">Nieuw thema: </label> <br><br>
-                    <input class= "card-input-field"type="text" id="nieuwthema" required>
+                    <input class= "card-input-field c-input"type="text" id="nieuwthema" required>
                 </div>
                 <button class= "card-thema-toevoegen" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
             </form>

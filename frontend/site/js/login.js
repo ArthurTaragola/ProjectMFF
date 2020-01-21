@@ -97,8 +97,6 @@ const yellowButton = function ()
     }
 }
 
-
-
 const DoSubmit = function()
 {
     if (passwordValid && emailValid)
@@ -131,6 +129,10 @@ const DoSubmit = function()
                     console.log("succesfull login");
                     localStorage.setItem("leerkrachtId", response);
                     window.location.href = "quiz.html";
+                }
+                else
+                {
+                    alert(response)
                 }
             }
         }

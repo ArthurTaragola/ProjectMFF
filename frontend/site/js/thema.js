@@ -88,11 +88,11 @@ const fetchData = function(url)
         .then(data => data);
 }
 
-const getAPI = async function (leerkrachtId)
+const getAPI = async function (id)
 {
     try
     {
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${id}`);
         for (let i = 0; i < data.length; i++)
         {
             themas.push(data[i].naam);
@@ -142,7 +142,9 @@ const listenToThemes = function ()
 const init = function()
 {
     console.log("DOM Loaded");
-    getAPI(25);
+    let leerkrachtId = localStorage.getItem("leerkrachtId");
+    console.log(leerkrachtId);
+    getAPI(leerkrachtId);
     //console.log(localStorage.getItem("niveauLevel")); //get api with this
     startButton = document.querySelector('#js-start_button');
     startButton.addEventListener('click', goToNewPage);

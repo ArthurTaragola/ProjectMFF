@@ -115,6 +115,8 @@ function DoSubmit()
 {
     if (alleventListenersValid)
     {
+        grayButton();
+
         let xhr = new XMLHttpRequest();
 
         let firstName = document.getElementById("voornaam").value;
@@ -134,6 +136,7 @@ function DoSubmit()
         {
             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
             {
+                yellowButton();
                 console.log("the account has succesfully been made");
                 //response = xhr.responseText; 
                 //console.log(response); //expect leerkrachtId

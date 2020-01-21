@@ -5,6 +5,9 @@ let questionList;
 let niveau = 1;
 let thema = 1;
 
+let statuspopup = false;
+let previousi;
+
 const DropDown1 = function()
 {
     var x, i, j, selElmnt, a, b, c;
@@ -227,10 +230,6 @@ const FillInData = function()
           let B=  questionList[i].foutAntwoord1;
           let C=  questionList[i].foutAntwoord2;
           let id = questionList[i].vraagId;
-          console.log(vraag);
-          console.log(A);
-          console.log(B);
-          console.log(C);
 
           htmlQuestion +=
           `<tr id="js-question" class="c-table-color"></tr>
@@ -262,9 +261,19 @@ const FillInData = function()
 }
 
 function myFunction(i) {
+  if (statuspopup == false){
     var popup = document.getElementById(`myPopup${i}`);
     popup.classList.toggle("show");
-}
+    statuspopup = true;
+    previousi = i
+  }
+  else{
+    var popup = document.getElementById(`myPopup${previousi}`);
+    popup.classList.toggle("show");
+    statuspopup = false;
+    myFunction(i);
+    }
+  }
 
 const addQuestion = function ()
 {

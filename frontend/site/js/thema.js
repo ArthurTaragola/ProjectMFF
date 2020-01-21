@@ -4,7 +4,6 @@ let objectList = [];
 let themaList = [];
 let addedThemaList = [];
 let themas = [];
-let amountOfThemes = 6; //verander
 
 let oneThemeSelected;
 
@@ -21,19 +20,7 @@ const toggleStatus = function(thema)
         if (themaList.length == 1) //kleur moet enkel weizigen als er 1 of meer items in komen
         {
             oneThemeSelected = true;
-            document.getElementById('js-start_button').style.backgroundColor = '#F8F067';
-            document.getElementById('js-start_button').style.borderColor = '#D4CB2F';
-            document.getElementById('js-start_button').style.color = '#08518B';
-            document.getElementById("js-start_button").onmouseover = function()
-            {
-                this.style.backgroundColor = '#FFFAA3';
-                this.style.borderColor = '#F8F067';
-            }
-            document.getElementById("js-start_button").onmouseout = function()
-            {
-                this.style.backgroundColor = '#F8F067';
-                this.style.borderColor = '#D4CB2F';
-            }
+            yellowButton();
         }
     }
     else
@@ -48,23 +35,44 @@ const toggleStatus = function(thema)
         {
             oneThemeSelected = false;
             console.log("leeg");
-            document.getElementById('js-start_button').style.backgroundColor = '#D9D9D9';
-            document.getElementById('js-start_button').style.borderColor = '#A8A8A8';
-            document.getElementById('js-start_button').style.color = '#6E6E6E';
-            document.getElementById("js-start_button").onmouseover = function()
-            {
-                this.style.backgroundColor = '#D9D9D9';
-                this.style.borderColor = '#A8A8A8';
-            }
-            document.getElementById("js-start_button").onmouseout = function()
-            {
-                this.style.backgroundColor = '#D9D9D9';
-                this.style.borderColor = '#A8A8A8';
-            }
+            grayButton();
         }
     }
     console.log(themaList);
+}
 
+const grayButton = function ()
+{
+    document.getElementById("js-start_button").style.backgroundColor = '#D9D9D9';
+    document.getElementById("js-start_button").style.borderColor = '#A8A8A8';
+    document.getElementById("js-start_button").style.color = '#6E6E6E';
+    document.getElementById("js-start_button").onmouseover = function()
+    {
+        this.style.backgroundColor = '#D9D9D9';
+        this.style.borderColor = '#A8A8A8';
+    }
+    document.getElementById("js-start_button").onmouseout = function()
+    {
+        this.style.backgroundColor = '#D9D9D9';
+        this.style.borderColor = '#A8A8A8';
+    }
+}
+
+const yellowButton = function ()
+{
+    document.getElementById("js-start_button").style.backgroundColor = '#F8F067';
+    document.getElementById("js-start_button").style.borderColor = '#D4CB2F';
+    document.getElementById("js-start_button").style.color = '#08518B';
+    document.getElementById("js-start_button").onmouseover = function()
+    {
+        this.style.backgroundColor = '#FFFAA3';
+        this.style.borderColor = '#F8F067';
+    }
+    document.getElementById("js-start_button").onmouseout = function()
+    {
+        this.style.backgroundColor = '#F8F067';
+        this.style.borderColor = '#D4CB2F';
+    }
 }
 
 const goToNewPage = function ()
@@ -130,7 +138,7 @@ const showThemes = function ()
 
 const listenToThemes = function ()
 {
-    for (let i = 0; i < amountOfThemes; i++)
+    for (let i = 0; i < themas.length; i++)
     {
         temp = document.querySelector(`.js-thema${i+1}`);
         temp.addEventListener('click', function(){toggleStatus(i)});
@@ -143,9 +151,9 @@ const init = function()
 {
     console.log("DOM Loaded");
     let leerkrachtId = localStorage.getItem("leerkrachtId");
-    console.log(leerkrachtId);
+    //console.log(leerkrachtId);
+    grayButton();
     getAPI(leerkrachtId);
-    //console.log(localStorage.getItem("niveauLevel")); //get api with this
     startButton = document.querySelector('#js-start_button');
     startButton.addEventListener('click', goToNewPage);
 }

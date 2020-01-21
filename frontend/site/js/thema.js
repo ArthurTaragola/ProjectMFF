@@ -7,6 +7,8 @@ let themas = [];
 
 let oneThemeSelected;
 
+let leerkrachtId = localStorage.getItem("leerkrachtId");
+
 const toggleStatus = function(thema)
 {
     let added = !addedThemaList[thema];
@@ -75,6 +77,15 @@ const yellowButton = function ()
     }
 }
 
+const checkIfSuperUser = function ()
+{
+    if (leerkrachtId == 25)
+    {
+        let html = ``;
+        document.getElementById("js-logout").innerHTML = html;
+    }
+}
+
 const goToNewPage = function ()
 {
     if (oneThemeSelected)
@@ -96,11 +107,11 @@ const fetchData = function(url)
         .then(data => data);
 }
 
-const getAPI = async function (id)
+const getAPI = async function ()
 {
     try
     {
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${id}`);
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
         for (let i = 0; i < data.length; i++)
         {
             themas.push(data[i].naam);
@@ -150,10 +161,10 @@ const listenToThemes = function ()
 const init = function()
 {
     console.log("DOM Loaded");
-    let leerkrachtId = localStorage.getItem("leerkrachtId");
     //console.log(leerkrachtId);
     grayButton();
-    getAPI(leerkrachtId);
+    checkIfSuperUser();
+    getAPI();
     startButton = document.querySelector('#js-start_button');
     startButton.addEventListener('click', goToNewPage);
 }

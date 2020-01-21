@@ -73,6 +73,10 @@ input[type=checkbox]:checked + label {
 
 }
 
+.checkbutton{
+    display: none;
+}
+
 .chart{
     font-family: var(--font-family);
     color: var(--color-text-alpha);

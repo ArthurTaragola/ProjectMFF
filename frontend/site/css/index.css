@@ -73,6 +73,10 @@ input[type=checkbox]:checked + label {
 
 }
 
+.checkbutton{
+    display: none;
+}
+
 .chart{
     font-family: var(--font-family);
     color: var(--color-text-alpha);
@@ -429,11 +433,11 @@ input:focus {
     transition: width 10s ease-in-out;
 }
 
-.answer{
+/* .answer{
     display: grid;
     grid-template-columns: auto auto auto;
     
-}
+} */
 
 /* UTILITIES */
 .u-grid-col-span-3

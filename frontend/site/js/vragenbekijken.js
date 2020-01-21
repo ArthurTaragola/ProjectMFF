@@ -271,7 +271,10 @@ function myFunction(i) {
     var popup = document.getElementById(`myPopup${previousi}`);
     popup.classList.toggle("show");
     statuspopup = false;
-    myFunction(i);
+    if (previousi != i)
+    {
+      myFunction(i);
+    }
     }
   }
 

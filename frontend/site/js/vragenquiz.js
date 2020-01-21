@@ -23,6 +23,8 @@ let pointsTeam2;
 let audioTeam1 = new Audio('/sounds/Yeet.mp3');
 let audioTeam2 = new Audio('/sounds/Quack.mp3')
 
+let niveauLevel = localStorage.getItem("niveauLevel");
+
 
 const loadbar = function()
 {
@@ -53,7 +55,7 @@ const getAPI = async function()
     {
         try
         {
-            const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${themaList[i]}`);
+            const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${themaList[i]}/${niveauLevel}`);
             for (let k = 0; k < data.length; k++)
             {
                 questionList.push(data[k]);

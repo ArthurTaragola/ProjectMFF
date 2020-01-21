@@ -5,6 +5,9 @@ let questionList;
 let niveau = 1;
 let thema = 1;
 
+let statuspopup = false;
+let previousi;
+
 const DropDown1 = function()
 {
     var x, i, j, selElmnt, a, b, c;
@@ -170,23 +173,6 @@ const fetchData = function(url)
         .then(data => data);
 }
 
-// const getAPI = async function()
-// {
-//     try
-//     {
-//         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/1/1`);
-//         for (let k = 0; k < data.length; k++)
-//         {
-//             questionList.push(data[k]);
-//         }
-//     }
-//     catch(error)
-//     {
-//         console.error('An error occured', error);
-//     }
-//     FillInData()
-// }
-
 
 const getAPI = async function(niveau, thema)
 {
@@ -219,8 +205,8 @@ const FillInData = function()
         <td>B.</td> <td>${questionList[0].foutAntwoord1}</td>
         <td>C.</td> <td>${questionList[0].foutAntwoord2}</td>
         <td>
-            <div class="popup" onclick="myFunction()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                <span class="popuptext" id="myPopup">
+            <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <span class="popuptext" id="myPopup0">
                     <table class="c-center">                                    
                             <button class="c-button__popup" >
                                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
@@ -243,10 +229,7 @@ const FillInData = function()
           let A=  questionList[i].juistAntwoord;
           let B=  questionList[i].foutAntwoord1;
           let C=  questionList[i].foutAntwoord2;
-          console.log(vraag);
-          console.log(A);
-          console.log(B);
-          console.log(C);
+          let id = questionList[i].vraagId;
 
           htmlQuestion +=
           `<tr id="js-question" class="c-table-color"></tr>
@@ -255,8 +238,8 @@ const FillInData = function()
           <td>B.</td> <td>${B}</td>
           <td>C.</td> <td>${C}</td>
           <td>
-              <div class="popup" onclick="myFunction()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                  <span class="popuptext" id="myPopup">
+              <div class="popup" id = "PopUp${id}" onclick="myFunction(${i})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                  <span class="popuptext" id="myPopup${i}">
                       <table class="c-center">                                    
                               <button class="c-button__popup" >
                                   <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
@@ -274,20 +257,23 @@ const FillInData = function()
         </tr>`;
 
       }
-    
     document.getElementById("js-question").innerHTML = htmlQuestion;
-
-
-
-    // let htmlAnswer = `<button class= "c-button-antwoord" id="A">A) ${shuffledAnswers[0]}</button>`;
-    // document.getElementById("js-A").innerHTML = htmlAnswer;
-    // htmlAnswer = `<button class= "c-button-antwoord" id="B">B) ${shuffledAnswers[1]}</button>`;
-    // document.getElementById("js-B").innerHTML = htmlAnswer;
-    // htmlAnswer = `<button class= "c-button-antwoord" id="C">C) ${shuffledAnswers[2]}</button>`;
-    // document.getElementById("js-C").innerHTML = htmlAnswer;
-    // //console.log(shuffledAnswers);
-    // correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
 }
+
+function myFunction(i) {
+  if (statuspopup == false){
+    var popup = document.getElementById(`myPopup${i}`);
+    popup.classList.toggle("show");
+    statuspopup = true;
+    previousi = i
+  }
+  else{
+    var popup = document.getElementById(`myPopup${previousi}`);
+    popup.classList.toggle("show");
+    statuspopup = false;
+    myFunction(i);
+    }
+  }
 
 const addQuestion = function ()
 {

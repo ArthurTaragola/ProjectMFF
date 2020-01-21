@@ -5,6 +5,8 @@ let quizIsFinished = false;
 
 let winningTeam;
 
+let leerkrachtId = localStorage.getItem("leerkrachtId");
+
 const loadGraph = function (){
     let team1 = true;
     let img = document.getElementById("bird1");
@@ -153,7 +155,7 @@ const checkQuestions = function ()
         let html = `<h1 class="question">Eindstand!</h1></button>`;
         document.getElementById("js-title").innerHTML = html;
 
-        html = `<button class= "c-button-volgende js-stopButton">Stop quiz</button>`;
+        html = `<button class= "c-button c-button-volgende js-stopButton">Stop quiz</button>`;
         document.getElementById("js-endButton").innerHTML = html;
     }
 }
@@ -180,7 +182,26 @@ const goToNewPage = function ()
 
 const goToHomePage = function ()
 {
-    window.location.href = "quiz.html";
+    if (leerkrachtId == 25) //superuser
+    {
+        window.location.href = "index.html";
+    }
+    else
+    {
+        window.location.href = "quiz.html";
+    }
+}
+
+const keyPressed = function (e)
+{
+    if (e.code == 'Space' || e.key == 'Enter')
+    {
+        if (quizIsFinished)
+        {
+            goToHomePage();
+        }
+        goToNewPage();
+    }
 }
 
 const init = function()
@@ -191,6 +212,7 @@ const init = function()
     questionList = JSON.parse(localStorage.getItem("questions"));
     checkQuestions();
     loadGraph();
+    document.addEventListener("keydown", keyPressed, false);
     if (!quizIsFinished)
     {
         nextQuestion = document.querySelector('.js-nextButton');

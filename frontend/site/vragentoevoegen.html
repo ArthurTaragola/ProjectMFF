@@ -15,14 +15,85 @@
 
     <title>Move For Fortune - VragenToevoegen</title>
 
-    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
 
     <script src="js/vragentoevoegen.js"></script>
 </head>
 <body>
-    <div class="card">
+    <div class="c-grid">
+        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-2 position-logout">
+            <a href="">Log out</a>
+        </div>
+        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-2">
+            <div class="c-card c-grid">               
+               <div class="c-grid__item u-grid-col-span-4 c-title">
+                    <div id="js-title">
+                        <h1 class="c-title">Nieuwe vraag:</h1>
+                    </div>
+                </div>
+               <div class="c-grid__item u-grid-col-span-1"></div>
+               <div class="c-grid__item u-grid-col-span-1 u-grid-row-span-4"></div>
+               <div class="c-grid__item u-grid-col-span-4 u-grid-row-span-4">
+                <!-- <form class="c-form" action="" onsubmit="return false">
+                    <div class="c-card-item__input">
+                        <label for="email" class="email">E-mail:</label> <br>
+                        <input class="c-input js-email" type="email" id="email">
+                    </div>
+                    <br>
+                    <div class="c-card-item__input">
+                        <label for="ww" class="wachtwoord">Wachtwoord:</label> <br>
+                        <input class="c-input js-password" type="password" id="ww">
+                    </div>
+                    <div class="c-card-item__btn">
+                        <input class="c-button c-button-login" id="js-loginButton" type="submit" value="Login" onclick="DoSubmit()">
+                        <br>
+                        <a href="registreren.html">Nog geen account?</a>
+                    </div>      
+                </form> -->
+                <form class= "c-form" id='js-selectTheme' action="" onsubmit="return false">
+                    <div class= "card-input">
+                        <label class= "card-vraag" for="Niveau">Niveau: </label> <br><br>
+                        <select class="card-input-option c-dropdown" id='niveau'>
+                            <option value="1">Niveau 1</option>
+                            <option value="2">Niveau 2</option>
+                            <option value="3">Niveau 3</option>
+                        </select>
+                    </div>
+                    <div class= "card-input">
+                        <label class= "card-vraag" for="Thema">Thema:</label> <br><br>
+                        <select class="card-input-option c-dropdown" id='thema'>
+    
+                        </select>
+                    </div>
+                    <div class="card-toevoegen js-newTheme">Voeg een nieuw thema toe</div>
+                    <button class= "card-button" onclick="submitTheme()">Toevoegen</button>
+                </form>
+                <form class= "c-form" action="" id='js-addThema' onsubmit="return false">
+                    <div class= "card-input">
+                        <label class= "card-vraag" for="vraag">Nieuw thema: </label> <br><br>
+                        <input class= "card-input-field c-input"type="text" id="nieuwthema" required>
+                    </div>
+                    <button class= "card-thema-toevoegen" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
+                </form>
+            </div>
+               </div>
+               <div class="c-grid__item u-grid-col-span-1  u-grid-row-span-4"></div>
+               <div class="c-grid__item u-grid-col-span-1"></div>
+               <div class="c-grid__item u-grid-col-span-4"></div>
+               <div class="c-grid__item u-grid-col-span-1"></div>
+            </div>
+        </div>
+        <div class="c-grid__item u-grid-col-span-2"></div>
+    </div>
+
+
+
+    <!-- <div class="card">
         <div class="card-inline" id='js-addQuestion'>
             <div id="js-title">
                 <h1 class="card-title">Nieuwe vraag:</h1>
@@ -70,7 +141,7 @@
                     <input class= "card-input-field c-input"type="text" id="nieuwthema" required>
                 </div>
                 <button class= "card-thema-toevoegen" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
-            </form>
+            </form> -->
         </div>
         <div class="card-thema-toegevoegd" id='js-themaSuccessfullAdded'>
             <h1 class= "card-toegevoegd">Nieuw thema is <br> succesvol toegevoegd!</h1>

@@ -20,8 +20,8 @@ let questionList = [];
 let pointsTeam1;
 let pointsTeam2;
 
-let audioTeam1 = new Audio('/sounds/Yeet.mp3');
-let audioTeam2 = new Audio('/sounds/Quack.mp3')
+let audioTeam1 = new Audio('sounds/Yeet.mp3');
+let audioTeam2 = new Audio('sounds/Quack.mp3')
 
 let niveauLevel = localStorage.getItem("niveauLevel");
 

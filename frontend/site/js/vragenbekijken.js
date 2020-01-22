@@ -5,6 +5,8 @@ let questionList;
 let thema = 1;
 let niveau = 1;
 
+let themaList = [];
+
 let statuspopup = false;
 let previousid;
 
@@ -180,7 +182,6 @@ const fetchData = function(url)
 
 const getThemas = async function()
 {
-  let themaList = [];
   let leerkrachtId = localStorage.getItem("leerkrachtId");
   try
   {
@@ -214,6 +215,7 @@ const fillInThemas = function (data)
       {
           htmlThema += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
       }
+      htmlThema += `<option value="all">alle themas</option>`;
       document.getElementById("js-themas").innerHTML = htmlThema;
     }
     else
@@ -226,20 +228,33 @@ const fillInThemas = function (data)
 const getAPI = async function(thema, niveau)
 {
   questionList = [];
+  console.log(thema, niveau)
+  if (thema != "all")
+  {
     try
     {
-      console.log(thema, niveau)
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${thema}`);
-        for (let k = 0; k < data.length; k++)
-        {
-            questionList.push(data[k]);
-        }
+      const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${thema}`);
+      for (let k = 0; k < data.length; k++)
+      {
+          questionList.push(data[k]);
+      }
     }
     catch(error)
     {
         console.error('An error occured', error);
     }
     FillInData()
+  }
+  else
+  {
+    for (let j = 0; j < themaList.length; j++)
+    {
+      const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${themaList[j].themaId}`);
+      questionList.push(data);
+    }
+    console.log(questionList);
+    fillInAllQuestions();
+  }
 }
 
 
@@ -316,6 +331,50 @@ const FillInData = function()
       document.getElementById("js-question").innerHTML = htmlQuestion;
     }
 }
+
+const fillInAllQuestions = function ()
+{
+  statuspopup = false;
+  
+  let htmlQuestion = "";
+
+  for (let i = 0; i < themaList.length; i++)
+  {
+    for (let k = 0; k < questionList[i].length; k++)
+    {
+      htmlQuestion += `<tr id="js-question" class="c-table-color"></tr>
+      <td>${themaList[i].naam}</td>
+      <td>${questionList[i][k].vraagstelling}</td>
+      <td>A.</td> <td>${questionList[i][k].juistAntwoord}</td>
+      <td>B.</td> <td>${questionList[i][k].foutAntwoord1}</td>
+      <td>C.</td> <td>${questionList[i][k].foutAntwoord2}</td>
+      <td>
+          <div class="popup" id = "PopUp${questionList[i][k].vraagId}" onclick="myFunction(${questionList[i][k].vraagId})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+              <span class="popuptext" id="myPopup${questionList[i][k].vraagId}">
+                  <table class="c-center">                                    
+                        <button class="c-button__popup js-update${questionList[i][k].vraagId}" >
+                            <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                            Aanpassen  
+                        </button>
+                        <button class="c-button__popup js-delete${questionList[i][k].vraagId}">
+                            <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
+                            Verwijderen 
+                        </button>
+                  </table>
+              </span>
+            </div>
+        </td> 
+      </tr>`;
+    }
+  }
+  if (htmlQuestion == '')
+  {
+    htmlQuestion = `<tr id="js-question" class="c-table-color"></tr>
+    <td>er zijn geen vragen</td>`;
+  }
+  document.getElementById("js-question").innerHTML = htmlQuestion;
+}
+
 
 function myFunction(id)
 {

@@ -46,9 +46,11 @@ td{
 .hidden {position:absolute;visibility:hidden;opacity:0;}
 input[type=checkbox] + label {
     font-size: var(--standard-pixels);
-    padding-top: 5%;
-    padding-bottom: 5%; 
+    height: 50px;
+    padding-top: 16px;
+    padding-bottom: 16px; 
     margin-bottom: 5%;
+    margin-left: 32px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     width: 99%;
     font-family:var(--font-family);
@@ -60,9 +62,11 @@ input[type=checkbox] + label {
 } 
 input[type=checkbox]:checked + label {
     font-size:var(--standard-pixels);
-    padding-top: 5%;
-    padding-bottom: 5%; 
+    height: 50px;
+    padding-top: 16px;
+    padding-bottom: 16px;  
     margin-bottom: 5%;
+    margin-left: 32px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     font-family:var(--standard-pixels);
@@ -92,6 +96,13 @@ input[type=checkbox]:checked + label {
     color: var(--color-text-alpha);
     text-align: center;
     margin-top: 10%;
+    font-size: 32px;
+}
+
+.c-title2{
+    color: var(--color-text-alpha);
+    text-align: center;
+    margin-top: 25%;
     font-size: 32px;
 }
 
@@ -140,7 +151,7 @@ input[type=checkbox]:checked + label {
     height: 101px;
     font-size: 30px;
     margin-top: 10%;
-    margin-left: 8%;
+    margin-left: 16%;
     width: 351px;
 }
 
@@ -228,6 +239,7 @@ input[type=checkbox]:checked + label {
     width: 99%;
     padding: 2px 4px;  
     font-family: Sniglet;
+    border: none;
 }
 
 input:focus {

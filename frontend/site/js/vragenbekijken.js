@@ -189,7 +189,14 @@ const getThemas = async function()
       {
           themaList.push(data[k]);
       }
-      thema = data[0].themaId;
+      if (data.length != 0)
+      {
+        thema = data[0].themaId;
+      }
+      else
+      {
+        thema = 0;
+      }
   }
   catch(error)
   {
@@ -200,12 +207,20 @@ const getThemas = async function()
 
 const fillInThemas = function (data)
 {
-    let htmlThema = `<option value="${data[0].themaId}">${data[0].naam}</option>`;
-    for (let i = 0; i < data.length; i++)
+    if (data.length != 0)
     {
-        htmlThema += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
+      let htmlThema = `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+      for (let i = 0; i < data.length; i++)
+      {
+          htmlThema += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
+      }
+      document.getElementById("js-themas").innerHTML = htmlThema;
     }
-    document.getElementById("js-themas").innerHTML = htmlThema;
+    else
+    {
+      let htmlThema = `<option value=0>Geen themas</option>`;
+      document.getElementById("js-themas").innerHTML = htmlThema;
+    }
 }
 
 const getAPI = async function(thema, niveau)
@@ -230,67 +245,76 @@ const getAPI = async function(thema, niveau)
 
 const FillInData = function()
 {
-    console.log(questionList);
-    statuspopup = false;
-    
-    let htmlQuestion = 
-    `<tr id="js-question" class="c-table-color"></tr>
-        <td>${questionList[0].vraagstelling}</td>
-        <td>A.</td> <td>${questionList[0].juistAntwoord}</td>
-        <td>B.</td> <td>${questionList[0].foutAntwoord1}</td>
-        <td>C.</td> <td>${questionList[0].foutAntwoord2}</td>
-        <td>
-            <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(${questionList[0].vraagId})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                <span class="popuptext" id="myPopup${questionList[0].vraagId}">
-                    <table class="c-center">
-                          <button class="c-button__popup js-update${questionList[0].vraagId}" >
-                              <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-                              Aanpassen  
-                          </button>
-                          <button class="c-button__popup js-delete${questionList[0].vraagId}">
-                              <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
-                              Verwijderen 
-                          </button>
-                    </table>
-                </span>
-            </div>
-        </td> 
-    </tr>`;
-
-      for (let i = 1; i < questionList.length; i++)
-      {
-          let vraag = questionList[i].vraagstelling;
-          let A=  questionList[i].juistAntwoord;
-          let B=  questionList[i].foutAntwoord1;
-          let C=  questionList[i].foutAntwoord2;
-          let id = questionList[i].vraagId;
-
-          htmlQuestion +=
-          `<tr id="js-question" class="c-table-color"></tr>
-          <td>${vraag}</td>
-          <td>A.</td> <td>${A}</td>
-          <td>B.</td> <td>${B}</td>
-          <td>C.</td> <td>${C}</td>
+    if (questionList.length != 0)
+    {
+      console.log(questionList);
+      statuspopup = false;
+      
+      let htmlQuestion = 
+      `<tr id="js-question" class="c-table-color"></tr>
+          <td>${questionList[0].vraagstelling}</td>
+          <td>A.</td> <td>${questionList[0].juistAntwoord}</td>
+          <td>B.</td> <td>${questionList[0].foutAntwoord1}</td>
+          <td>C.</td> <td>${questionList[0].foutAntwoord2}</td>
           <td>
-              <div class="popup" id = "PopUp${id}" onclick="myFunction(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                  <span class="popuptext" id="myPopup${id}">
-                      <table class="c-center">                                    
-                            <button class="c-button__popup js-update${id}" >
+              <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(${questionList[0].vraagId})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                  <span class="popuptext" id="myPopup${questionList[0].vraagId}">
+                      <table class="c-center">
+                            <button class="c-button__popup js-update${questionList[0].vraagId}" >
                                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                                 Aanpassen  
                             </button>
-                            <button class="c-button__popup js-delete${id}">
+                            <button class="c-button__popup js-delete${questionList[0].vraagId}">
                                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
                                 Verwijderen 
                             </button>
                       </table>
                   </span>
-                </div>
+              </div>
           </td> 
-        </tr>`;
+      </tr>`;
 
-      }
-    document.getElementById("js-question").innerHTML = htmlQuestion;
+        for (let i = 1; i < questionList.length; i++)
+        {
+            let vraag = questionList[i].vraagstelling;
+            let A=  questionList[i].juistAntwoord;
+            let B=  questionList[i].foutAntwoord1;
+            let C=  questionList[i].foutAntwoord2;
+            let id = questionList[i].vraagId;
+
+            htmlQuestion +=
+            `<tr id="js-question" class="c-table-color"></tr>
+            <td>${vraag}</td>
+            <td>A.</td> <td>${A}</td>
+            <td>B.</td> <td>${B}</td>
+            <td>C.</td> <td>${C}</td>
+            <td>
+                <div class="popup" id = "PopUp${id}" onclick="myFunction(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    <span class="popuptext" id="myPopup${id}">
+                        <table class="c-center">                                    
+                              <button class="c-button__popup js-update${id}" >
+                                  <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                                  Aanpassen  
+                              </button>
+                              <button class="c-button__popup js-delete${id}">
+                                  <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
+                                  Verwijderen 
+                              </button>
+                        </table>
+                    </span>
+                  </div>
+            </td> 
+          </tr>`;
+
+        }
+      document.getElementById("js-question").innerHTML = htmlQuestion;
+    }
+    else
+    {
+      let htmlQuestion =`<tr id="js-question" class="c-table-color"></tr>
+        <td>er zijn geen vragen</td>`;
+      document.getElementById("js-question").innerHTML = htmlQuestion;
+    }
 }
 
 function myFunction(id)

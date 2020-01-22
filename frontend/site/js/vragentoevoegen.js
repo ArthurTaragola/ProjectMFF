@@ -120,6 +120,14 @@ const submitQuestion = function ()
         wrongAnswer2Value = document.getElementById("verkeerdantwoord2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
+        if (document.getElementById("thema").value == 0)
+        {
+            grayButton("js-validThemeSelect");
+        }
+        else
+        {
+            yellowButton("js-validThemeSelect");
+        }
     }
 }
 
@@ -128,29 +136,32 @@ const submitTheme = function ()
     let niveau = document.getElementById("niveau").value;
     let thema = document.getElementById("thema").value;
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        "Vraagstelling": questionValue,
-        "JuistAntwoord": correctAnswerValue,
-        "FoutAntwoord1": wrongAnswer1Value,
-        "FoutAntwoord2": wrongAnswer2Value,
-        "Niveau": niveau,
-        "ThemaId": thema
-    }));
-    xhr.onreadystatechange = function ()
+    if (thema != 0)
     {
-        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            "Vraagstelling": questionValue,
+            "JuistAntwoord": correctAnswerValue,
+            "FoutAntwoord1": wrongAnswer1Value,
+            "FoutAntwoord2": wrongAnswer2Value,
+            "Niveau": niveau,
+            "ThemaId": thema
+        }));
+        xhr.onreadystatechange = function ()
         {
-            console.log("the question has succesfully been added");
-            document.getElementById('js-newQuestion').style.display = 'block';
-            document.getElementById('js-addQuestion').style.display = 'none';
-            document.getElementById('js-questionSuccessfullAdded').style.display = 'block';
-        }
-        else if (xhr.readyState == XMLHttpRequest.DONE)
-        {
-            console.log("something went wrong, please try again later");
+            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+            {
+                console.log("the question has succesfully been added");
+                document.getElementById('js-newQuestion').style.display = 'block';
+                document.getElementById('js-addQuestion').style.display = 'none';
+                document.getElementById('js-questionSuccessfullAdded').style.display = 'block';
+            }
+            else if (xhr.readyState == XMLHttpRequest.DONE)
+            {
+                console.log("something went wrong, please try again later");
+            }
         }
     }
 }
@@ -215,17 +226,25 @@ const getThemes = async function ()
 
 const showThemes = function ()
 {
-    let htmlTheme = `<option value=${themaIndexes[0]}>${themas[0]}</option>`;
+    if (themas.length != 0)
+    {
+        let htmlTheme = `<option value=${themaIndexes[0]}>${themas[0]}</option>`;
 
-    for (let i = 1; i < themas.length; i++)
-    {
-        htmlTheme += `<option value=${themaIndexes[i]}>${themas[i]}</option>`;
+        for (let i = 1; i < themas.length; i++)
+        {
+            htmlTheme += `<option value=${themaIndexes[i]}>${themas[i]}</option>`;
+        }
+        let selectThema = document.getElementById("thema");
+        selectThema.innerHTML = htmlTheme;
+        if (!noNewThemes)
+        {
+            selectThema.selectedIndex = themas.length-1;
+        }
     }
-    let selectThema = document.getElementById("thema");
-    selectThema.innerHTML = htmlTheme;
-    if (!noNewThemes)
+    else
     {
-        selectThema.selectedIndex = themas.length-1;
+        let htmlTheme = `<option value=0>Geen themas</option>`;
+        document.getElementById("thema").innerHTML = htmlTheme;
     }
 }
 
@@ -247,6 +266,15 @@ const goBackToSelectTheme = function ()
 
     let htmlTitle = `<h1 class="card-title">Nieuwe vraag:</h1>`;
     document.getElementById("js-title").innerHTML = htmlTitle;
+
+    if (document.getElementById("thema").value == 0)
+    {
+        grayButton("js-validThemeSelect");
+    }
+    else
+    {
+        yellowButton("js-validThemeSelect");
+    }
 }
 
 const goBackToList = function ()

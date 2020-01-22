@@ -197,6 +197,7 @@ const getAPI = async function(niveau, thema)
 const FillInData = function()
 {
     console.log(questionList);
+    statuspopup = false;
     
     let htmlQuestion = 
     `<tr id="js-question" class="c-table-color"></tr>
@@ -260,14 +261,19 @@ const FillInData = function()
     document.getElementById("js-question").innerHTML = htmlQuestion;
 }
 
-function myFunction(i) {
-  if (statuspopup == false){
+function myFunction(i)
+{
+  if (statuspopup == false)
+  {
+    console.log("show");
     var popup = document.getElementById(`myPopup${i}`);
     popup.classList.toggle("show");
     statuspopup = true;
     previousi = i
   }
-  else{
+  else
+  {
+    console.log("hide");
     var popup = document.getElementById(`myPopup${previousi}`);
     popup.classList.toggle("show");
     statuspopup = false;
@@ -275,8 +281,8 @@ function myFunction(i) {
     {
       myFunction(i);
     }
-    }
   }
+}
 
 const addQuestion = function ()
 {

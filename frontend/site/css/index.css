@@ -148,7 +148,7 @@ input[type=checkbox]:checked + label {
     height: 73px;
     width: 100%;
     font-size: 24px;
-    margin-right: 10%;
+    margin-bottom: 8px;
 }
 
 .c-button-volgende{
@@ -211,6 +211,7 @@ input[type=checkbox]:checked + label {
 .c-card-item__btn{
     text-align: center;
     margin-top: 32px;
+    margin-left: 8px;
 }
 
 .c-card-item__btnregistreren{
@@ -225,7 +226,8 @@ input[type=checkbox]:checked + label {
 
 .c-input{
     width: 99%;
-    
+    padding: 2px 4px;  
+    font-family: Sniglet;
 }
 
 input:focus {

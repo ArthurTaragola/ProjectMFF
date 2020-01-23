@@ -267,15 +267,16 @@ const FillInData = function()
       
       let htmlQuestion = 
       `<tr id="js-question" class="c-table-color"></tr>
+          <td>1.</td>
           <td>${questionList[0].vraagstelling}</td>
           <td>A.</td> <td>${questionList[0].juistAntwoord}</td>
           <td>B.</td> <td>${questionList[0].foutAntwoord1}</td>
           <td>C.</td> <td>${questionList[0].foutAntwoord2}</td>
           <td>
-              <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(${questionList[0].vraagId})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+              <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(${questionList[0].vraagId}, 0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                   <span class="popuptext" id="myPopup${questionList[0].vraagId}">
                       <table class="c-center">
-                            <button class="c-button__popup js-update${questionList[0].vraagId}" >
+                            <button class="c-button__popup js-update0" >
                                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                                 Aanpassen  
                             </button>
@@ -299,15 +300,16 @@ const FillInData = function()
 
             htmlQuestion +=
             `<tr id="js-question" class="c-table-color"></tr>
+            <td>${i+1}.</td>
             <td>${vraag}</td>
             <td>A.</td> <td>${A}</td>
             <td>B.</td> <td>${B}</td>
             <td>C.</td> <td>${C}</td>
             <td>
-                <div class="popup" id = "PopUp${id}" onclick="myFunction(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <div class="popup" id = "PopUp${id}" onclick="myFunction(${id}, ${i})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     <span class="popuptext" id="myPopup${id}">
                         <table class="c-center">                                    
-                              <button class="c-button__popup js-update${id}" >
+                              <button class="c-button__popup js-update${i}" >
                                   <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                                   Aanpassen  
                               </button>
@@ -343,16 +345,17 @@ const fillInAllQuestions = function ()
     for (let k = 0; k < questionList[i].length; k++)
     {
       htmlQuestion += `<tr id="js-question" class="c-table-color"></tr>
+      <td>${k+1}.</td>
       <td>${themaList[i].naam}</td>
       <td>${questionList[i][k].vraagstelling}</td>
       <td>A.</td> <td>${questionList[i][k].juistAntwoord}</td>
       <td>B.</td> <td>${questionList[i][k].foutAntwoord1}</td>
       <td>C.</td> <td>${questionList[i][k].foutAntwoord2}</td>
       <td>
-          <div class="popup" id = "PopUp${questionList[i][k].vraagId}" onclick="myFunction(${questionList[i][k].vraagId})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <div class="popup" id = "PopUp${questionList[i][k].vraagId}" onclick="myFunction(${questionList[i][k].vraagId}, ${i}, ${k})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
               <span class="popuptext" id="myPopup${questionList[i][k].vraagId}">
                   <table class="c-center">                                    
-                        <button class="c-button__popup js-update${questionList[i][k].vraagId}" >
+                        <button class="c-button__popup js-update${i}${k}" >
                             <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                             Aanpassen  
                         </button>
@@ -376,14 +379,18 @@ const fillInAllQuestions = function ()
 }
 
 
-function myFunction(id)
+function myFunction(id, item1, item2 = "")
 {
   if (statuspopup == false)
   {
     console.log("show");
     console.log(`.js-delete${id}`);
+    console.log(`.js-update${item1}`);
+    console.log(`${item2}`);
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
     deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
+    updateQuerySelector = document.querySelector(`.js-update${item1}${item2}`);
+    updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
     var popup = document.getElementById(`myPopup${id}`);
     popup.classList.toggle("show");
     statuspopup = true;
@@ -397,7 +404,7 @@ function myFunction(id)
     statuspopup = false;
     if (previousid != id)
     {
-      myFunction(id);
+      myFunction(id, item1, item2);
     }
   }
 }
@@ -411,6 +418,20 @@ const deleteQuestion = function (id)
   console.log(`question with id #${id} has been deleted`);
   setTimeout(() => {getAPI(thema, niveau)}, 200);
 }
+
+const updateQuestion = function (item1, item2)
+{
+  if (item2 == '')
+  {
+    console.log(questionList[item1]);
+  }
+  else
+  {
+    console.log(questionList[item1][item2]);
+  }
+  //window.location.href = "vragentoevoegen.html";
+}
+
 
 const addQuestion = function ()
 {

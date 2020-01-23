@@ -265,8 +265,8 @@ const FillInData = function()
       console.log(questionList);
       statuspopup = false;
       
-      let htmlQuestion = 
-      `<tr id="js-question" class="c-table-color"></tr>
+      let htmlQuestion =`<table class="c-table">
+      <tr id="js-question" class="c-table-color">
           <td>1.</td>
           <td>${questionList[0].vraagstelling}</td>
           <td>A.</td> <td>${questionList[0].juistAntwoord}</td>
@@ -298,8 +298,7 @@ const FillInData = function()
             let C=  questionList[i].foutAntwoord2;
             let id = questionList[i].vraagId;
 
-            htmlQuestion +=
-            `<tr id="js-question" class="c-table-color"></tr>
+            htmlQuestion +=`<tr id="js-question" class="c-table-color">
             <td>${i+1}.</td>
             <td>${vraag}</td>
             <td>A.</td> <td>${A}</td>
@@ -319,17 +318,18 @@ const FillInData = function()
                               </button>
                         </table>
                     </span>
-                  </div>
+                </div>
             </td> 
           </tr>`;
 
         }
+      htmlQuestion += `</table>`;
       document.getElementById("js-question").innerHTML = htmlQuestion;
     }
     else
     {
-      let htmlQuestion =`<tr id="js-question" class="c-table-color"></tr>
-        <td>er zijn geen vragen</td>`;
+      let htmlQuestion =`<table class="c-table"><tr id="js-question" class="c-table-color"></tr>
+        <td>er zijn geen vragen</td> </table>`;
       document.getElementById("js-question").innerHTML = htmlQuestion;
     }
 }
@@ -338,15 +338,27 @@ const fillInAllQuestions = function ()
 {
   statuspopup = false;
   
-  let htmlQuestion = "";
+  let htmlQuestion = ``;
 
   for (let i = 0; i < themaList.length; i++)
   {
-    for (let k = 0; k < questionList[i].length; k++)
+    htmlQuestion += `<table class="c-title-table">
+    <tr>
+        <th>
+          ${themaList[i].naam}
+        </th>
+    </tr>
+    </table>
+    <table class="c-table">`;
+    if (questionList[i].length == 0)
     {
       htmlQuestion += `<tr id="js-question" class="c-table-color"></tr>
+      <td>er zijn geen vragen</td>`;
+    }
+    for (let k = 0; k < questionList[i].length; k++)
+    {
+      htmlQuestion += `<tr id="js-question" class="c-table-color">
       <td>${k+1}.</td>
-      <td>${themaList[i].naam}</td>
       <td>${questionList[i][k].vraagstelling}</td>
       <td>A.</td> <td>${questionList[i][k].juistAntwoord}</td>
       <td>B.</td> <td>${questionList[i][k].foutAntwoord1}</td>
@@ -369,12 +381,9 @@ const fillInAllQuestions = function ()
         </td> 
       </tr>`;
     }
+    htmlQuestion += `</table>`
   }
-  if (htmlQuestion == '')
-  {
-    htmlQuestion = `<tr id="js-question" class="c-table-color"></tr>
-    <td>er zijn geen vragen</td>`;
-  }
+  htmlQuestion += `</table>`
   document.getElementById("js-question").innerHTML = htmlQuestion;
 }
 
@@ -416,7 +425,7 @@ const deleteQuestion = function (id)
     method: 'DELETE',
   })
   console.log(`question with id #${id} has been deleted`);
-  setTimeout(() => {getAPI(thema, niveau)}, 200);
+  setTimeout(() => {getAPI(thema, niveau)}, 500);
 }
 
 const updateQuestion = function (item1, item2)

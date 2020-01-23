@@ -6,6 +6,7 @@
     --color-alpha-yellowII:#D4CB2F;
     --color-alpha-yellow-light: #FFFAA3;
     --color-alpha-green:#73AC40;
+    --color-text-red:#E96220;
     
     /* font */
     --font-family: Sniglet;
@@ -106,6 +107,15 @@ input[type=checkbox]:checked + label {
     font-size: 32px;
 }
 
+.c-instruction{
+    display: none;
+    margin-top: 15%;
+    /* color: var(--color-text-red); */
+    color: var(--color-text-alpha);
+    text-align: center;
+    font-size: 24px;
+    transition: ease-in;
+}
 
 .c-title-vragen{
     text-align: left;

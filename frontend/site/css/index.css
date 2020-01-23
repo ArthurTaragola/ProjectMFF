@@ -250,6 +250,7 @@ input[type=checkbox]:checked + label {
     padding: 2px 4px;  
     font-family: Sniglet;
     border: none;
+    line-height: 1.5;
 }
 
 input:focus {
@@ -277,6 +278,9 @@ input:focus {
     cursor: pointer;
 }
 
+.c-center{
+    text-align: center;
+}
 /* POP-UP */
 /* Popup container */
 .popup {
@@ -497,9 +501,6 @@ input:focus {
 {
     grid-column: span 6;
 }
-
-
-
 
 .u-grid-row-span-4
 {

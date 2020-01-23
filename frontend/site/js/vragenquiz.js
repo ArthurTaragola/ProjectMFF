@@ -191,6 +191,7 @@ const bothTeamsAnswered = function()
 {
     let possibleAnswers = ["A", "B", "C"];
     let correctAnswer = shuffledAnswers[correctAnswerIndex];
+
     //go to next page (show right answer)
     console.log("team 1: " + answerteam1);
     console.log("team 2: " + answerteam2);
@@ -248,6 +249,7 @@ const bothTeamsAnswered = function()
             console.log("team 1 krijgt 0 punten");
         }
     }
+    document.getElementById("js-instruction").style.display = 'block';
 }
 
 const goToNewPage = function ()
@@ -257,7 +259,6 @@ const goToNewPage = function ()
     localStorage.setItem("pointsTeam2", JSON.stringify(pointsTeam2));
     localStorage.setItem("questions", JSON.stringify(questionList));
     localStorage.setItem("firstQuestion", JSON.stringify(false));
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!laat onderaan de tekst "(druk op spatie of enter om door te gaan)" tevoorschijn komen
     window.location.href = "Scoreboard.html";
 }
 

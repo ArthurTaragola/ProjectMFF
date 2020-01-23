@@ -74,31 +74,39 @@ const getData = function()
 {
     shuffledAnswers = [];
     console.log(questionList);
-    let answers = [];
-    let randomQuestion = Math.floor(Math.random()*questionList.length);
-    let vraag = questionList[randomQuestion].vraagstelling;
-    let htmlQuestion = `<div class="question">${vraag}</div>`;
-    document.getElementById("js-question").innerHTML = htmlQuestion;
-    answers.push(questionList[randomQuestion].juistAntwoord);
-    answers.push(questionList[randomQuestion].foutAntwoord1);
-    answers.push(questionList[randomQuestion].foutAntwoord2);
-    console.log(vraag);
-    shuffle(answers);
-    //console.log(answers);
-    for (let i = 0; i < 3; i++)
+    if (questionList.length != 0)
     {
-        console.log(shuffledAnswers[i]);
-    }
-    let htmlAnswer = `<button class="c-button c-button-vragen" id="A">A) ${shuffledAnswers[0]}</button>`;
-    document.getElementById("js-A").innerHTML = htmlAnswer;
-    htmlAnswer = `<button class="c-button c-button-vragen" id="B">B) ${shuffledAnswers[1]}</button>`;
-    document.getElementById("js-B").innerHTML = htmlAnswer;
-    htmlAnswer = `<button class="c-button c-button-vragen" id="C">C) ${shuffledAnswers[2]}</button>`;
-    document.getElementById("js-C").innerHTML = htmlAnswer;
-    //console.log(shuffledAnswers);
-    correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
+        let answers = [];
+        let randomQuestion = Math.floor(Math.random()*questionList.length);
+        let vraag = questionList[randomQuestion].vraagstelling;
+        let htmlQuestion = `<div class="question">${vraag}</div>`;
+        document.getElementById("js-question").innerHTML = htmlQuestion;
+        answers.push(questionList[randomQuestion].juistAntwoord);
+        answers.push(questionList[randomQuestion].foutAntwoord1);
+        answers.push(questionList[randomQuestion].foutAntwoord2);
+        console.log(vraag);
+        shuffle(answers);
+        //console.log(answers);
+        for (let i = 0; i < 3; i++)
+        {
+            console.log(shuffledAnswers[i]);
+        }
+        let htmlAnswer = `<button class="c-button c-button-vragen" id="A">A) ${shuffledAnswers[0]}</button>`;
+        document.getElementById("js-A").innerHTML = htmlAnswer;
+        htmlAnswer = `<button class="c-button c-button-vragen" id="B">B) ${shuffledAnswers[1]}</button>`;
+        document.getElementById("js-B").innerHTML = htmlAnswer;
+        htmlAnswer = `<button class="c-button c-button-vragen" id="C">C) ${shuffledAnswers[2]}</button>`;
+        document.getElementById("js-C").innerHTML = htmlAnswer;
+        //console.log(shuffledAnswers);
+        correctAnswerIndex = shuffledAnswers.indexOf(answers[0]);
 
-    questionList.splice(randomQuestion, 1); //verwijder 1 vraag uit de lijst
+        questionList.splice(randomQuestion, 1); //verwijder 1 vraag uit de lijst
+    }
+    else
+    {
+        alert("dit thema heeft geen vragen");
+        window.location.href = "thema's.html";
+    }
 }
 
 const shuffle = function(list)
@@ -281,6 +289,7 @@ const init = function()
         pointsTeam2 = JSON.parse(localStorage.getItem("pointsTeam2"));
         getData();
     }
+
     loadbar();
     setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
 }

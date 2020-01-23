@@ -7,6 +7,8 @@ let winningTeam;
 
 let leerkrachtId = localStorage.getItem("leerkrachtId");
 
+let audioVictory = new Audio('sounds/victory.mp3')
+
 const loadGraph = function (){
     let team1 = true;
     let img = document.getElementById("bird1");
@@ -75,7 +77,7 @@ const loadGraph = function (){
                             bar._model.x = 100;
                         }
                         ctx.drawImage(img, bar._model.x + 10, bar._model.y - 38);
-                        if ((quizIsFinished && winningTeam == 1) || winningTeam == 3)
+                        if ((quizIsFinished && winningTeam == 1) || (winningTeam == 3 && pointsTeam1 != 0))
                         {
                             ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
                         }
@@ -88,7 +90,7 @@ const loadGraph = function (){
                             bar._model.x = 100;
                         }
                         ctx.drawImage(img2, bar._model.x + 10, bar._model.y - 38);
-                        if ((quizIsFinished && winningTeam == 2) || winningTeam == 3)
+                        if ((quizIsFinished && winningTeam == 2) || (winningTeam == 3&& pointsTeam2 != 0))
                         {
                             ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
                         }
@@ -220,6 +222,7 @@ const init = function()
     }
     else
     {
+        audioVictory.play();
         stopQuiz = document.querySelector('.js-stopButton');
         stopQuiz.addEventListener('click', goToHomePage);
     }

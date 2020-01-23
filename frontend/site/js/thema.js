@@ -9,16 +9,16 @@ let oneThemeSelected;
 
 let leerkrachtId = localStorage.getItem("leerkrachtId");
 
-const toggleStatus = function(thema)
+const toggleStatus = function(item, thema)
 {
-    let added = !addedThemaList[thema];
-    addedThemaList[thema] = added;
+    let added = !addedThemaList[item];
+    addedThemaList[item] = added;
     if (added)
     {
         console.log("added thema "+thema);
         document.getElementById(`js-addbutton_thema${thema+1}`).style.display = 'none';
         document.getElementById(`js-checkbutton_thema${thema+1}`).style.display = 'inline';
-        themaList.push(thema+1);
+        themaList.push(thema);
         if (themaList.length == 1) //kleur moet enkel weizigen als er 1 of meer items in komen
         {
             oneThemeSelected = true;
@@ -29,7 +29,7 @@ const toggleStatus = function(thema)
     {
         document.getElementById(`js-addbutton_thema${thema+1}`).style.display = 'inline';
         document.getElementById(`js-checkbutton_thema${thema+1}`).style.display = 'none';
-        let index = themaList.indexOf(thema+1);
+        let index = themaList.indexOf(thema);
         if (index > -1) {
             themaList.splice(index, 1);
         }
@@ -114,7 +114,7 @@ const getAPI = async function ()
         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
         for (let i = 0; i < data.length; i++)
         {
-            themas.push(data[i].naam);
+            themas.push(data[i]);
         }
     }
     catch(error)
@@ -127,20 +127,20 @@ const getAPI = async function ()
 
 const showThemes = function ()
 {
-    let htmlTheme = `<input type="checkbox" value="Cultuur" class="hidden js-thema1" name="cb" id="cb1"> 
+    let htmlTheme = `<input type="checkbox" value="${themas[0].naam}" class="hidden js-thema${themas[0].themaId}" name="cb" id="cb1"> 
     <label for="cb1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema1" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema1" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        ${themas[0]}
+        <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema${themas[0].themaId+1}" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema${themas[0].themaId+1}" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        ${themas[0].naam}
     </label>`;
 
     for (let i = 1; i < themas.length; i++)
     {
-        htmlTheme += `<input type="checkbox" value="Cultuur" class="hidden js-thema${i+1}" name="cb" id="cb${i+1}"> 
+        htmlTheme += `<input type="checkbox" value="${themas[i].naam}" class="hidden js-thema${themas[i].themaId}" name="cb" id="cb${i+1}"> 
         <label for="cb${i+1}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema${i+1}" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema${i+1}" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            ${themas[i]}
+            <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema${themas[i].themaId+1}" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="checkbutton svg-button" id="js-checkbutton_thema${themas[i].themaId+1}" fill = "#08518B" width="32" height="32" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill= "none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            ${themas[i].naam}
         </label>`;
     }
     document.getElementById("js-themas").innerHTML = htmlTheme;
@@ -151,8 +151,8 @@ const listenToThemes = function ()
 {
     for (let i = 0; i < themas.length; i++)
     {
-        temp = document.querySelector(`.js-thema${i+1}`);
-        temp.addEventListener('click', function(){toggleStatus(i)});
+        temp = document.querySelector(`.js-thema${themas[i].themaId}`);
+        temp.addEventListener('click', function(){toggleStatus(i, themas[i].themaId)});
         objectList.push(temp);
         addedThemaList.push(false);
     }

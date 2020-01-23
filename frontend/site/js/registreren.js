@@ -123,25 +123,31 @@ function DoSubmit()
         let name = document.getElementById("naam").value;
         let email = document.getElementById("email").value;
         let password = document.getElementById("ww").value;
+        let password2 = document.getElementById("ww2").value;
 
-        xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/leerkrachten");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            "Voornaam": firstName,
-            "Naam": name,
-            "Email": email,
-            "wachtwoord": password
-        }));
-        xhr.onreadystatechange = function ()
-        {
-            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+        if(password == password2){
+            xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/leerkrachten");
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                "Voornaam": firstName,
+                "Naam": name,
+                "Email": email,
+                "wachtwoord": password
+            }));
+            xhr.onreadystatechange = function ()
             {
-                yellowButton();
-                console.log("the account has succesfully been made");
-                //response = xhr.responseText; 
-                //console.log(response); //expect leerkrachtId
-                window.location.href = "login.html";
+                if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+                {
+                    yellowButton();
+                    console.log("the account has succesfully been made");
+                    //response = xhr.responseText; 
+                    //console.log(response); //expect leerkrachtId
+                    window.location.href = "login.html";
+                }
             }
+        }
+        else{
+            alert("Wachtwoorden niet gelijk")
         }
     }
 }

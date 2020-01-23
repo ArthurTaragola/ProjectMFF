@@ -136,7 +136,6 @@ const showThemes = function ()
 
     for (let i = 1; i < themas.length; i++)
     {
-        console.log(themas[i])
         htmlTheme += `<input type="checkbox" value="${themas[i].naam}" class="hidden js-thema${themas[i].themaId}" name="cb" id="cb${i+1}"> 
         <label for="cb${i+1}">
             <svg xmlns="http://www.w3.org/2000/svg" class="addbutton svg-button" id="js-addbutton_thema${themas[i].themaId+1}" fill= "#6E6E6E" width="32" height="32" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>

@@ -237,9 +237,20 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__home{
-    margin: 16px;
+    margin: 32px;
     display: flex;
     align-items: center;
+}
+
+.c-add-question{
+    cursor: pointer;
+}
+
+.c-card-item__person{
+    margin: 32px;
+    display: flex;
+    align-items: center;
+    float: right;
 }
 
 .c-home-text{
@@ -405,11 +416,16 @@ input:focus {
     background-color:var(--color-alpha-yellow-light);
 }
 
-.position-logout{
+/* .position-logout{
     text-align: right;
     padding: var(--standard-pixels);
     cursor: pointer;
-}
+} */
+
+/* .position-home{
+    padding: var(--standard-pixels);
+    cursor: pointer;
+} */
 
 .position-bird-duif{
     margin-top: 10%;
@@ -519,6 +535,10 @@ input:focus {
     left: 0;
     right: 0;
     z-index: 99;
+  }
+
+  .close{
+      cursor: pointer;
   }
   
   /*hide the items when the select box is closed:*/

@@ -9,7 +9,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ed7272">
+    <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
 
     <title>Move For Fortune - Home</title>
@@ -21,14 +22,21 @@
 </head>
 <body>
     <div class="c-grid">
-        <div class="c-grid__item u-grid-col-span-1"></div>
+        <div class="c-grid__item u-grid-col-span-1 position-home">
+            <a href="quiz.html" class="c-card-item__home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/><path d="M0 0h24v24H0z" fill="none" margin-right="100px"/></svg>
+                <span class="c-home-text">Home</span>
+            </a>
+        </div>
         <div class="c-grid__item u-grid-col-span-4">
             <h1 class="c-title">Kies het gewenste niveau!</h1>
         </div>
         <div class="c-grid__item u-grid-col-span-1 position-logout" id="js-logout">
-            Log out
+            <a href="index.html" class="c-card-item__person">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#08518B" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                <span class="c-home-text">Log out</span>
+            </a>
         </div>
-
         <div class="c-grid__item u-grid-col-span-6">
             <div class="transparant"></div>
             <br>

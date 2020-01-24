@@ -27,6 +27,7 @@ table{
 html{
     /* font */
     font-family:var(--font-family);
+    background-color: var(--color-alpha-blue);
     
     /* background afbeelding */
     background-image: url(../svg/Inlog\ scherm\ –\ 15.svg);

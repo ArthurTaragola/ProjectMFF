@@ -726,7 +726,7 @@ const newTheme = function ()
     document.getElementById('js-selectTheme').style.display = 'none';
     document.getElementById('js-addThema').style.display = 'block';
 
-    let htmlTitle = `<h1 class="card-title">Nieuw thema:</h1>`;
+    let htmlTitle = `<h1 class="c-title c-title-vragen">Nieuw thema:</h1>`;
     document.getElementById("js-title").innerHTML = htmlTitle;
 }
 

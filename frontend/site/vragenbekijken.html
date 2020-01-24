@@ -82,7 +82,7 @@
                                     <div class="c-grid__item u-grid-col-span-1"></div>
                                     <div class="c-grid__item u-grid-col-span-4 c-title">
                                         <div id="js-title">
-                                            <h1 class="c-title">Nieuwe vraag:</h1>
+                                            <h1 class="c-title c-title-toevoegen">Nieuwe vraag:</h1>
                                         </div>
                                     </div>
                                     <div class="c-grid__item u-grid-col-span-1">
@@ -92,27 +92,24 @@
                                     <div class="c-grid__item u-grid-col-span-4 u-grid-row-span-4">
                                         <form action="" id='js-newQuestion' onsubmit="return false">
                         <div class="c-card-item__input">
-                            <label for="vraag">Vraag:</label><br>
-                            <input id="vraag" class="c-input" type="text">
+                            <input id="vraag" class="c-input" type="text" placeholder="Vraag">
                         </div>
                         <br>
                         <div class="c-card-item__input">
-                            <label for="jantw">Juist antwoord:</label><br>
-                            <input id="jantw" class="c-input" type="text" required>
+                            <input id="jantw" class="c-input" type="text" placeholder="Juist antwoord" required>
                         </div>
                         <br>
                         <div class="c-card-item__input">
-                            <label for="vantw1">Verkeerd antwoord:</label><br>
-                            <input id="vantw1" class="c-input" type="text" required>
+                            <input id="vantw1" class="c-input" type="text" required placeholder="Verkeerd antwoord">
                         </div>
                         <br>
                         <div class="c-card-item__input">
-                            <label for="vantw2">Verkeerd antwoord 2:</label><br>
-                            <input id="vantw2" class="c-input" type="text" required>
+                            <input id="vantw2" class="c-input" type="text" required placeholder="Verkeerd antwoord 2">
                         </div>
                         <br>
+                        <br>
                         <div class="c-card-item__input">
-                            <input class="c-button c-button-login" id="js-validInputs" value="Volgende" type="button" onclick="submitQuestion()">
+                            <input class="c-button c-button-thema" id="js-validInputs" value="Volgende" type="button" onclick="submitQuestion()">
                         </div>
                     </form>
                     <form action="" id='js-selectTheme' onsubmit="return false">
@@ -131,11 +128,11 @@
                             </select>
                         </div>
                         <div class="c-card-item__input">
-                            <label class=" js-newTheme" for="toevoegen">Voeg een nieuw thema toe</label>
+                            <label class="js-newTheme" for="toevoegen">Voeg een nieuw thema toe</label>
                             <!--<button class= "card-button" id="js-validThemeSelect" onclick="submitTheme()">Toevoegen</button>-->
                         </div>
                         <div class="c-card-item__input">
-                            <input class="c-button c-button-login" id="js-validThemeSelect" value="Toevoegen" type="button" onclick="submitTheme()">
+                            <input class="c-button c-button-thema" id="js-validThemeSelect" value="Toevoegen" type="button" onclick="submitTheme()">
                         </div>
                     </form>
                     <form action="" id='js-addThema' onsubmit="return false">

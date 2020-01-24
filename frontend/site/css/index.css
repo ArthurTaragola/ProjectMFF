@@ -236,8 +236,13 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__home{
-    margin-left: 16px;
-    margin-top: 10px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.c-home-text{
+    padding-left: 4px;
 }
 
 .c-card-item__btn{

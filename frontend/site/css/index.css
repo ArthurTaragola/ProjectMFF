@@ -57,37 +57,37 @@ input{
 .hidden {position:absolute;visibility:hidden;opacity:0;}
 input[type=checkbox] + label {
     font-size: var(--standard-pixels);
-    height: 50px;
-    padding-top: 16px;
-    padding-bottom: 16px; 
-    margin-bottom: 5%;
-    margin-left: 32px;
+    padding-top: 24px;
+    padding-bottom: 24px; 
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    width: 99%;
+    width: 100%;
     font-family:var(--font-family);
     color: #6E6E6E;
     background-color: #D9D9D9;
-    border: 4px solid #A8A8A8; 
+    border: 4px solid #D9D9D9; 
     text-align: center;
+    border-radius: 8px;
+    justify-content: center;
 
 } 
 input[type=checkbox]:checked + label {
     font-size:var(--standard-pixels);
-    height: 50px;
-    padding-top: 16px;
-    padding-bottom: 16px;  
-    margin-bottom: 5%;
-    margin-left: 32px;
+    padding-top: 24px;
+    padding-bottom: 24px; 
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     font-family:var(--standard-pixels);
     color: var(--color-text-alpha);
     background-color: var(--color-alpha-yellow);
-    border: 4px solid var(--color-alpha-yellowII); 
+    border: 4px solid var(--color-alpha-yellow); 
     text-align: center;
+    border-radius: 8px;
+    justify-content: center;
 
 }
-
+.thema{
+    margin-left: 24px;
+}
 .checkbutton{
     display: none;
 }
@@ -155,7 +155,7 @@ input[type=checkbox]:checked + label {
 /* voor responsive add css grid */
 .c-button{ 
     font-family: var(--font-family);
-    /* border: 4px solid var(--color-alpha-yellowII); */
+    border: 4px solid var(--color-alpha-yellow);
     color: var(--color-text-alpha);
     background-color: var(--color-alpha-yellow);
     border-radius: 8px;
@@ -186,6 +186,7 @@ input[type=checkbox]:checked + label {
 .c-button-volgende{
     width: 75%;
     height: 40px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .c-buttons-thema{
@@ -205,7 +206,7 @@ input[type=checkbox]:checked + label {
 
 .c-button:hover{
     background-color: var(--color-alpha-yellow-light);
-    border-color: var(--color-alpha-yellow);
+    border-color: var(--color-alpha-yellow-light);
     transition-duration: 0.4s;
 }
 
@@ -236,8 +237,13 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__home{
-    margin-left: 16px;
-    margin-top: 10px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.c-home-text{
+    padding-left: 4px;
 }
 
 .c-card-item__btn{
@@ -265,7 +271,7 @@ input[type=checkbox]:checked + label {
 .c-input{
     margin-top: 5%;
     width: 99%;
-    padding: 2px 4px;  
+    padding: 4px 8px;  
     font-family: Sniglet;
     border: none;
     line-height: 1.5;
@@ -322,9 +328,15 @@ input:focus {
     margin-top: 40%;
 }
 
+<<<<<<< HEAD
 /* .c-center{
     text-align: center;
 } */
+=======
+.svg-thema{
+    display:flex;
+}
+>>>>>>> develop
 
 /* .c-svg-home{
     max-width: 24px;

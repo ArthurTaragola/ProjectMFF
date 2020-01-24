@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
     <script src="js/vragenbekijken.js"></script>
-    <script src="js/vragentoevoegen.js"></script>
     <title>Move For Fortune - Vragen bekijken</title>
 </head>
 <body>
@@ -22,9 +21,9 @@
                 Bekijk Uw vragen
             </h1>
         </div>
-        <div class="c-grid__item u-grid-col-span-1 position-logout">
-          Log Out
-        </div>
+        <a href="index.html"><div class="c-grid__item u-grid-col-span-1 position-logout">
+          Log out
+        </div></a>
         <div class="c-grid__item u-grid-col-span-1"></div>
         <div class="c-grid__item u-grid-col-span-4">
             <div class="c-titletable">
@@ -44,7 +43,7 @@
                         <th>Kies uw thema:</th>
                         <th>
                             <div class="custom-select1">
-                                <select>
+                                <select id="js-themas">
                                     <option>Cultuur</option>
                                     <option value="1">Cultuur</option>
                                     <option value="2">Sport</option>
@@ -122,7 +121,7 @@
                             <button class= "card-button" id="js-validThemeSelect" onclick="submitTheme()">Toevoegen</button>
                         </div>
                         <div class="c-card-item__input">
-                            <input class="c-button c-button-login" id="js-validThemeInput" value="Toevoegen" type="button" onclick="submitTheme()">
+                            <input class="c-button c-button-login" id="js-addThemaButton" value="Toevoegen" type="button" onclick="submitTheme()">
                         </div>
                     </form>
                     <form action="" id='js-addThema' onsubmit="return false">
@@ -134,8 +133,15 @@
                             <button  class="c-button c-button-login" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
                         </div>
                     </form>
+                    <!--
+                    <div class="card-thema-toegevoegd" id='js-themaSuccessfullAdded'>
+                        <h1 class= "card-toegevoegd">Nieuw thema is <br> succesvol toegevoegd!</h1>
+                        <button class= "card-button js-goBackToPreviousPage">Volgende</button>
+                    </div>
+                    -->
                     <div class="c-card-item__input">
                         <h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>
+                        <!--<button class= "card-button js-goBackToList">Volgende</button>-->
                     </div>
                                     </div>
                                     <div class="c-grid__item u-grid-col-span-1 u-grid-row-span-4"></div>

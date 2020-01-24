@@ -107,7 +107,8 @@ const DoSubmit = function()
 
         var response;
 
-        let email = document.getElementById("email").value;
+        let email = document.getElementById("email").value.toLowerCase();
+        console.log(email)
         let password = document.getElementById("ww").value;
 
         xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v1/login");

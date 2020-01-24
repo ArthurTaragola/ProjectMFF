@@ -121,7 +121,7 @@ function DoSubmit()
 
         let firstName = document.getElementById("voornaam").value;
         let name = document.getElementById("naam").value;
-        let email = document.getElementById("email").value;
+        let email = document.getElementById("email").value.toLowerCase();
         let password = document.getElementById("ww").value;
         let password2 = document.getElementById("ww2").value;
 

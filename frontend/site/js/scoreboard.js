@@ -45,7 +45,7 @@ const loadGraph = function (){
 
             layout: {
                 padding: {
-                    right: 80
+                    right: 120
                 }
             },
             defaultFontFamily: Chart.defaults.global.defaultFontFamily = 'Sniglet',
@@ -76,10 +76,10 @@ const loadGraph = function (){
                         {
                             bar._model.x = 100;
                         }
-                        ctx.drawImage(img, bar._model.x + 10, bar._model.y - 38);
+                        ctx.drawImage(img, bar._model.x + 10, bar._model.y - 30);
                         if ((quizIsFinished && winningTeam == 1) || (winningTeam == 3 && pointsTeam1 != 0))
                         {
-                            ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
+                            ctx.drawImage(img3, bar._model.x + 58, bar._model.y - 50);
                         }
                         team1 = false;
                     }
@@ -89,10 +89,10 @@ const loadGraph = function (){
                         {
                             bar._model.x = 100;
                         }
-                        ctx.drawImage(img2, bar._model.x + 10, bar._model.y - 38);
+                        ctx.drawImage(img2, bar._model.x + 10, bar._model.y - 30);
                         if ((quizIsFinished && winningTeam == 2) || (winningTeam == 3&& pointsTeam2 != 0))
                         {
-                            ctx.drawImage(img3, bar._model.x + 56, bar._model.y - 10);
+                            ctx.drawImage(img3, bar._model.x + 58, bar._model.y - 50);
                         }
                         team1 = true;
                     }
@@ -206,14 +206,14 @@ const keyPressed = function (e)
     }
 }
 
-const init = function()
+const init = async function()
 {
     console.log("DOM Loaded");
     pointsTeam1 = JSON.parse(localStorage.getItem("pointsTeam1"));
     pointsTeam2 = JSON.parse(localStorage.getItem("pointsTeam2"));
     questionList = JSON.parse(localStorage.getItem("questions"));
     checkQuestions();
-    loadGraph();
+    await loadGraph();
     document.addEventListener("keydown", keyPressed, false);
     if (!quizIsFinished)
     {

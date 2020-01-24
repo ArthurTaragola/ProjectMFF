@@ -593,9 +593,9 @@ const submitQuestion = function ()
     if (alleventListenersValid)
     {
         questionValue = document.getElementById("vraag").value;
-        correctAnswerValue = document.getElementById("juistantwoord").value;
-        wrongAnswer1Value = document.getElementById("verkeerdantwoord1").value;
-        wrongAnswer2Value = document.getElementById("verkeerdantwoord2").value;
+        correctAnswerValue = document.getElementById("jantw").value;
+        wrongAnswer1Value = document.getElementById("vantw1").value;
+        wrongAnswer2Value = document.getElementById("vantw2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
         if (document.getElementById("thema").value == 0)
@@ -632,9 +632,9 @@ const submitTheme = function ()
             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
             {
                 console.log("the question has succesfully been added");
-                document.getElementById('js-newQuestion').style.display = 'block';
-                document.getElementById('js-addQuestion').style.display = 'none';
-                document.getElementById('js-questionSuccessfullAdded').style.display = 'block';
+                //document.getElementById('js-newQuestion').style.display = 'block';
+                document.getElementById('js-selectTheme').style.display = 'none';
+                document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -648,7 +648,7 @@ const submitNewTheme = function ()
 {
     if (validThemeInput)
     {
-        let thema = document.getElementById("nieuwthema").value;
+        let thema = document.getElementById("idk").value;
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", `https://moveforfortunefunction.azurewebsites.net/api/v2/themas/${leerkrachtId}`);
@@ -749,11 +749,6 @@ const goBackToSelectTheme = function ()
     }
 }
 
-const goBackToList = function ()
-{
-    window.location.href = "vragenbekijken.html";
-}
-
 
 const init = async function()
 {
@@ -770,18 +765,23 @@ const init = async function()
     buttonNewTheme = document.querySelector('.js-newTheme');
     buttonNewTheme.addEventListener('click', newTheme);
 
-    buttonThemeAdded = document.querySelector('.js-goBackToPreviousPage');
-    buttonThemeAdded.addEventListener('click', goBackToSelectTheme);
+    //buttonThemeAdded = document.querySelector('.js-goBackToPreviousPage');
+    //buttonThemeAdded.addEventListener('click', goBackToSelectTheme);
 
-    buttonThemeAdded = document.querySelector('.js-goBackToList');
-    buttonThemeAdded.addEventListener('click', goBackToList);
+    //buttonThemeAdded = document.querySelector('.js-goBackToList');
+    //buttonThemeAdded.addEventListener('click', goBackToList);
 
     question = document.querySelector('#vraag');
-    correctAnswer = document.querySelector('#juistantwoord');
-    wrongAnswer1 = document.querySelector('#verkeerdantwoord1');
-    wrongAnswer2 = document.querySelector('#verkeerdantwoord2');
+    correctAnswer = document.querySelector('#jantw');
+    wrongAnswer1 = document.querySelector('#vantw1');
+    wrongAnswer2 = document.querySelector('#vantw2');
 
-    newThemeInput = document.querySelector('#nieuwthema');
+    newThemeInput = document.querySelector('#newth');
+
+    document.getElementById('js-selectTheme').style.display = 'none';
+    document.getElementById('js-addThema').style.display = 'none';
+    document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
+    document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
 
     enableListeners();
     grayButton('js-validInputs');

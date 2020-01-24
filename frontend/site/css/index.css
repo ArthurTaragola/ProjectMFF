@@ -270,7 +270,7 @@ input[type=checkbox]:checked + label {
 .c-input{
     margin-top: 5%;
     width: 99%;
-    padding: 2px 4px;  
+    padding: 4px 8px;  
     font-family: Sniglet;
     border: none;
     line-height: 1.5;

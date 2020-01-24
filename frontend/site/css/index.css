@@ -193,6 +193,18 @@ input[type=checkbox]:checked + label {
     width: 351px;
 }
 
+.c-logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-logo{
+    margin: 5px;
+    width: 13vh;
+    height: auto;
+}
+
 .c-button-login{
     height: 73px;
     width: 100%;

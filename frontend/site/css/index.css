@@ -318,8 +318,13 @@ input:focus {
 }
 
 .c-center{
-    text-align: center;
+    margin-left: 150%;
+    margin-top: 40%;
 }
+
+/* .c-center{
+    text-align: center;
+} */
 
 /* .c-svg-home{
     max-width: 24px;

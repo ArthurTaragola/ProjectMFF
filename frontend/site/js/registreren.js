@@ -1,6 +1,6 @@
 let eventListeners = [];
 let emailValid = false;
-let eventListenersValid = [false, false, false];
+let eventListenersValid = [false, false, false, false];
 let alleventListenersValid = false;
 
 const enableListeners = function()
@@ -9,8 +9,9 @@ const enableListeners = function()
     nameListener.addEventListener('input', function () {checkValue(1)});
     emailListener.addEventListener('input', checkEmailAddress);
     passwordListener.addEventListener('input', function () {checkValue(2)});
+    passwordListener2.addEventListener('input', function () {checkValue(3)});
     
-    eventListeners.push(firstNameListener, nameListener, passwordListener);
+    eventListeners.push(firstNameListener, nameListener, passwordListener, passwordListener2);
 }
 const isEmpty = function(fieldValue)
 {
@@ -35,7 +36,7 @@ const checkValue = function(index)
         {
             console.log('niet leeg');
             eventListenersValid[index] = true;
-            if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && emailValid)
+            if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && eventListenersValid[3] && emailValid)
             {
                 alleventListenersValid = true;
                 yellowButton('js-validInputs');
@@ -56,7 +57,7 @@ const checkEmailAddress = function()
         {
             console.log("valid email");
             emailValid = true;
-            if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && emailValid)
+            if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && eventListenersValid[3] && emailValid)
             {
                 alleventListenersValid = true;
                 yellowButton('js-validInputs');
@@ -126,6 +127,7 @@ function DoSubmit()
         let password2 = document.getElementById("ww2").value;
 
         if(password == password2){
+            setTimeout(() => {document.getElementById("js-registerButton").innerHTML = "<div class='loader'></div>";}, 100);
             xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/leerkrachten");
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({
@@ -138,6 +140,7 @@ function DoSubmit()
             {
                 if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
                 {
+                    document.getElementById("js-registerButton").innerHTML = "Registreren";
                     yellowButton();
                     console.log("the account has succesfully been made");
                     //response = xhr.responseText; 
@@ -148,6 +151,7 @@ function DoSubmit()
         }
         else{
             alert("Wachtwoorden niet gelijk")
+            yellowButton();
         }
     }
 }
@@ -158,6 +162,7 @@ const init = function()
     firstNameListener = document.querySelector('#voornaam');
     nameListener = document.querySelector('#naam');
     passwordListener = document.querySelector('#ww');
+    passwordListener2 = document.querySelector('#ww2');
     emailListener = document.querySelector('#email');
     enableListeners();
     grayButton();

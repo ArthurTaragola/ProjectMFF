@@ -1,6 +1,8 @@
 let emailValid = false;
 let passwordValid = false;
 
+loginButton = document.getElementById("js-loginButton");
+
 const enableListeners = function()
 {
     email.addEventListener('input', checkEmailAddress);
@@ -102,6 +104,7 @@ const DoSubmit = function()
     if (passwordValid && emailValid)
     {
         grayButton();
+        setTimeout(() => {document.getElementById("js-loginButton").innerHTML = "<div class='loader'></div>";}, 100);
 
         let xhr = new XMLHttpRequest();
 
@@ -121,6 +124,7 @@ const DoSubmit = function()
         {
             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
             {
+                document.getElementById("js-loginButton").innerHTML = "Login";
                 yellowButton();
                 response = xhr.responseText; 
                 console.log(response);

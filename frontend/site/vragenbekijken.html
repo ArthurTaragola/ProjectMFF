@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
     <script src="js/vragenbekijken.js"></script>
+    <script src="js/vragentoevoegen.js"></script>
     <title>Move For Fortune - Vragen bekijken</title>
 </head>
 <body>
@@ -27,9 +28,15 @@
                 Bekijk Uw vragen
             </h1>
         </div>
+<<<<<<< HEAD
         <a href="index.html"><div class="c-grid__item u-grid-col-span-1 position-logout">
           Log Out
         </div></a>
+=======
+        <div class="c-grid__item u-grid-col-span-1 position-logout">
+          Log Out
+        </div>
+>>>>>>> develop
         <div class="c-grid__item u-grid-col-span-1"></div>
         <div class="c-grid__item u-grid-col-span-4">
             <div class="c-titletable">
@@ -40,7 +47,7 @@
                             <div class="custom-select">
                                 <select id="my-select">
                                 <option>Niveau 1</option>
-                                  <option value="1" >Niveau 1</option>
+                                  <option value="1">Niveau 1</option>
                                   <option value="2" >Niveau 2</option>
                                   <option value="3" >Niveau 3</option>
                                 </select>
@@ -49,28 +56,127 @@
                         <th>Kies uw thema:</th>
                         <th>
                             <div class="custom-select1">
-                                <select id="js-themas">
+                                <select>
+                                    <option>Cultuur</option>
+                                    <option value="1">Cultuur</option>
+                                    <option value="2">Sport</option>
+                                    <option value="3">Technologie</option>
+                                    <option value="4">Natuur</option>
+                                    <option value="5">Actua</option>
+                                    <option value="6">Wetenschap</option>
                                     <!-- <option value="alles">Alles</option> -->
                                 </select>
                             </div>
                         </th>
                         <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="js-addQuestion c-add" width="24" height="24" viewBox="0 0 24 24"><path fill="#08518B" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="myBtn" class="js-addQuestion" width="24" height="24" viewBox="0 0 24 24"><path fill="#08518B" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+
+
+                            <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="c-card c-card-overlay">
+
+                                <div class="c-grid">
+                                    <div class="c-grid__item u-grid-col-span-1"></div>
+                                    <div class="c-grid__item u-grid-col-span-4 c-title">
+                                        <div id="js-title">
+                                            <h1 class="c-title">Nieuwe vraag:</h1>
+                                        </div>
+                                    </div>
+                                    <div class="c-grid__item u-grid-col-span-1">
+                                        <span class="close">&times;</span>
+                                    </div>
+                                    <div class="c-grid__item u-grid-col-span-1 u-grid-row-span-4"></div>
+                                    <div class="c-grid__item u-grid-col-span-4 u-grid-row-span-4">
+                                        <form action="" id='js-newQuestion' onsubmit="return false">
+                        <div class="c-card-item__input">
+                            <label for="vraag">Vraag:</label><br>
+                            <input id="vraag" class="c-input" type="text">
+                        </div>
+                        <br>
+                        <div class="c-card-item__input">
+                            <label for="jantw">Juist antwoord:</label><br>
+                            <input id="jantw" class="c-input" type="text" required>
+                        </div>
+                        <br>
+                        <div class="c-card-item__input">
+                            <label for="vantw1">Verkeerd antwoord:</label><br>
+                            <input id="vantw1" class="c-input" type="text" required>
+                        </div>
+                        <br>
+                        <div class="c-card-item__input">
+                            <label for="vantw2">Verkeerd antwoord 2:</label><br>
+                            <input id="vantw2" class="c-input" type="text" required>
+                        </div>
+                        <br>
+                        <div class="c-card-item__input">
+                            <input class="c-button c-button-login" id="js-validInputs" value="Volgende" type="button" onclick="submitTheme()">
+                        </div>
+                    </form>
+                    <form action="" id='js-selectTheme' onsubmit="return false">
+                        <div class="c-card-item__input">
+                            <label for="niveau">Niveau</label>
+                            <select id='niveau'>
+                                <option value="1">Niveau 1</option>
+                                <option value="2">Niveau 2</option>
+                                <option value="3">Niveau 3</option>
+                            </select>
+                        </div>
+                        <div class="c-card-item__input">
+                            <label for="">Thema</label>
+                            <select id="thema">
+
+                            </select>
+                        </div>
+                        <div class="c-card-item__input">
+                            <label class=" js-newTheme" for="toevoegen">Voeg een nieuw thema toe</label>
+                            <button class= "card-button" id="js-validThemeSelect" onclick="submitTheme()">Toevoegen</button>
+                        </div>
+                        <div class="c-card-item__input">
+                            <input class="c-button c-button-login" id="js-validThemeInput" value="Toevoegen" type="button" onclick="submitTheme()">
+                        </div>
+                    </form>
+                    <form action="" id='js-addThema' onsubmit="return false">
+                        <div class="c-card-item__input">
+                            <label for="newth">Nieuw thema:</label>
+                            <input type="text" id="newth" required>
+                        </div>
+                        <div class="c-card-item__input">
+                            <button  class="c-button c-button-login" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
+                        </div>
+                    </form>
+                    <div class="c-card-item__input">
+                        <h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>
+                    </div>
+                                    </div>
+                                    <div class="c-grid__item u-grid-col-span-1 u-grid-row-span-4"></div>
+                                </div>
+
+
+
+
+
+
+
+                            </div> <!--einde div modal-content -->
+                        </div> <!-- einde div modal -->
+
+
+
                         </th>
                       </tr>
                 </table>
             </div>
-            <div id='js-question'>
-                <table class="c-table">
-
-                </table>
-            </div>
+            <table class="c-table" id = "js-question">
+                  <tr class="c-table-color">
+                  </tr>
+            </table>
         </div>
         <div class="c-grid__item u-grid-col-span-1"></div>
         <div class="c-grid__item u-grid-col-span-1"></div>
-        <div class="c-grid__item u-grid-col-span-4"><div class="transparant"><br><div class="transparant"></div></div></div>
+        <div class="c-grid__item u-grid-col-span-4"></div>
         <div class="c-grid__item u-grid-col-span-1"></div>
-
     </div>
 </body>
 </html>

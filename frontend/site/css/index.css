@@ -376,6 +376,7 @@ input:focus {
   .popup .popuptext {
     visibility: hidden;
     width: 160px;
+    height: 52px;
     background-color: var(--color-alpha-yellow-light);
     color: var(--color-text-alpha);
     text-align: center;

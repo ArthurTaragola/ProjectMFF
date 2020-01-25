@@ -409,7 +409,7 @@ const fillInAllQuestions = function ()
 
 function myFunction(id, item1, item2 = "")
 {
-  if (statuspopup == false)
+  if (statuspopup == false && id != previousid)
   {
     console.log("show");
     console.log(`.js-delete${id}`);
@@ -422,7 +422,7 @@ function myFunction(id, item1, item2 = "")
     var popup = document.getElementById(`myPopup${id}`);
     popup.classList.toggle("show");
     statuspopup = true;
-    previousid = id
+    previousid = id;
   }
   else
   {
@@ -457,6 +457,7 @@ const updateQuestion = function (item1, item2)
   {
     console.log(questionList[item1][item2]);
   }
+  updateQuerySelector.removeEventListener('click', function() {updateQuestion(item1, item2)});
   //window.location.href = "vragentoevoegen.html";
 }
 
@@ -634,6 +635,7 @@ const submitTheme = function ()
                 console.log("the question has succesfully been added");
                 //document.getElementById('js-newQuestion').style.display = 'block';
                 document.getElementById('js-selectTheme').style.display = 'none';
+                document.getElementById('js-title').style.display = 'none';
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
@@ -648,7 +650,7 @@ const submitNewTheme = function ()
 {
     if (validThemeInput)
     {
-        let thema = document.getElementById("idk").value;
+        let thema = document.getElementById("newth").value;
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", `https://moveforfortunefunction.azurewebsites.net/api/v2/themas/${leerkrachtId}`);
@@ -661,12 +663,14 @@ const submitNewTheme = function ()
             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
             {
                 console.log("the theme has succesfully been added");
+                yellowButton("js-buttonThemeAddedSuccessfully");
                 document.getElementById('js-addThema').style.display = 'none';
-                document.getElementById('js-addQuestion').style.display = 'none';
-                document.getElementById('js-themaSuccessfullAdded').style.display = 'block';
+                document.getElementById('myBtn').style.display = 'none';
+                document.getElementById('js-themeAddedSuccessfully').style.display = 'block';
+                document.getElementById('js-title').style.display = 'none';
                 noNewThemes = false;
                 //document.getElementById('js-selectTheme').style.display = 'block';
-                getThemes(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!select new theme
+                getThemes();
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -726,17 +730,18 @@ const newTheme = function ()
     document.getElementById('js-selectTheme').style.display = 'none';
     document.getElementById('js-addThema').style.display = 'block';
 
-    let htmlTitle = `<h1 class="card-title">Nieuw thema:</h1>`;
+    let htmlTitle = `<h1 class="c-title">Nieuw thema:</h1>`;
     document.getElementById("js-title").innerHTML = htmlTitle;
 }
 
-const goBackToSelectTheme = function ()
+const goBackToThemaSelect = function ()
 {
-    document.getElementById('js-themaSuccessfullAdded').style.display = 'none';
-    document.getElementById('js-addQuestion').style.display = 'block';
+    document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
+    document.getElementById('js-title').style.display = 'block';
+    document.getElementById('myBtn').style.display = 'block';
     document.getElementById('js-selectTheme').style.display = 'block';
 
-    let htmlTitle = `<h1 class="card-title">Nieuwe vraag:</h1>`;
+    let htmlTitle = `<h1 class="c-title c-title-toevoegen">Nieuwe vraag:</h1>`;
     document.getElementById("js-title").innerHTML = htmlTitle;
 
     if (document.getElementById("thema").value == 0)
@@ -753,8 +758,6 @@ const goBackToSelectTheme = function ()
 const init = async function()
 {
     console.log("DOM loaded");
-    AddQuestionButton = document.querySelector('.js-addQuestion');
-    AddQuestionButton.addEventListener('click', addQuestion);
     //getThemas();
     DropDown();
     await DropDown1();
@@ -762,14 +765,18 @@ const init = async function()
 
     getThemes();
 
+    //AddQuestionButton = document.querySelector('.js-addQuestion');
+    //AddQuestionButton.addEventListener('click', addQuestion);
+    addQuestion();
+
     buttonNewTheme = document.querySelector('.js-newTheme');
     buttonNewTheme.addEventListener('click', newTheme);
 
     //buttonThemeAdded = document.querySelector('.js-goBackToPreviousPage');
     //buttonThemeAdded.addEventListener('click', goBackToSelectTheme);
 
-    //buttonThemeAdded = document.querySelector('.js-goBackToList');
-    //buttonThemeAdded.addEventListener('click', goBackToList);
+    buttonGoBackToThemaSelect = document.querySelector('.js-goBackToThemaSelect');
+    buttonGoBackToThemaSelect.addEventListener('click', goBackToThemaSelect);
 
     question = document.querySelector('#vraag');
     correctAnswer = document.querySelector('#jantw');
@@ -785,6 +792,7 @@ const init = async function()
 
     enableListeners();
     grayButton('js-validInputs');
+    grayButton('js-validThemeInput');
 };
 
 document.addEventListener('DOMContentLoaded', init);

@@ -204,6 +204,7 @@ const getThemas = async function()
 {
   try
   {
+      themaList = [];
       const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
       for (let k = 0; k < data.length; k++)
       {
@@ -217,6 +218,7 @@ const getThemas = async function()
       {
         thema = 0;
       }
+      console.log(themaList);
   }
   catch(error)
   {
@@ -229,18 +231,20 @@ const fillInThemas = function (data)
 {
     if (data.length != 0)
     {
-      let htmlThema = `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+      let htmlThema = `<select id='js-themas'>`
+      htmlThema += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
       for (let i = 0; i < data.length; i++)
       {
           htmlThema += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
       }
       htmlThema += `<option value="all">alle themas</option>`;
-      document.getElementById("js-themas").innerHTML = htmlThema;
+      htmlThema += `</select>`
+      document.getElementById("js-themaSelect").innerHTML = htmlThema;
     }
     else
     {
-      let htmlThema = `<option value=0>Geen themas</option>`;
-      document.getElementById("js-themas").innerHTML = htmlThema;
+      let htmlThema = `<select id='js-themas'><option value=0>Geen themas</option></select>`;
+      document.getElementById("js-themaSelect").innerHTML = htmlThema;
     }
 }
 
@@ -475,7 +479,19 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal
 btn.addEventListener("click", function() {
   modal.style.display = "block";
-  
+  document.getElementById('js-newQuestion').style.display = 'block';
+  document.getElementById('js-title').style.display = 'block';
+  document.getElementById("js-title").innerHTML = `<h1 class="c-title">Nieuwe vraag:</h1>`;
+  document.getElementById('js-selectTheme').style.display = 'none';
+  document.getElementById('js-addThema').style.display = 'none';
+  document.getElementById('js-addThema').style.display = 'none';
+  document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
+  document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
+
+  document.getElementById("vraag").value = '';
+  document.getElementById("jantw").value = '';
+  document.getElementById("vantw1").value = '';
+  document.getElementById("vantw2").value = '';
 });
 
 // When the user clicks on <span> (x), close the modal
@@ -607,6 +623,7 @@ const submitQuestion = function ()
         {
             yellowButton("js-validThemeSelect");
         }
+        getThemes();
     }
 }
 
@@ -637,6 +654,8 @@ const submitTheme = function ()
                 document.getElementById('js-selectTheme').style.display = 'none';
                 document.getElementById('js-title').style.display = 'none';
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
+                getAPI(thema, niveau);
+                console.log("get themes");
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -665,12 +684,13 @@ const submitNewTheme = function ()
                 console.log("the theme has succesfully been added");
                 yellowButton("js-buttonThemeAddedSuccessfully");
                 document.getElementById('js-addThema').style.display = 'none';
-                document.getElementById('myBtn').style.display = 'none';
                 document.getElementById('js-themeAddedSuccessfully').style.display = 'block';
                 document.getElementById('js-title').style.display = 'none';
                 noNewThemes = false;
                 //document.getElementById('js-selectTheme').style.display = 'block';
-                getThemes();
+
+                document.getElementById("js-themaSelect").innerHTML = ``;
+                DropDown1();
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -710,12 +730,21 @@ const showThemes = function ()
         {
             htmlTheme += `<option value=${themaIndexes[i]}>${themas[i]}</option>`;
         }
+
         let selectThema = document.getElementById("thema");
         selectThema.innerHTML = htmlTheme;
         if (!noNewThemes)
         {
             selectThema.selectedIndex = themas.length-1;
+            console.log("selected thema: "+(themas.length-1).toString())
         }
+        else
+        {
+            selectThema.selectedIndex = themaIndexes.indexOf(parseInt(thema,10));
+        }
+
+        let selectNiveau = document.getElementById("niveau");
+        selectNiveau.selectedIndex = niveau-1;
     }
     else
     {
@@ -752,6 +781,7 @@ const goBackToThemaSelect = function ()
     {
         yellowButton("js-validThemeSelect");
     }
+    getThemes();
 }
 
 

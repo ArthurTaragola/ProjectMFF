@@ -122,6 +122,18 @@ input[type=checkbox]:checked + label {
     text-align:left;
 }
 
+.c-card-toevoegen{
+    text-align: center;
+    margin-top: 10%;
+}
+.c-card-toevoegen:hover{
+    cursor: pointer;
+}
+.c-button-toevoegen{
+    margin-top: 10%;
+}
+
+
 .c-instruction{
     display: none;
     margin-top: 15%;
@@ -179,6 +191,18 @@ input[type=checkbox]:checked + label {
     margin-top: 10%;
     margin-left: 16%;
     width: 351px;
+}
+
+.c-logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-logo{
+    margin: 5px;
+    width: 13vh;
+    height: auto;
 }
 
 .c-button-login{

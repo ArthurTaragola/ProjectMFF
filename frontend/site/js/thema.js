@@ -83,6 +83,7 @@ const checkIfSuperUser = function ()
     {
         let html = ``;
         document.getElementById("js-logout").innerHTML = html;
+        document.getElementById("js-home").href = "index.html";
     }
 }
 

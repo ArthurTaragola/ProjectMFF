@@ -118,6 +118,10 @@ input[type=checkbox]:checked + label {
     font-size: 32px;
 }
 
+.c-title-toevoegen{
+    text-align:left;
+}
+
 .c-instruction{
     display: none;
     margin-top: 15%;
@@ -184,6 +188,14 @@ input[type=checkbox]:checked + label {
     margin-bottom: 8px;
 }
 
+.c-button-thema{
+    height: 64px;
+    margin-left: 15%;
+    width: 70%;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
 .c-button-volgende{
     width: 75%;
     height: 40px;
@@ -225,7 +237,7 @@ input[type=checkbox]:checked + label {
 {
     background-color: var(--color-alpha-yellow);
     /* margin-top: 20%; */
-    padding-bottom: 10%;
+    padding-bottom: 3%;
     border-radius: 8px;
     height: auto;
     display: grid;
@@ -234,7 +246,8 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__input{
-    width: 100%;
+    width: 94%;
+    font-size: 16px;
 }
 
 .c-card-item__home{
@@ -275,14 +288,14 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-overlay{
-    width: 40%;
+    width: 30%;
     height: auto;
-    margin-left: 30%;
+    margin-left: 35%;
 }
 
 .c-input{
     margin-top: 5%;
-    width: 99%;
+    width: 100%;
     padding: 4px 8px;  
     font-family: Sniglet;
     border: none;
@@ -541,6 +554,9 @@ input:focus {
 
   .close{
       cursor: pointer;
+      float: right;
+      padding-right: 32px;
+      padding-top:16px; 
   }
   
   /*hide the items when the select box is closed:*/

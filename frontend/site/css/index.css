@@ -261,7 +261,7 @@ input[type=checkbox]:checked + label {
 {
     background-color: var(--color-alpha-yellow);
     /* margin-top: 20%; */
-    padding-bottom: 3%;
+    padding-bottom: 10%;
     border-radius: 8px;
     height: auto;
     display: grid;
@@ -275,7 +275,8 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__home{
-    margin: 32px;
+    margin-top: 24px;
+    margin-left: 24px;
     display: flex;
     align-items: center;
 }

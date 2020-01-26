@@ -348,6 +348,11 @@ const FillInData = function()
         }
       htmlQuestion += `</table>`;
       document.getElementById("js-question").innerHTML = htmlQuestion;
+      for (let i = 0; i < questionList.length; i++)
+        {
+            updateQuerySelector = document.querySelector(`.js-update${i}`);
+            updateQuerySelector.addEventListener('click', function() {updateQuestion(i)});
+        }
     }
     else
     {
@@ -408,12 +413,19 @@ const fillInAllQuestions = function ()
   }
   htmlQuestion += `</table>`
   document.getElementById("js-question").innerHTML = htmlQuestion;
+  for (let i = 0; i < themaList.length; i++)
+  {
+    for (let k = 0; k < questionList[i].length; k++)
+    {
+        updateQuerySelector = document.querySelector(`.js-update${i}${k}`);
+        updateQuerySelector.addEventListener('click', function() {updateQuestion(i, k)});
+    }
+  }
 }
-
 
 function myFunction(id, item1, item2 = "")
 {
-  if (statuspopup == false && id != previousid)
+  if (statuspopup == false)
   {
     console.log("show");
     console.log(`.js-delete${id}`);
@@ -421,8 +433,8 @@ function myFunction(id, item1, item2 = "")
     console.log(`${item2}`);
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
     deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
-    updateQuerySelector = document.querySelector(`.js-update${item1}${item2}`);
-    updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
+    // updateQuerySelector = document.querySelector(`.js-update${item1}${item2}`);
+    // updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
     var popup = document.getElementById(`myPopup${id}`);
     popup.classList.toggle("show");
     statuspopup = true;
@@ -451,9 +463,9 @@ const deleteQuestion = function (id)
   setTimeout(() => {getAPI(thema, niveau)}, 500);
 }
 
-const updateQuestion = function (item1, item2)
+const updateQuestion = function (item1, item2 = '')
 {
-  if (item2 == '')
+  if (item2 === '')
   {
     console.log(questionList[item1]);
   }
@@ -461,8 +473,6 @@ const updateQuestion = function (item1, item2)
   {
     console.log(questionList[item1][item2]);
   }
-  updateQuerySelector.removeEventListener('click', function() {updateQuestion(item1, item2)});
-  //window.location.href = "vragentoevoegen.html";
 }
 
 const addQuestion = function ()

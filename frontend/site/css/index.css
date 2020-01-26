@@ -538,6 +538,37 @@ input:focus {
 .select-selected {
     background-color: white;
   }
+
+
+/* custom dropdown list */
+/*the container must be positioned relative:*/
+.custom-select2 {
+    position: relative;
+    font-family: var(--font-family);
+    width:150px;
+    
+  }
+  
+.custom-select2 select {
+    display: none;  /* hide original SELECT element: */
+  }
+  
+.select-selected {
+    background-color: white;
+  }
+
+/* custom dropdown list */
+/*the container must be positioned relative:*/
+.custom-select3 {
+    position: relative;
+    font-family: var(--font-family);
+    width:150px;
+    
+  }
+  
+.custom-select3 select {
+    display: none;  /* hide original SELECT element: */
+  }
   
 /*style the arrow inside the select element:*/
 .select-selected:after {

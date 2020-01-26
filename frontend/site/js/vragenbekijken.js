@@ -29,6 +29,9 @@ let alleventListenersValid = false;
 
 let validThemeInput = false;
 
+let newQuestion = true; //boolean to see if the pop-up is for a new question or to edit a question
+let questionData;
+
 let leerkrachtId = localStorage.getItem("leerkrachtId");
 
 
@@ -139,7 +142,6 @@ const DropDown = function()
                 var y, i, k, s, h;
                 s = this.parentNode.parentNode.getElementsByTagName("select")[0];
                 h = this.parentNode.previousSibling;
-                console.log("value: "+this.value);
                 for (i = 1; i < s.length; i++) {
                   if (s.options[i].innerHTML == this.innerHTML) {
                     s.selectedIndex = i;
@@ -251,7 +253,7 @@ const fillInThemas = function (data)
 const getAPI = async function(thema, niveau)
 {
   questionList = [];
-  console.log(thema, niveau)
+  console.log(thema, niveau);
   if (thema != "all")
   {
     try
@@ -299,7 +301,7 @@ const FillInData = function()
               <div class="popup" id = "PopUp${questionList[0].vraagId}" onclick="myFunction(${questionList[0].vraagId}, 0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                   <span class="popuptext" id="myPopup${questionList[0].vraagId}">
                       <table class="c-center">
-                            <button class="c-button__popup js-update0" >
+                            <button class="c-button__popup" id="js-update0" >
                                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                                 Aanpassen  
                             </button>
@@ -331,7 +333,7 @@ const FillInData = function()
                 <div class="popup" id = "PopUp${id}" onclick="myFunction(${id}, ${i})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     <span class="popuptext" id="myPopup${id}">
                         <table class="c-center">                                    
-                              <button class="c-button__popup js-update${i}" >
+                              <button class="c-button__popup" id="js-update${i}" >
                                   <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                                   Aanpassen  
                               </button>
@@ -348,11 +350,11 @@ const FillInData = function()
         }
       htmlQuestion += `</table>`;
       document.getElementById("js-question").innerHTML = htmlQuestion;
-      for (let i = 0; i < questionList.length; i++)
-        {
-            updateQuerySelector = document.querySelector(`.js-update${i}`);
-            updateQuerySelector.addEventListener('click', function() {updateQuestion(i)});
-        }
+    //   for (let i = 0; i < questionList.length; i++)
+    //     {
+    //         updateQuerySelector = document.querySelector(`#js-update${i}`);
+    //         updateQuerySelector.addEventListener('click', function() {updateQuestion(i)});
+    //     }
     }
     else
     {
@@ -368,11 +370,11 @@ const fillInAllQuestions = function ()
   
   let htmlQuestion = ``;
 
-  for (let i = 0; i < themaList.length; i++)
+  for (let i = 0; i < themaList.length; i++) //!!!!!!!!!!!!!!!!!!!!!! style="text-align: left" IN CSS (lijn 377 (4 lijnen hieronder)) !!!!!!!!!!!!!!!!
   {
     htmlQuestion += `<table class="c-title-table">
     <tr>
-        <th>
+        <th colspan="2" style="text-align: left">
           ${themaList[i].naam}
         </th>
     </tr>
@@ -380,8 +382,9 @@ const fillInAllQuestions = function ()
     <table class="c-table">`;
     if (questionList[i].length == 0)
     {
-      htmlQuestion += `<tr id="js-question" class="c-table-color"></tr>
-      <td>er zijn geen vragen</td>`;
+      htmlQuestion += `<tr id="js-question" class="c-table-color">
+      <td></td>
+      <td>er zijn geen vragen</td></tr>`;
     }
     for (let k = 0; k < questionList[i].length; k++)
     {
@@ -395,7 +398,7 @@ const fillInAllQuestions = function ()
           <div class="popup" id = "PopUp${questionList[i][k].vraagId}" onclick="myFunction(${questionList[i][k].vraagId}, ${i}, ${k})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
               <span class="popuptext" id="myPopup${questionList[i][k].vraagId}">
                   <table class="c-center">                                    
-                        <button class="c-button__popup js-update${i}${k}" >
+                        <button class="c-button__popup" id="js-update${i}${k}" >
                             <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                             Aanpassen  
                         </button>
@@ -413,14 +416,14 @@ const fillInAllQuestions = function ()
   }
   htmlQuestion += `</table>`
   document.getElementById("js-question").innerHTML = htmlQuestion;
-  for (let i = 0; i < themaList.length; i++)
-  {
-    for (let k = 0; k < questionList[i].length; k++)
-    {
-        updateQuerySelector = document.querySelector(`.js-update${i}${k}`);
-        updateQuerySelector.addEventListener('click', function() {updateQuestion(i, k)});
-    }
-  }
+//   for (let i = 0; i < themaList.length; i++)
+//   {
+//     for (let k = 0; k < questionList[i].length; k++)
+//     {
+//         updateQuerySelector = document.querySelector(`#js-update${i}${k}`);
+//         updateQuerySelector.addEventListener('click', function() {editQuestion(i, k)});
+//     }
+//   }
 }
 
 function myFunction(id, item1, item2 = "")
@@ -429,11 +432,13 @@ function myFunction(id, item1, item2 = "")
   {
     console.log("show");
     console.log(`.js-delete${id}`);
-    console.log(`.js-update${item1}`);
+    console.log(`#js-update${item1}`);
     console.log(`${item2}`);
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
     deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
-    // updateQuerySelector = document.querySelector(`.js-update${item1}${item2}`);
+    console.log("GET OUTTA MA SWAMP");
+    editQuestion(`js-update${item1}${item2}`, item1, item2);
+    // updateQuerySelector = document.querySelector(`#js-update${item1}${item2}`);
     // updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
     var popup = document.getElementById(`myPopup${id}`);
     popup.classList.toggle("show");
@@ -463,20 +468,25 @@ const deleteQuestion = function (id)
   setTimeout(() => {getAPI(thema, niveau)}, 500);
 }
 
+/*
 const updateQuestion = function (item1, item2 = '')
 {
   if (item2 === '')
   {
     console.log(questionList[item1]);
+    editQuestion(`js-update${item1}`);
   }
   else
   {
     console.log(questionList[item1][item2]);
+    editQuestion(`js-update${item1}${item2}`);
   }
 }
+*/
 
 const addQuestion = function ()
 {
+    console.log("vraag toevoegen")
     // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -488,6 +498,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 btn.addEventListener("click", function() {
+  newQuestion = true;
   modal.style.display = "block";
   document.getElementById('js-newQuestion').style.display = 'block';
   document.getElementById('js-title').style.display = 'block';
@@ -522,6 +533,64 @@ window.addEventListener("click",function(event) {
 
 }; //end add question
 
+
+const editQuestion = function (buttonId, item1, item2)
+{
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById(buttonId);
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.addEventListener("click", function() {
+  newQuestion = false;
+  modal.style.display = "block";
+  document.getElementById('js-newQuestion').style.display = 'block';
+  document.getElementById('js-title').style.display = 'block';
+  document.getElementById("js-title").innerHTML = `<h1 class="c-title">Vraag aanpassen:</h1>`;
+  document.getElementById('js-selectTheme').style.display = 'none';
+  document.getElementById('js-addThema').style.display = 'none';
+  document.getElementById('js-addThema').style.display = 'none';
+  document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
+  document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
+  
+  if (item2 === '')
+  {
+    questionData = questionList[item1];
+  }
+  else
+  {
+      console.log(item1, item2)
+    questionData = questionList[item1][item2];
+  }
+  console.log();
+  document.getElementById("vraag").value = questionData.vraagstelling;
+  document.getElementById("jantw").value = questionData.juistAntwoord;
+  document.getElementById("vantw1").value = questionData.foutAntwoord1;
+  document.getElementById("vantw2").value = questionData.foutAntwoord2;
+
+  eventListenersValid = [true, true, true, true];
+  alleventListenersValid = true;
+  yellowButton('js-validInputs');
+});
+
+// When the user clicks on <span> (x), close the modal
+span.addEventListener("click",function() {
+  modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click",function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});
+
+}; //end edit question
 
 
 
@@ -629,6 +698,17 @@ const submitQuestion = function ()
         wrongAnswer2Value = document.getElementById("vantw2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
+        if (newQuestion)
+        {
+            document.getElementById('js-validThemeSelect').style.display = 'block';
+            document.getElementById('js-validThemeSelectEditQuestion').style.display = 'none';
+        }
+        else
+        {
+            document.getElementById('js-validThemeSelect').style.display = 'none';
+            document.getElementById('js-validThemeSelectEditQuestion').style.display = 'block';
+            yellowButton('js-validThemeSelectEditQuestion');
+        }
         if (document.getElementById("thema").value == 0)
         {
             grayButton("js-validThemeSelect");
@@ -643,10 +723,10 @@ const submitQuestion = function ()
 
 const submitTheme = function ()
 {
-    let niveau = document.getElementById("niveau").value;
-    let thema = document.getElementById("thema").value;
+    let niveauId = document.getElementById("niveau").value;
+    let themaId = document.getElementById("thema").value;
 
-    if (thema != 0)
+    if (themaId != 0)
     {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
@@ -656,8 +736,8 @@ const submitTheme = function ()
             "JuistAntwoord": correctAnswerValue,
             "FoutAntwoord1": wrongAnswer1Value,
             "FoutAntwoord2": wrongAnswer2Value,
-            "Niveau": niveau,
-            "ThemaId": thema
+            "Niveau": niveauId,
+            "ThemaId": themaId
         }));
         xhr.onreadystatechange = function ()
         {
@@ -683,13 +763,13 @@ const submitNewTheme = function ()
 {
     if (validThemeInput)
     {
-        let thema = document.getElementById("newth").value;
+        let themaNaam = document.getElementById("newth").value;
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", `https://moveforfortunefunction.azurewebsites.net/api/v2/themas/${leerkrachtId}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
-            "naam": thema
+            "naam": themaNaam
         }));
         xhr.onreadystatechange = function ()
         {
@@ -699,6 +779,7 @@ const submitNewTheme = function ()
                 yellowButton("js-buttonThemeAddedSuccessfully");
                 document.getElementById('js-addThema').style.display = 'none';
                 document.getElementById('js-themeAddedSuccessfully').style.display = 'block';
+                document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById('js-title').style.display = 'none';
                 noNewThemes = false;
                 //document.getElementById('js-selectTheme').style.display = 'block';
@@ -712,6 +793,46 @@ const submitNewTheme = function ()
             }
         }
     }
+}
+
+const updateQuestion = function ()
+{
+    console.log("got so far")
+
+    let niveauId = document.getElementById("niveau").value;
+    let themaId = document.getElementById("thema").value;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("PUT", `https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${questionData.vraagId}`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        "Vraagstelling": questionValue,
+        "JuistAntwoord": correctAnswerValue,
+        "FoutAntwoord1": wrongAnswer1Value,
+        "FoutAntwoord2": wrongAnswer2Value,
+        "Niveau": niveauId,
+        "ThemaId": themaId
+    }));
+    xhr.onreadystatechange = function ()
+    {
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+        {
+            console.log("the question has succesfully been added");
+            //document.getElementById('js-newQuestion').style.display = 'block';
+            document.getElementById('js-selectTheme').style.display = 'none';
+            document.getElementById('js-title').style.display = 'none';
+            document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
+            document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
+            getAPI(thema, niveau);
+            console.log("get themes");
+        }
+        else if (xhr.readyState == XMLHttpRequest.DONE)
+        {
+            console.log("something went wrong, please try again later");
+        }
+    }
+
+
 }
 
 const getThemes = async function ()
@@ -754,11 +875,29 @@ const showThemes = function ()
         }
         else
         {
-            selectThema.selectedIndex = themaIndexes.indexOf(parseInt(thema,10));
+            if (thema == 'all')
+            {
+                thema = themaIndexes[0];
+            }
+            if (newQuestion)
+            {
+                selectThema.selectedIndex = themaIndexes.indexOf(parseInt(thema,10));
+            }
+            else
+            {
+                selectThema.selectedIndex = themaIndexes.indexOf(parseInt(questionData.themaId,10));
+            }
         }
 
         let selectNiveau = document.getElementById("niveau");
-        selectNiveau.selectedIndex = niveau-1;
+        if (newQuestion)
+        {
+            selectNiveau.selectedIndex = niveau-1;
+        }
+        else
+        {
+            selectNiveau.selectedIndex = questionData.niveau-1;
+        }
     }
     else
     {

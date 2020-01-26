@@ -496,6 +496,9 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+// Get the final button that closes the modal
+var finish = document.getElementById("js-buttonQuestionAddedSuccessfully");
+
 // When the user clicks the button, open the modal
 btn.addEventListener("click", function() {
   newQuestion = true;
@@ -508,6 +511,7 @@ btn.addEventListener("click", function() {
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
   document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
+  finish.style.display = 'none';
 
   document.getElementById("vraag").value = '';
   document.getElementById("jantw").value = '';
@@ -531,6 +535,11 @@ window.addEventListener("click",function(event) {
   }
 });
 
+// When the user clicks on the finish button, close the modal
+finish.addEventListener("click",function() {
+    modal.style.display = "none";
+  });
+
 }; //end add question
 
 
@@ -545,6 +554,9 @@ var btn = document.getElementById(buttonId);
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+// Get the final button that closes the modal
+var finish = document.getElementById("js-buttonQuestionAddedSuccessfully");
+
 // When the user clicks the button, open the modal
 btn.addEventListener("click", function() {
   newQuestion = false;
@@ -557,6 +569,7 @@ btn.addEventListener("click", function() {
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
   document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
+  finish.style.display = 'none';
   
   if (item2 === '')
   {
@@ -589,6 +602,11 @@ window.addEventListener("click",function(event) {
     modal.style.display = "none";
   }
 });
+
+// When the user clicks on the finish button, close the modal
+finish.addEventListener("click",function() {
+    modal.style.display = "none";
+  });
 
 }; //end edit question
 
@@ -748,6 +766,8 @@ const submitTheme = function ()
                 document.getElementById('js-selectTheme').style.display = 'none';
                 document.getElementById('js-title').style.display = 'none';
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
+                document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
+                document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
                 getAPI(thema, niveau);
                 console.log("get themes");
             }
@@ -779,7 +799,6 @@ const submitNewTheme = function ()
                 yellowButton("js-buttonThemeAddedSuccessfully");
                 document.getElementById('js-addThema').style.display = 'none';
                 document.getElementById('js-themeAddedSuccessfully').style.display = 'block';
-                document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById('js-title').style.display = 'none';
                 noNewThemes = false;
                 //document.getElementById('js-selectTheme').style.display = 'block';
@@ -823,6 +842,7 @@ const updateQuestion = function ()
             document.getElementById('js-title').style.display = 'none';
             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
+            document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
             getAPI(thema, niveau);
             console.log("get themes");
         }
@@ -926,14 +946,7 @@ const goBackToThemaSelect = function ()
     let htmlTitle = `<h1 class="c-title c-title-toevoegen">Nieuwe vraag:</h1>`;
     document.getElementById("js-title").innerHTML = htmlTitle;
 
-    if (document.getElementById("thema").value == 0)
-    {
-        grayButton("js-validThemeSelect");
-    }
-    else
-    {
-        yellowButton("js-validThemeSelect");
-    }
+    yellowButton("js-validThemeSelect");
     getThemes();
 }
 
@@ -976,6 +989,7 @@ const init = async function()
     enableListeners();
     grayButton('js-validInputs');
     grayButton('js-validThemeInput');
+    yellowButton('js-buttonQuestionAddedSuccessfully')
 };
 
 document.addEventListener('DOMContentLoaded', init);

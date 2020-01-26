@@ -502,6 +502,10 @@ btn.addEventListener("click", function() {
   document.getElementById("jantw").value = '';
   document.getElementById("vantw1").value = '';
   document.getElementById("vantw2").value = '';
+
+  eventListenersValid = [false, false, false, false];
+  alleventListenersValid = false;
+  grayButton('js-validInputs');
 });
 
 // When the user clicks on <span> (x), close the modal
@@ -546,7 +550,7 @@ const checkValue = function(input)
         if (!eventListenersValid[0] || !eventListenersValid[1] || !eventListenersValid[2] || !eventListenersValid[3])
         {
             alleventListenersValid = false;
-            grayButton('js-validInputs')
+            grayButton('js-validInputs');
         }
     }
     else

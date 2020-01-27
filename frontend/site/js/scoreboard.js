@@ -7,7 +7,7 @@ let winningTeam;
 
 let leerkrachtId = localStorage.getItem("leerkrachtId");
 
-let audioVictory = new Audio('sounds/victory.mp3')
+//let audioVictory = new Audio('sounds/victory.mp3')
 
 const loadGraph = function (){
     let team1 = true;
@@ -31,8 +31,8 @@ const loadGraph = function (){
                 label: 'Teams',
                 data: [pointsTeam1, pointsTeam2],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 99, 132, 0.9)'
                 ],
                 borderColor: [
                     'rgba(54, 162, 235, 1)',
@@ -59,11 +59,11 @@ const loadGraph = function (){
                 var chartInstance = this.chart,
                   ctx = chartInstance.ctx;
         
-                ctx.font = Chart.helpers.fontString(24, 'normal', 'Sniglet');
+                ctx.font = Chart.helpers.fontString(36, 'normal', 'Sniglet');
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'right';
-                ctx.fillStyle  = "#035266";
+                ctx.fillStyle  = "#fff";
 
                 this.data.datasets.forEach(function(dataset, i) {
                   var meta = chartInstance.controller.getDatasetMeta(i);

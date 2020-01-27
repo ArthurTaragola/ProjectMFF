@@ -166,12 +166,12 @@ input[type=checkbox]:checked + label {
 
 .c-table{
     width: 100%;
-    background-color: var(--color-alpha-yellow);
+    background-color: var(--color-alpha-yellow-light);
 }
 
 .c-table-color:nth-child(even) 
 {
-    background-color: var(--color-alpha-yellow-light);
+    background-color: var(--color-alpha-yellow);
 }
 
 /* voor responsive add css grid */
@@ -190,8 +190,22 @@ input[type=checkbox]:checked + label {
     margin-left: 25%;
 }
 
+.c-button-vragen2{
+    height: 60px;
+    font-size: var(--standard-pixels);
+    width: 90%;
+    margin-left: 5%;
+}
+
+.c-button-vragen3{
+    height: 60px;
+    font-size: var(--standard-pixels);
+    width: 50%;
+    margin-left: 25%;
+}
+
 .c-button-index{
-    height: 101px;
+    height: 60px;
     font-size: 30px;
     margin-top: 10%;
     margin-left: 16%;
@@ -387,6 +401,14 @@ input:focus {
 .svg-thema{
     display:flex;
 }
+
+.svg-nest{
+    margin-top: 10%;
+}
+
+/* .svg-pelican{
+
+} */
 
 /* .c-svg-home{
     max-width: 24px;

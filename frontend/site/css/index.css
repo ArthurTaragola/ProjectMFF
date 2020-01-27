@@ -148,6 +148,10 @@ input[type=checkbox]:checked + label {
     text-align: left;
 }
 
+.c-vragen{
+    font-size: 48px;
+}
+
 .c-titletable{
     font-size: 24px;
 }

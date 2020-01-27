@@ -52,6 +52,7 @@ td{
 
 input{
     border-radius: 8px;
+    color: var(--color-text-alpha);
     height: 24px;
 }
 
@@ -318,7 +319,7 @@ input[type=checkbox]:checked + label {
 
 .c-card-overlay{
     width: 30%;
-    height: auto;
+    height: 400px;
     margin-left: 35%;
 }
 

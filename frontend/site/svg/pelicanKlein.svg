@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63.407" height="55.713" viewBox="0 0 63.407 55.713">
+  <g id="pelicanKlein" transform="translate(0 -14.066)">
+    <path id="Path_57" data-name="Path 57" d="M117.092,184.507h3.97v-7.094H126.7v7.094h.425a1.973,1.973,0,0,1,0,3.946H117.092a1.973,1.973,0,0,1,0-3.946Z" transform="translate(-83.635 -118.674)" fill="#db9f15"/>
+    <path id="Path_58" data-name="Path 58" d="M133.724,184.507h3.97v-7.094h5.642v7.094h.425a1.973,1.973,0,0,1,0,3.946H133.724a1.973,1.973,0,0,1,0-3.946Z" transform="translate(-95.719 -118.674)" fill="#ffb819"/>
+    <path id="Path_59" data-name="Path 59" d="M82.428,32.8V14.066h5.805A10.691,10.691,0,0,1,98.924,24.757V32.8h24.368v8.717A20.432,20.432,0,0,1,102.86,61.947h0A20.432,20.432,0,0,1,82.428,41.515V32.8Z" transform="translate(-59.885)" fill="#d5d6d9"/>
+    <g id="Group_46" data-name="Group 46" transform="translate(0 14.066)">
+      <path id="Path_60" data-name="Path 60" d="M0,29.783A22.543,22.543,0,0,0,22.543,52.326V29.783Z" transform="translate(0 -25.485)" fill="#ffb819"/>
+      <rect id="Rectangle_74" data-name="Rectangle 74" width="22.543" height="4.298" transform="translate(0 0)" fill="#ffcd6c"/>
+    </g>
+    <g id="Group_47" data-name="Group 47" transform="translate(24.405 20.47)">
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="3.151" cy="3.151" r="3.151" transform="translate(0 0)" fill="#fff"/>
+      <circle id="Ellipse_4" data-name="Ellipse 4" cx="1.576" cy="1.576" r="1.576" transform="translate(1.576 1.576)" fill="#004987"/>
+    </g>
+    <path id="Path_61" data-name="Path 61" d="M135.319,91.946a13.348,13.348,0,1,1-26.7,0Z" transform="translate(-78.916 -56.581)" fill="#bbbfc3"/>
+  </g>
+</svg>

@@ -134,7 +134,13 @@ const keyPressed = function(e)
             case 'z':
                 assignAnswer(1, 0);
                 break;
+            case 'w':
+                assignAnswer(1, 0);
+                break;
             case 'q':
+                assignAnswer(1, 1);
+                break;
+            case 'a':
                 assignAnswer(1, 1);
                 break;
             case 's':

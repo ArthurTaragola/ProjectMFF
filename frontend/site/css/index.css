@@ -239,6 +239,7 @@ input[type=checkbox]:checked + label {
     margin-bottom: 8px;
 }
 
+
 .c-button-volgende{
     margin-left: 37.5%;
     width: 25%;
@@ -347,7 +348,7 @@ input[type=checkbox]:checked + label {
 }
 
 .loader {
-    margin: auto;
+    margin-left: 100px;
     border: 8px solid #f3f3f3;
     border-radius: 50%;
     border-top: 8px solid #08518B;

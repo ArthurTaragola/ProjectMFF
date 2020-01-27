@@ -22,12 +22,14 @@ let pointsTeam2;
 
 let audioTeam1 = new Audio('sounds/Moo.mp3');
 let audioTeam2 = new Audio('sounds/Quack.mp3');
+let audioloading = new Audio('sounds/countdown.aac')
 
 let niveauLevel = localStorage.getItem("niveauLevel");
 
 
 const loadbar = function()
 {
+    audioloading.play();
     $('.progress-bar-fill').delay(1000).queue(function () {$(this).css('width', '100%')});
     setTimeout(function() {$('#progress-bar').fadeOut('fast');}, 10000);
     $(document).ready(function ()

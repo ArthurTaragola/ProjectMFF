@@ -36,6 +36,87 @@ let leerkrachtId = localStorage.getItem("leerkrachtId");
 
 
 
+const DropDown3 = async function ()
+{
+    //await getThemas();
+    var x, i, j, selElmnt, a, b, c;
+    var option = document.getElementById("thema");
+    /*look for any elements with the class "custom-select11":*/
+    x = document.getElementsByClassName("custom-select3");
+    for (i = 0; i < x.length; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < selElmnt.length; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            h = this.parentNode.previousSibling;
+            for (i = 1; i < s.length; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                thema = option.options[option.selectedIndex].value;
+                getAPI(thema,niveau);
+                console.log(thema);
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                for (k = 0; k < y.length; k++) {
+                    y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+                }
+            }
+            h.click();
+        });
+        b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function(e) {
+            /*when the select box is clicked, close any other select boxes,
+            and open/close the current select box:*/
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        for (i = 0; i < y.length; i++) {
+        if (elmnt == y[i]) {
+            arrNo.push(i)
+        } else {
+            y[i].classList.remove("select-arrow-active");
+        }
+        }
+        for (i = 0; i < x.length; i++) {
+        if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+        }
+        }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+}
+
 const DropDown2 = async function()
 {
   var x, i, j, selElmnt, a, b, c;
@@ -113,92 +194,11 @@ const DropDown2 = async function()
   /*if the user clicks anywhere outside the select box,
   then close all select boxes:*/
   document.addEventListener("click", closeAllSelect);
-
-
-
-
-  // //await getThemas();
-  //   var x, i, j, selElmnt, a, b, c;
-  //       var option = document.getElementById("js-themas");
-  //       /*look for any elements with the class "custom-select11":*/
-  //       x = document.getElementsByClassName("custom-select2");
-  //       for (i = 0; i < x.length; i++) {
-  //         selElmnt = x[i].getElementsByTagName("select")[0];
-  //         /*for each element, create a new DIV that will act as the selected item:*/
-  //         a = document.createElement("DIV");
-  //         a.setAttribute("class", "select-selected");
-  //         a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  //         x[i].appendChild(a);
-  //         /*for each element, create a new DIV that will contain the option list:*/
-  //         b = document.createElement("DIV");
-  //         b.setAttribute("class", "select-items select-hide");
-  //         for (j = 1; j < selElmnt.length; j++) {
-  //           /*for each option in the original select element,
-  //           create a new DIV that will act as an option item:*/
-  //           c = document.createElement("DIV");
-  //           c.innerHTML = selElmnt.options[j].innerHTML;
-  //           c.addEventListener("click", function(e) {
-  //               /*when an item is clicked, update the original select box,
-  //               and the selected item:*/
-  //               var y, i, k, s, h;
-  //               s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-  //               h = this.parentNode.previousSibling;
-  //               for (i = 1; i < s.length; i++) {
-  //                 if (s.options[i].innerHTML == this.innerHTML) {
-  //                   s.selectedIndex = i;
-  //                   thema = option.options[option.selectedIndex].value;
-  //                   getAPI(thema,niveau);
-  //                   console.log(thema);
-  //                   h.innerHTML = this.innerHTML;
-  //                   y = this.parentNode.getElementsByClassName("same-as-selected");
-  //                   for (k = 0; k < y.length; k++) {
-  //                     y[k].removeAttribute("class");
-  //                   }
-  //                   this.setAttribute("class", "same-as-selected");
-  //                   break;
-  //                 }
-  //               }
-  //               h.click();
-  //           });
-  //           b.appendChild(c);
-  //         }
-  //         x[i].appendChild(b);
-  //         a.addEventListener("click", function(e) {
-  //             /*when the select box is clicked, close any other select boxes,
-  //             and open/close the current select box:*/
-  //             e.stopPropagation();
-  //             closeAllSelect(this);
-  //             this.nextSibling.classList.toggle("select-hide");
-  //             this.classList.toggle("select-arrow-active");
-  //           });
-  //       }
-  //       function closeAllSelect(elmnt) {
-  //         /*a function that will close all select boxes in the document,
-  //         except the current select box:*/
-  //         var x, y, i, arrNo = [];
-  //         x = document.getElementsByClassName("select-items");
-  //         y = document.getElementsByClassName("select-selected");
-  //         for (i = 0; i < y.length; i++) {
-  //           if (elmnt == y[i]) {
-  //             arrNo.push(i)
-  //           } else {
-  //             y[i].classList.remove("select-arrow-active");
-  //           }
-  //         }
-  //         for (i = 0; i < x.length; i++) {
-  //           if (arrNo.indexOf(i)) {
-  //             x[i].classList.add("select-hide");
-  //           }
-  //         }
-  //       }
-  //       /*if the user clicks anywhere outside the select box,
-  //       then close all select boxes:*/
-  //       document.addEventListener("click", closeAllSelect);
 }
 
 const DropDown1 = async function()
 {
-  await getThemas();
+  //await getThemas();
     var x, i, j, selElmnt, a, b, c;
         var option = document.getElementById("js-themas");
         /*look for any elements with the class "custom-select11":*/
@@ -387,28 +387,38 @@ const getThemas = async function()
   {
       console.error('An error occured', error);
   }
-  fillInThemas(themaList);
+
+    fillInThemas(themaList);
 }
 
 const fillInThemas = function (data)
 {
     if (data.length != 0)
     {
-      let htmlThema = `<select id='js-themas'>`
+      let htmlThema = `<select id='js-themas'>`;
       htmlThema += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+      let htmlThema1 = `<select id='thema'>`;
+      htmlThema1 += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+
       for (let i = 0; i < data.length; i++)
       {
           htmlThema += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
+          htmlThema1 += `<option value="${data[i].themaId}">${data[i].naam}</option>`;
       }
       htmlThema += `<option value="all">alle themas</option>`;
       htmlThema += `</select>`
+      htmlThema1 += `<option value="all">alle themas</option>`;
+      htmlThema1 += `</select>`
       document.getElementById("js-themaSelect").innerHTML = htmlThema;
+      document.getElementById("js-themaSelect1").innerHTML = htmlThema1;
     }
     else
     {
       let htmlThema = `<select id='js-themas'><option value=0>Geen themas</option></select>`;
       document.getElementById("js-themaSelect").innerHTML = htmlThema;
     }
+    DropDown1();
+    DropDown2();
 }
 
 const getAPI = async function(thema, niveau)
@@ -877,6 +887,8 @@ const submitQuestion = function ()
         wrongAnswer2Value = document.getElementById("vantw2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
+        DropDown2();
+        DropDown3();
         if (newQuestion)
         {
             document.getElementById('js-validThemeSelect').style.display = 'block';
@@ -1115,12 +1127,10 @@ const goBackToThemaSelect = function ()
 const init = async function()
 {
     console.log("DOM loaded");
-    //getThemas();
+    getThemas();
     DropDown();
-    await DropDown1();
+    //await DropDown1();
     getAPI(thema,niveau);
-
-    DropDown2();
 
     getThemes();
 

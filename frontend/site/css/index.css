@@ -1,6 +1,6 @@
 :root{
     /* colors */
-    --color-alpha-blue: #B7DAEF;
+    --color-alpha-blue: #83E8F9;
     --color-text-alpha:#08518B;
     --color-alpha-yellow: #F7E11B;
     --color-alpha-yellowII:#D4CB2F;
@@ -175,7 +175,8 @@ input[type=checkbox]:checked + label {
 }
 
 /* voor responsive add css grid */
-.c-button{ 
+.c-button{
+    cursor: pointer; 
     font-family: var(--font-family);
     border: 4px solid var(--color-alpha-yellow);
     color: var(--color-text-alpha);
@@ -225,10 +226,12 @@ input[type=checkbox]:checked + label {
 }
 
 .c-button-login{
-    height: 73px;
-    width: 100%;
-    font-size: 24px;
-    margin-bottom: 8px;
+    /* margin-left: 25%; */
+    width: 40%;
+    height: 48px;
+    font-size: 16px;
+    padding: 8px;
+    
 }
 
 .c-button-thema{
@@ -245,6 +248,12 @@ input[type=checkbox]:checked + label {
     width: 25%;
     height: 40px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.c-button-volgende-2{
+    width: 80%;
+    margin-left: 0%;
+    margin-right: 10%;
 }
 
 .c-buttons-thema{ 
@@ -318,8 +327,7 @@ input[type=checkbox]:checked + label {
 
 .c-card-item__btn{
     text-align: center;
-    margin-top: 32px;
-    margin-left: 8px;
+    margin-top: 15%;
 }
 
 .c-card-item__btnregistreren{
@@ -356,6 +364,13 @@ input[type=checkbox]:checked + label {
     height: 32px;
     -webkit-animation: spin 1s linear infinite; /* Safari */
     animation: spin 1s linear infinite;
+  }
+
+  .loader-login{
+      height: 16px;
+      width: 16px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #08518B;
   }
   
 .c-animation{
@@ -412,6 +427,30 @@ input:focus {
 
 .svg-nest{
     margin-top: 10%;
+    margin-left: 50%;
+}
+
+.svg-greenbird{
+    margin-left: 75%;
+    
+}
+
+.svg-flamingo-klein{
+    
+}
+
+.vert-move{
+    -webkit-animation: mover 1s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
 }
 
 /* .svg-pelican{
@@ -509,8 +548,8 @@ input:focus {
 }
 
 .position-bird-flamingo{
-    margin-top: -11.5%;
-    margin-left: 77.5%;
+    margin-top: -15%;
+    margin-left: 70%;
 }
 
 .modal {

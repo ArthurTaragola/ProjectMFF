@@ -104,7 +104,7 @@ const DoSubmit = function()
     if (passwordValid && emailValid)
     {
         grayButton();
-        setTimeout(() => {document.getElementById("js-loginButton").innerHTML = "<div class='loader'></div>";}, 100);
+        setTimeout(() => {document.getElementById("js-loginButton").innerHTML = "<div class='loader loader-login'></div>";}, 100);
 
         let xhr = new XMLHttpRequest();
 

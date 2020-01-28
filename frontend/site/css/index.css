@@ -551,11 +551,11 @@ input:focus {
     background-color:var(--color-alpha-yellow-light);
 }
 
-/* .position-logout{
+.position-logout2{
     text-align: right;
     padding: var(--standard-pixels);
     cursor: pointer;
-} */
+}
 
 /* .position-home{
     padding: var(--standard-pixels);

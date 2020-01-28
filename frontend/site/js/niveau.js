@@ -1,3 +1,6 @@
+let customHeaders = new Headers();
+customHeaders.append('Accept', 'application/json');
+
 let leerkrachtId = localStorage.getItem("leerkrachtId");
 
 const checkIfSuperUser = function ()
@@ -16,6 +19,33 @@ const goToNewPage = function(niveau)
     window.location.href = "thema's.html";
 }
 
+const fetchData = function(url)
+{
+    return fetch(url, {headers: customHeaders})
+        .then(r => r.json()) // idem aan: function(r){return r.json()}
+        .then(data => data);
+}
+const getThemas = async function ()
+{
+    try
+    {
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
+        if (data.length == 0)
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "U heeft nog geen thema's!",
+                confirmButtonText: "<a href='vragenbekijken.html' style = 'color: white';>Ok</a>"
+              })
+        }
+    }
+    catch(error)
+    {
+        console.error('An error occured', error);
+    }
+}
+
 const init = function()
 {
     console.log("DOM Loaded");
@@ -26,6 +56,7 @@ const init = function()
     buttonNiveau2.addEventListener('click', function() {goToNewPage(2)});
     buttonNiveau3 = document.querySelector('.js-niveau3');
     buttonNiveau3.addEventListener('click', function() {goToNewPage(3)});
+    getThemas();
 }
 
 document.addEventListener('DOMContentLoaded', init);

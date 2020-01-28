@@ -630,7 +630,7 @@ const deleteThema = async function (themaId)
         {
             for(let k = 0; k < data.length; k++)
             {
-                await deleteQuestion(data[k].vraagId);
+                await deleteQuestion(data[k].vraagId, false);
             }
         }
     }
@@ -660,8 +660,7 @@ function myFunction(id, item1, item2 = "")
     console.log(`#js-update${item1}`);
     console.log(`${item2}`);
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
-    deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
-    setTimeout(() => {getAPI(thema, niveau)}, 500);
+    deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id, true)});
     editQuestion(`js-update${item1}${item2}`, item1, item2);
     // updateQuerySelector = document.querySelector(`#js-update${item1}${item2}`);
     // updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
@@ -683,13 +682,17 @@ function myFunction(id, item1, item2 = "")
   }
 }
 
-const deleteQuestion = function (id)
+const deleteQuestion = function (id, getQuestions)
 {
   console.log(id);
   fetch('https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/' + id, {
     method: 'DELETE',
   })
   console.log(`question with id #${id} has been deleted`);
+  if (getQuestions)
+  {
+    setTimeout(() => {getAPI(thema, niveau)}, 500);
+  }
 }
 
 /*

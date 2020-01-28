@@ -29,7 +29,7 @@ const getAPI = async function()
 const FillInData = function(leerkrachtnaam)
 {
     console.log(leerkrachtnaam)
-    let htmlQuestion = `<h1 class="c-title" id="js-naam">Welkom ${leerkrachtnaam} !</h1>`;
+    let htmlQuestion = `<h1 class="c-title" id="js-naam">Welkom ${leerkrachtnaam}!</h1>`;
     document.getElementById("js-naam").innerHTML = htmlQuestion;
 }
 

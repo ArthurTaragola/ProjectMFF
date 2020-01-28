@@ -532,7 +532,7 @@ const FillInData = function()
     else
     {
       let htmlQuestion =`<table class="c-table"><tr id="js-question" class="c-table-color"></tr>
-        <td>er zijn geen vragen</td> </table>`;
+        <td>Er zijn geen vragen</td> </table>`;
       document.getElementById("js-question").innerHTML = htmlQuestion;
     }
 }
@@ -562,7 +562,7 @@ const fillInAllQuestions = function ()
     {
       htmlQuestion += `<tr id="js-question" class="c-table-color">
       <td></td>
-      <td>er zijn geen vragen</td></tr>`;
+      <td>Er zijn geen vragen</td></tr>`;
     }
     for (let k = 0; k < questionList[i].length; k++)
     {
@@ -662,7 +662,6 @@ function myFunction(id, item1, item2 = "")
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
     deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
     setTimeout(() => {getAPI(thema, niveau)}, 500);
-    console.log("GET OUTTA MA SWAMP");
     editQuestion(`js-update${item1}${item2}`, item1, item2);
     // updateQuerySelector = document.querySelector(`#js-update${item1}${item2}`);
     // updateQuerySelector.addEventListener('click', function() {updateQuestion(item1, item2)});
@@ -949,7 +948,10 @@ const submitQuestion = async function ()
         DropDown2();
         
         await getThemas();
-        getAPI(themaList[0].themaId, 1);
+        if (themaList[0] != null)
+        {
+            getAPI(themaList[0].themaId, 1);
+        }
         if (newQuestion)
         {
             document.getElementById('js-validThemeSelect').style.display = 'block';
@@ -1007,6 +1009,7 @@ const submitTheme = function ()
                 console.log(thema)
                 niveau = 1;
                 thema = themaList[0].themaId;
+                getAPI(thema, niveau);
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {

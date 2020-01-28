@@ -228,6 +228,7 @@ input[type=checkbox]:checked + label {
 .c-button-login{
     /* margin-left: 25%; */
     width: 40%;
+    height: 48px;
     font-size: 16px;
     padding: 8px;
     
@@ -368,6 +369,8 @@ input[type=checkbox]:checked + label {
   .loader-login{
       height: 16px;
       width: 16px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #08518B;
   }
   
 .c-animation{
@@ -545,8 +548,8 @@ input:focus {
 }
 
 .position-bird-flamingo{
-    margin-top: -11.5%;
-    margin-left: 77.5%;
+    margin-top: -15%;
+    margin-left: 70%;
 }
 
 .modal {

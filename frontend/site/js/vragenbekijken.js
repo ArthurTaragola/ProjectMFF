@@ -547,9 +547,14 @@ const fillInAllQuestions = function ()
   {
     htmlQuestion += `<table class="c-title-table">
     <tr>
-        <th colspan="2" style="text-align: left; background-color: #F5E559">
+        <th colspan="8" style="text-align: left; background-color: #F5E559">
           ${themaList[i].naam}
         </th>
+        <td style="text-align: right; background-color: #F5E559"">
+            <div class="js-deleteThema${themaList[i].themaId}">
+                <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
+            </div>
+        </td>
     </tr>
     </table>
     <table class="c-table">`;
@@ -589,15 +594,62 @@ const fillInAllQuestions = function ()
   }
   htmlQuestion += `</table>`
   document.getElementById("js-question").innerHTML = htmlQuestion;
-//   for (let i = 0; i < themaList.length; i++)
-//   {
-//     for (let k = 0; k < questionList[i].length; k++)
-//     {
-//         updateQuerySelector = document.querySelector(`#js-update${i}${k}`);
-//         updateQuerySelector.addEventListener('click', function() {editQuestion(i, k)});
-//     }
-//   }
+  for (let i = 0; i < themaList.length; i++)
+  {
+    deleteThemaListener = document.querySelector(`.js-deleteThema${themaList[i].themaId}`)
+    deleteThemaListener.addEventListener('click', function() {confirmation(themaList[i])});
+  }
 }
+
+const confirmation = function (thema)
+{
+    Swal.fire({
+        title: 'Weet je het zeker?',
+        text: `Ben je zeker dat je thema "${thema.naam}" en alle bijhorende vragen wilt verwijderen?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Annuleren',
+        confirmButtonText: 'Ja, ik ben zeker!'
+      }).then((result) => {
+        if (result.value) {
+            deleteThema(thema.themaId)
+        }
+      })
+}
+
+const deleteThema = async function (themaId)
+{
+    //confirmation verwijder elke vraag van dit thema, ook met andere niveaus
+    console.log(themaId);
+    for(let i = 1; i < 4; i++)
+    {
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${i}/${themaId}`);
+        if (data.length != 0)
+        {
+            for(let k = 0; k < data.length; k++)
+            {
+                await deleteQuestion(data[k].vraagId);
+            }
+        }
+    }
+
+    fetch('https://moveforfortunefunction.azurewebsites.net/api/v1/thema/' + themaId, {
+        method: 'DELETE',
+    })
+
+    setTimeout(() => {
+        getAPI(themaList[0].themaId, 1);
+        Swal.fire(
+            'Verwijderd!',
+            'Het thema en de bijhorende vragen zijn verwijderd.',
+            'success'
+        )
+        getThemas();
+    }, 500);
+}
+
 
 function myFunction(id, item1, item2 = "")
 {
@@ -609,6 +661,7 @@ function myFunction(id, item1, item2 = "")
     console.log(`${item2}`);
     deleteQuerySelector = document.querySelector(`.js-delete${id}`);
     deleteQuerySelector.addEventListener('click', function() {deleteQuestion(id)});
+    setTimeout(() => {getAPI(thema, niveau)}, 500);
     console.log("GET OUTTA MA SWAMP");
     editQuestion(`js-update${item1}${item2}`, item1, item2);
     // updateQuerySelector = document.querySelector(`#js-update${item1}${item2}`);
@@ -638,7 +691,6 @@ const deleteQuestion = function (id)
     method: 'DELETE',
   })
   console.log(`question with id #${id} has been deleted`);
-  setTimeout(() => {getAPI(thema, niveau)}, 500);
 }
 
 /*
@@ -991,6 +1043,9 @@ const submitNewTheme = function ()
                 document.getElementById("js-themaSelect").innerHTML = ``;
                 getThemas();
                 getAPI(thema, niveau);
+                document.getElementById("newth").value = '';
+                grayButton('js-validThemeInput');
+                validThemeInput = false
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {

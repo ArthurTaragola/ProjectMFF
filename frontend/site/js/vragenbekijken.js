@@ -68,7 +68,7 @@ const DropDown3 = async function ()
                 if (s.options[i].innerHTML == this.innerHTML) {
                 s.selectedIndex = i;
                 thema = option.options[option.selectedIndex].value;
-                getAPI(thema,niveau);
+                //getAPI(thema,niveau);
                 console.log(thema);
                 h.innerHTML = this.innerHTML;
                 y = this.parentNode.getElementsByClassName("same-as-selected");
@@ -148,7 +148,7 @@ const DropDown2 = async function()
               s.selectedIndex = i;
               niveau = i;
               console.log(niveau);
-              getAPI(thema,niveau);
+              //getAPI(thema,niveau);
               h.innerHTML = this.innerHTML;
               y = this.parentNode.getElementsByClassName("same-as-selected");
               for (k = 0; k < y.length; k++) {
@@ -381,6 +381,7 @@ const getThemas = async function()
       {
         thema = 0;
       }
+      console.log(thema);
       console.log(themaList);
   }
   catch(error)
@@ -407,7 +408,6 @@ const fillInThemas = function (data)
       }
       htmlThema += `<option value="all">alle themas</option>`;
       htmlThema += `</select>`
-      htmlThema1 += `<option value="all">alle themas</option>`;
       htmlThema1 += `</select>`
       document.getElementById("js-themaSelect").innerHTML = htmlThema;
       document.getElementById("js-themaSelect1").innerHTML = htmlThema1;
@@ -416,9 +416,11 @@ const fillInThemas = function (data)
     {
       let htmlThema = `<select id='js-themas'><option value=0>Geen themas</option></select>`;
       document.getElementById("js-themaSelect").innerHTML = htmlThema;
+      document.getElementById("js-themaSelect1").innerHTML = htmlThema;
     }
+    DropDown3();
     DropDown1();
-    DropDown2();
+    getAPI(thema, niveau);
 }
 
 const getAPI = async function(thema, niveau)
@@ -845,34 +847,28 @@ const checkValueTheme = function (input)
 const grayButton = function (buttonId)
 {
     document.getElementById(buttonId).style.backgroundColor = '#D9D9D9';
-    document.getElementById(buttonId).style.borderColor = '#A8A8A8';
     document.getElementById(buttonId).style.color = '#6E6E6E';
     document.getElementById(buttonId).onmouseover = function()
     {
         this.style.backgroundColor = '#D9D9D9';
-        this.style.borderColor = '#A8A8A8';
     }
     document.getElementById(buttonId).onmouseout = function()
     {
         this.style.backgroundColor = '#D9D9D9';
-        this.style.borderColor = '#A8A8A8';
     }
 }
 
 const yellowButton = function (buttonId)
 {
     document.getElementById(buttonId).style.backgroundColor = '#F8F067';
-    document.getElementById(buttonId).style.borderColor = '#D4CB2F';
     document.getElementById(buttonId).style.color = '#08518B';
     document.getElementById(buttonId).onmouseover = function()
     {
         this.style.backgroundColor = '#FFFAA3';
-        this.style.borderColor = '#F8F067';
     }
     document.getElementById(buttonId).onmouseout = function()
     {
         this.style.backgroundColor = '#F8F067';
-        this.style.borderColor = '#D4CB2F';
     }
 }
 
@@ -887,8 +883,16 @@ const submitQuestion = function ()
         wrongAnswer2Value = document.getElementById("vantw2").value;
         document.getElementById('js-newQuestion').style.display = 'none';
         document.getElementById('js-selectTheme').style.display = 'block';
+
+        document.getElementById("js-themaSelect1").innerHTML = ``;
+        document.getElementById("js-niveauSelect1").innerHTML = `<select id="niveau">
+            <option value="1"> Niveau 1</option>
+            <option value="1">Niveau 1</option>
+            <option value="2" >Niveau 2</option>
+            <option value="3" >Niveau 3</option>
+            </select>`;
         DropDown2();
-        DropDown3();
+        getThemas();
         if (newQuestion)
         {
             document.getElementById('js-validThemeSelect').style.display = 'block';
@@ -900,7 +904,7 @@ const submitQuestion = function ()
             document.getElementById('js-validThemeSelectEditQuestion').style.display = 'block';
             yellowButton('js-validThemeSelectEditQuestion');
         }
-        if (document.getElementById("thema").value == 0)
+        if (themas.length == 0)
         {
             grayButton("js-validThemeSelect");
         }
@@ -941,7 +945,12 @@ const submitTheme = function ()
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
                 document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-                getAPI(thema, niveau);
+                console.log(themaId)
+                console.log(thema)
+                if (themaId == thema && niveauId == niveau)
+                {
+                    getAPI(themaIndexes[0], niveau);
+                }
                 console.log("get themes");
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
@@ -977,7 +986,7 @@ const submitNewTheme = function ()
                 //document.getElementById('js-selectTheme').style.display = 'block';
 
                 document.getElementById("js-themaSelect").innerHTML = ``;
-                DropDown1();
+                getThemas();
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -1016,7 +1025,10 @@ const updateQuestion = function ()
             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
             document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-            getAPI(thema, niveau);
+            if (themaId == thema && niveauId == niveau)
+            {
+                getAPI(thema, niveau);
+            }
             console.log("get themes");
         }
         else if (xhr.readyState == XMLHttpRequest.DONE)
@@ -1054,7 +1066,7 @@ const showThemes = function ()
     {
         let htmlTheme = `<option value=${themaIndexes[0]}>${themas[0]}</option>`;
 
-        for (let i = 1; i < themas.length; i++)
+        for (let i = 0; i < themas.length; i++)
         {
             htmlTheme += `<option value=${themaIndexes[i]}>${themas[i]}</option>`;
         }
@@ -1094,8 +1106,8 @@ const showThemes = function ()
     }
     else
     {
-        let htmlTheme = `<option value=0>Geen themas</option>`;
-        document.getElementById("thema").innerHTML = htmlTheme;
+        //let htmlTheme = `<option value=0>Geen themas</option>`;
+        //document.getElementById("thema").innerHTML = htmlTheme;
     }
 }
 
@@ -1123,16 +1135,16 @@ const goBackToThemaSelect = function ()
     getThemes();
 }
 
-
 const init = async function()
 {
     console.log("DOM loaded");
-    getThemas();
     DropDown();
+    await getThemas();
     //await DropDown1();
-    getAPI(thema,niveau);
+    //getAPI(thema,niveau);
 
     getThemes();
+    console.log(themas);
 
     //AddQuestionButton = document.querySelector('.js-addQuestion');
     //AddQuestionButton.addEventListener('click', addQuestion);
@@ -1162,7 +1174,7 @@ const init = async function()
     enableListeners();
     grayButton('js-validInputs');
     grayButton('js-validThemeInput');
-    yellowButton('js-buttonQuestionAddedSuccessfully')
+    yellowButton('js-buttonQuestionAddedSuccessfully');
 };
 
 document.addEventListener('DOMContentLoaded', init);

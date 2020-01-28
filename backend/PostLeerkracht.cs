@@ -28,36 +28,44 @@ namespace MoveForFortune
                 string json = await new StreamReader(req.Body).ReadToEndAsync();
                 Leerkracht leerkracht = JsonConvert.DeserializeObject<Leerkracht>(json);
 
-                string GetStringSha256Hash(string text)
-                {
-                    if (String.IsNullOrEmpty(text))
-                        return String.Empty;
-
-                    using (var sha = new System.Security.Cryptography.SHA256Managed())
-                    {
-                        byte[] textData = System.Text.Encoding.UTF8.GetBytes(text);
-                        byte[] hash = sha.ComputeHash(textData);
-                        return BitConverter.ToString(hash).Replace("-", String.Empty);
-                    }
-                }
-
-                using (SqlConnection con = new SqlConnection())
+                if (await EmailInDatabase.EmailokAsync(leerkracht.Email))
                 {
 
-                    con.ConnectionString = connectionString;
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand())
+                    string GetStringSha256Hash(string text)
                     {
-                        cmd.Connection = con;
-                        cmd.CommandText = "Insert into Leerkracht values (@Voornaam, @Naam,  @Email, @Wachtwoord)";
-                        cmd.Parameters.AddWithValue("@Voornaam", leerkracht.Voornaam);
-                        cmd.Parameters.AddWithValue("@Naam", leerkracht.Naam);
-                        cmd.Parameters.AddWithValue("@Email", leerkracht.Email);
-                        cmd.Parameters.AddWithValue("@Wachtwoord", GetStringSha256Hash(leerkracht.Wachtwoord));
-                        await cmd.ExecuteNonQueryAsync();
+                        if (String.IsNullOrEmpty(text))
+                            return String.Empty;
+
+                        using (var sha = new System.Security.Cryptography.SHA256Managed())
+                        {
+                            byte[] textData = System.Text.Encoding.UTF8.GetBytes(text);
+                            byte[] hash = sha.ComputeHash(textData);
+                            return BitConverter.ToString(hash).Replace("-", String.Empty);
+                        }
                     }
+
+                    using (SqlConnection con = new SqlConnection())
+                    {
+
+                        con.ConnectionString = connectionString;
+                        await con.OpenAsync();
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            cmd.Connection = con;
+                            cmd.CommandText = "Insert into Leerkracht values (@Voornaam, @Naam,  @Email, @Wachtwoord)";
+                            cmd.Parameters.AddWithValue("@Voornaam", leerkracht.Voornaam);
+                            cmd.Parameters.AddWithValue("@Naam", leerkracht.Naam);
+                            cmd.Parameters.AddWithValue("@Email", leerkracht.Email);
+                            cmd.Parameters.AddWithValue("@Wachtwoord", GetStringSha256Hash(leerkracht.Wachtwoord));
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+                    }
+                    return new OkObjectResult("");
                 }
-                return new StatusCodeResult(200);
+                else
+                {
+                    return new OkObjectResult("gebruiker bestaat al");
+                }
             }
             catch(Exception ex)
             {

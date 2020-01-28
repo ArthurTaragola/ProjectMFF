@@ -1,3 +1,4 @@
+
 let eventListeners = [];
 let emailValid = false;
 let eventListenersValid = [false, false, false, false];
@@ -151,15 +152,25 @@ function DoSubmit()
                     }
                     else
                     {
-                        alert("Email adres al in gebruik");
-                        location.reload();
+                        document.getElementById("js-registerButton").innerHTML = "Registreren";
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Email adres al in gebruik!'
+                          })
+                          yellowButton();
                     }
                 }
             }
         }
         else{
-            alert("Wachtwoorden niet gelijk")
-            yellowButton();
+            document.getElementById("js-registerButton").innerHTML = "Registreren";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Wachtwoorden niet gelijk!'
+              })
+              yellowButton();
         }
     }
 }

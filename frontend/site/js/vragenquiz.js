@@ -211,6 +211,7 @@ const bothTeamsAnswered = function()
     //go to next page (show right answer)
     console.log("team 1: " + answerteam1);
     console.log("team 2: " + answerteam2);
+    setTimeout(() => {document.getElementById("js-instruction").style.display = 'block';}, 2000);
     setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.backgroundColor = '#75C461';}, 2000);
     setTimeout(() => {document.getElementById(`${possibleAnswers[correctAnswerIndex]}`).style.borderColor = '#63AC70';}, 2000);
     if (answerteam1 != correctAnswer)
@@ -265,7 +266,6 @@ const bothTeamsAnswered = function()
             console.log("team 1 krijgt 0 punten");
         }
     }
-    document.getElementById("js-instruction").style.display = 'block';
 }
 
 const goToNewPage = function ()

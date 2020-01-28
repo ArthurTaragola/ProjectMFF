@@ -152,22 +152,25 @@ function DoSubmit()
                     }
                     else
                     {
+                        document.getElementById("js-registerButton").innerHTML = "Registreren";
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
                             text: 'Email adres al in gebruik!'
                           })
+                          yellowButton();
                     }
                 }
             }
         }
         else{
+            document.getElementById("js-registerButton").innerHTML = "Registreren";
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Wachtwoorden niet gelijk!'
               })
-            yellowButton();
+              yellowButton();
         }
     }
 }

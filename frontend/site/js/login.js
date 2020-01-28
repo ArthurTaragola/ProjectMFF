@@ -105,7 +105,6 @@ const DoSubmit = function()
     {
         grayButton();
         setTimeout(() => {document.getElementById("js-loginButton").innerHTML = "<div class='loader loader-login'></div>";}, 100);
-
         let xhr = new XMLHttpRequest();
 
         var response;
@@ -136,7 +135,12 @@ const DoSubmit = function()
                 }
                 else
                 {
-                    alert(response)
+                    document.getElementById("js-loginButton").innerHTML = "Login";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response
+                      })
                 }
             }
         }

@@ -46,7 +46,7 @@ a{
     color:var(--color-text-alpha);
 }
 
-td{
+td, th{
     padding: 8px;
 }
 
@@ -432,6 +432,15 @@ input:focus {
     
 }
 
+.c-select{
+    padding-bottom: 16px;
+    margin-left: 20%;
+}
+
+.c-lbl{
+    padding-bottom: 8px;
+}
+
 .svg-thema{
     display:flex;
     align-items: center;
@@ -529,8 +538,8 @@ input:focus {
   /* Toggle this class when clicking on the popup container (hide and show the popup) */
   .popup .show {
     visibility: visible;
-    -webkit-animation: fadeIn 0.4s;
-    animation: fadeIn 0.4s
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s
   }
   
   /* Add animation (fade in the popup) */

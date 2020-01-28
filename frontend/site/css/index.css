@@ -226,10 +226,10 @@ input[type=checkbox]:checked + label {
 }
 
 .c-button-login{
-    height: 73px;
     /* margin-left: 25%; */
-    width: 50%;
-    font-size: 24px;
+    width: 40%;
+    font-size: 16px;
+    padding: 8px;
     
 }
 
@@ -247,6 +247,12 @@ input[type=checkbox]:checked + label {
     width: 25%;
     height: 40px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.c-button-volgende-2{
+    width: 80%;
+    margin-left: 0%;
+    margin-right: 10%;
 }
 
 .c-buttons-thema{ 
@@ -320,7 +326,7 @@ input[type=checkbox]:checked + label {
 
 .c-card-item__btn{
     text-align: center;
-    margin-top: 16px;
+    margin-top: 15%;
 }
 
 .c-card-item__btnregistreren{
@@ -357,6 +363,11 @@ input[type=checkbox]:checked + label {
     height: 32px;
     -webkit-animation: spin 1s linear infinite; /* Safari */
     animation: spin 1s linear infinite;
+  }
+
+  .loader-login{
+      height: 16px;
+      width: 16px;
   }
   
 .c-animation{

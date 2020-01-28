@@ -157,7 +157,7 @@ const checkQuestions = function ()
         let html = `<h1 class="question">Eindstand!</h1></button>`;
         document.getElementById("js-title").innerHTML = html;
 
-        html = `<button class= "c-button c-button-volgende js-stopButton">Stop quiz</button>`;
+        html = `<button class= "c-button c-button-volgende c-button-volgende-2 js-stopButton">Stop quiz</button>`;
         document.getElementById("js-endButton").innerHTML = html;
     }
 }

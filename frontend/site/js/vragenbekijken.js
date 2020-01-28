@@ -931,6 +931,9 @@ const submitQuestion = async function ()
 {
     if (alleventListenersValid)
     {
+        thema = themaList[0].themaId;
+        niveau = 1;
+
         questionValue = document.getElementById("vraag").value;
         correctAnswerValue = document.getElementById("jantw").value;
         wrongAnswer1Value = document.getElementById("vantw1").value;
@@ -982,8 +985,8 @@ const submitTheme = function ()
 {
     //let niveauId = document.getElementById("niveau").value;
     //let themaId = document.getElementById("thema").value;
-    console.log(niveau)
-    console.log(thema)
+    console.log(niveau);
+    console.log(thema);
 
     if (thema != 0)
     {
@@ -1063,10 +1066,11 @@ const submitNewTheme = function ()
 
 const updateQuestion = function ()
 {
-    console.log("got so far")
+    // let niveauId = document.getElementById("niveau").value;
+    // let themaId = document.getElementById("thema").value;
 
-    let niveauId = document.getElementById("niveau").value;
-    let themaId = document.getElementById("thema").value;
+    console.log(niveau);
+    console.log(thema);
 
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", `https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${questionData.vraagId}`);
@@ -1076,8 +1080,8 @@ const updateQuestion = function ()
         "JuistAntwoord": correctAnswerValue,
         "FoutAntwoord1": wrongAnswer1Value,
         "FoutAntwoord2": wrongAnswer2Value,
-        "Niveau": niveauId,
-        "ThemaId": themaId
+        "Niveau": niveau,
+        "ThemaId": thema
     }));
     xhr.onreadystatechange = function ()
     {
@@ -1090,11 +1094,10 @@ const updateQuestion = function ()
             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
             document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-            if (themaId == thema && niveauId == niveau)
-            {
-                getAPI(thema, niveau);
-            }
-            console.log("get themes");
+            
+            niveau = 1;
+            thema = themaList[0].themaId;
+            getAPI(thema, niveau);
         }
         else if (xhr.readyState == XMLHttpRequest.DONE)
         {

@@ -128,7 +128,7 @@ function DoSubmit()
         let password2 = document.getElementById("ww2").value;
 
         if(password == password2){
-            setTimeout(() => {document.getElementById("js-registerButton").innerHTML = "<div class='loader'></div>";}, 100);
+            setTimeout(() => {document.getElementById("js-registerButton").innerHTML = "<div class='loader loader-login'></div>";}, 100);
             xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/leerkrachten");
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({

@@ -234,6 +234,23 @@ input[type=checkbox]:checked + label {
     
 }
 
+.c-button-login2{
+    /* margin-left: 25%; */
+    width: 40%;
+    height: 48px;
+    font-size: 24px;
+    padding: 8px;
+    
+}
+
+.c-button-add{
+     margin-left: 33%;
+     width: 40%;
+     height: 48px;
+     font-size: 16px;
+     padding: 8px;
+}
+
 .c-button-thema{
     height: 64px;
     margin-left: 15%;
@@ -280,10 +297,6 @@ input[type=checkbox]:checked + label {
     display: grid;
     grid-template-columns: 33% auto 33%;
     grid-gap: 0;
-}
-
-.c-center{
-    margin-left: 10%;
 }
 
 .c-card
@@ -374,7 +387,8 @@ input[type=checkbox]:checked + label {
   }
   
 .c-animation{
-    margin-left: 100px;
+    margin-left: 50%;
+    margin-bottom: 20%;
 }
 
   /* Safari */
@@ -415,7 +429,7 @@ input:focus {
 
 .c-center{
     margin-left: 150%;
-    margin-top: 40%;
+    
 }
 
 .svg-thema{
@@ -432,11 +446,21 @@ input:focus {
 
 .svg-greenbird{
     margin-left: 75%;
+    margin-top: 20%;
     
 }
 
 .svg-flamingo-klein{
-    
+    margin-left: 30%;
+}
+
+.svg-papagaai{
+    margin-top: 8%;
+    margin-left: 50%;
+}
+
+.svg-greenbird-niveau{
+    margin-left: 25%;
 }
 
 .vert-move{

@@ -1,3 +1,4 @@
+
 let eventListeners = [];
 let emailValid = false;
 let eventListenersValid = [false, false, false, false];
@@ -151,14 +152,21 @@ function DoSubmit()
                     }
                     else
                     {
-                        alert("Email adres al in gebruik");
-                        location.reload();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Email adres al in gebruik!'
+                          })
                     }
                 }
             }
         }
         else{
-            alert("Wachtwoorden niet gelijk")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Wachtwoorden niet gelijk!'
+              })
             yellowButton();
         }
     }

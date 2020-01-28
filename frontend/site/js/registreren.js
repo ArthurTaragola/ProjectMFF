@@ -138,14 +138,22 @@ function DoSubmit()
             }));
             xhr.onreadystatechange = function ()
             {
-                if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+                if(xhr.readyState == XMLHttpRequest.DONE)
                 {
-                    document.getElementById("js-registerButton").innerHTML = "Registreren";
-                    yellowButton();
-                    console.log("the account has succesfully been made");
-                    //response = xhr.responseText; 
-                    //console.log(response); //expect leerkrachtId
-                    window.location.href = "login.html";
+                    if(xhr.responseText == "ok")
+                    {
+                        document.getElementById("js-registerButton").innerHTML = "Registreren";
+                        yellowButton();
+                        console.log("the account has succesfully been made");
+                        //response = xhr.responseText; 
+                        //console.log(response); //expect leerkrachtId
+                        window.location.href = "login.html";
+                    }
+                    else
+                    {
+                        alert("Email adres al in gebruik");
+                        location.reload();
+                    }
                 }
             }
         }

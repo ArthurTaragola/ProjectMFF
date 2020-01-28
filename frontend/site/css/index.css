@@ -282,10 +282,6 @@ input[type=checkbox]:checked + label {
     grid-gap: 0;
 }
 
-.c-center{
-    margin-left: 10%;
-}
-
 .c-card
 {
     background-color: var(--color-alpha-yellow);
@@ -374,7 +370,8 @@ input[type=checkbox]:checked + label {
   }
   
 .c-animation{
-    margin-left: 100px;
+    margin-left: 50%;
+    margin-bottom: 20%;
 }
 
   /* Safari */
@@ -415,7 +412,7 @@ input:focus {
 
 .c-center{
     margin-left: 150%;
-    margin-top: 40%;
+    
 }
 
 .svg-thema{
@@ -436,7 +433,7 @@ input:focus {
 }
 
 .svg-flamingo-klein{
-    
+    margin-left: 30%;
 }
 
 .vert-move{

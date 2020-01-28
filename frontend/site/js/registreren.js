@@ -148,7 +148,13 @@ function DoSubmit()
                         console.log("the account has succesfully been made");
                         //response = xhr.responseText; 
                         //console.log(response); //expect leerkrachtId
-                        window.location.href = "login.html";
+                        //window.location.href = "login.html";
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Succes',
+                            html: 'Uw account is succesvol aangemaakt! </br> U kunt nu inloggen',
+                            confirmButtonText: "<a href='login.html' style = 'color: white';>Ok</a>"
+                          })
                     }
                     else
                     {

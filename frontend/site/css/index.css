@@ -234,6 +234,15 @@ input[type=checkbox]:checked + label {
     
 }
 
+.c-button-login2{
+    /* margin-left: 25%; */
+    width: 40%;
+    height: 48px;
+    font-size: 24px;
+    padding: 8px;
+    
+}
+
 .c-button-thema{
     height: 64px;
     margin-left: 15%;
@@ -429,11 +438,21 @@ input:focus {
 
 .svg-greenbird{
     margin-left: 75%;
+    margin-top: 20%;
     
 }
 
 .svg-flamingo-klein{
     margin-left: 30%;
+}
+
+.svg-papagaai{
+    margin-top: 8%;
+    margin-left: 50%;
+}
+
+.svg-greenbird-niveau{
+    margin-left: 25%;
 }
 
 .vert-move{

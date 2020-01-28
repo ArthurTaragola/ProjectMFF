@@ -22,9 +22,9 @@ const popup = function()
         icon: 'info',
         html:
           'Bekijk de werking van het spel in volgende ' +
-          '<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">instructie video.</a> ' +
-          'Vogel <b>icons</b> kan je hier vinden <a href="https://www.flaticon.com/packs/bird-collection">hier.</a><br>' + 
-          '<b>Soundeffects</b> vind je <a href="https://freesound.org/home/">hier</a>',
+          '<a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">instructie video.</a> ' +
+          'Vogel <b>icons</b> kan je hier vinden <a target="_blank" href="https://www.flaticon.com/packs/bird-collection">hier.</a><br>' + 
+          '<b>Soundeffects</b> vind je <a target="_blank" href="https://freesound.org/home/">hier</a>',
         showCloseButton: true,
         showCancelButton: false,
         focusConfirm: false,

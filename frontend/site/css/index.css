@@ -241,6 +241,7 @@ input[type=checkbox]:checked + label {
     margin-bottom: 8px;
 }
 
+
 .c-button-volgende{
     margin-left: 37.5%;
     width: 25%;
@@ -358,6 +359,10 @@ input[type=checkbox]:checked + label {
     animation: spin 1s linear infinite;
   }
   
+.c-animation{
+    margin-left: 100px;
+}
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

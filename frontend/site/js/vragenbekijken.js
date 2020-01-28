@@ -420,7 +420,7 @@ const fillInThemas = function (data)
     }
     DropDown3();
     DropDown1();
-    getAPI(thema, niveau);
+    //getAPI(thema, niveau);
 }
 
 const getAPI = async function(thema, niveau)
@@ -547,7 +547,7 @@ const fillInAllQuestions = function ()
   {
     htmlQuestion += `<table class="c-title-table">
     <tr>
-        <th colspan="2" style="text-align: left">
+        <th colspan="2" style="text-align: left; background-color: #F5E559">
           ${themaList[i].naam}
         </th>
     </tr>
@@ -873,7 +873,7 @@ const yellowButton = function (buttonId)
 }
 
 
-const submitQuestion = function ()
+const submitQuestion = async function ()
 {
     if (alleventListenersValid)
     {
@@ -885,14 +885,19 @@ const submitQuestion = function ()
         document.getElementById('js-selectTheme').style.display = 'block';
 
         document.getElementById("js-themaSelect1").innerHTML = ``;
-        document.getElementById("js-niveauSelect1").innerHTML = `<select id="niveau">
-            <option value="1"> Niveau 1</option>
+        let htmlNiveau = `<select id="niveau">
             <option value="1">Niveau 1</option>
-            <option value="2" >Niveau 2</option>
-            <option value="3" >Niveau 3</option>
+            <option value="1">Niveau 1</option>
+            <option value="2">Niveau 2</option>
+            <option value="3">Niveau 3</option>
             </select>`;
+        document.getElementById("js-niveauSelect1").innerHTML = htmlNiveau;
+        document.getElementById("js-niveauSelect").innerHTML = htmlNiveau;
+        DropDown();
         DropDown2();
-        getThemas();
+        
+        await getThemas();
+        getAPI(themaList[0].themaId, 1);
         if (newQuestion)
         {
             document.getElementById('js-validThemeSelect').style.display = 'block';
@@ -918,10 +923,12 @@ const submitQuestion = function ()
 
 const submitTheme = function ()
 {
-    let niveauId = document.getElementById("niveau").value;
-    let themaId = document.getElementById("thema").value;
+    //let niveauId = document.getElementById("niveau").value;
+    //let themaId = document.getElementById("thema").value;
+    console.log(niveau)
+    console.log(thema)
 
-    if (themaId != 0)
+    if (thema != 0)
     {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
@@ -931,8 +938,8 @@ const submitTheme = function ()
             "JuistAntwoord": correctAnswerValue,
             "FoutAntwoord1": wrongAnswer1Value,
             "FoutAntwoord2": wrongAnswer2Value,
-            "Niveau": niveauId,
-            "ThemaId": themaId
+            "Niveau": niveau,
+            "ThemaId": thema
         }));
         xhr.onreadystatechange = function ()
         {
@@ -945,13 +952,9 @@ const submitTheme = function ()
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
                 document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-                console.log(themaId)
                 console.log(thema)
-                if (themaId == thema && niveauId == niveau)
-                {
-                    getAPI(themaIndexes[0], niveau);
-                }
-                console.log("get themes");
+                niveau = 1;
+                thema = themaList[0].themaId;
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -987,6 +990,7 @@ const submitNewTheme = function ()
 
                 document.getElementById("js-themaSelect").innerHTML = ``;
                 getThemas();
+                getAPI(thema, niveau);
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -1140,6 +1144,7 @@ const init = async function()
     console.log("DOM loaded");
     DropDown();
     await getThemas();
+    getAPI(thema, niveau);
     //await DropDown1();
     //getAPI(thema,niveau);
 

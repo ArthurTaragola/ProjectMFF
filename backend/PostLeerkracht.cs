@@ -60,7 +60,7 @@ namespace MoveForFortune
                             await cmd.ExecuteNonQueryAsync();
                         }
                     }
-                    return new OkObjectResult("");
+                    return new OkObjectResult("ok");
                 }
                 else
                 {

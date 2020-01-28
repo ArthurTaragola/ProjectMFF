@@ -4,6 +4,7 @@ customHeaders.append('Accept', 'application/json');
 let questionList;
 let thema = 1;
 let niveau = 1;
+let firstThema = true;
 
 let themaList = [];
 
@@ -29,7 +30,7 @@ let alleventListenersValid = false;
 
 let validThemeInput = false;
 
-let newQuestion = true; //boolean to see if the pop-up is for a new question or to edit a question
+let newQuestion = false; //boolean to see if the pop-up is for a new question or to edit a question
 let questionData;
 
 let leerkrachtId = localStorage.getItem("leerkrachtId");
@@ -369,15 +370,27 @@ const getThemas = async function()
   {
       themaList = [];
       const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
+      console.log(data)
       for (let k = 0; k < data.length; k++)
       {
           themaList.push(data[k]);
+          console.log("go in")
       }
-      if (data.length != 0)
+      if (firstThema)
       {
-        thema = data[0].themaId;
+          thema = themaList[0].themaId;
+          firstThema = false;
       }
-      else
+      console.log(thema)
+    //   if (data.length != 0)
+    //   {
+    //     thema = data[0].themaId;
+    //   }
+    //   else
+    //   {
+    //     thema = 0;
+    //   }
+      if (data.length == 0)
       {
         thema = 0;
       }
@@ -394,12 +407,28 @@ const getThemas = async function()
 
 const fillInThemas = function (data)
 {
-    if (data.length != 0)
+    if (thema != 0)
     {
-      let htmlThema = `<select id='js-themas'>`;
-      htmlThema += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
-      let htmlThema1 = `<select id='thema'>`;
-      htmlThema1 += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+        let htmlThema;
+        let htmlThema1;
+        if (thema != 'all')
+        {
+            index = themaList.findIndex(x => x.themaId == thema);
+            console.log(index)
+            console.log(thema)
+
+            htmlThema = `<select id='js-themas'>`;
+            htmlThema += `<option value="${data[index].themaId}">${data[index].naam}</option>`;
+            htmlThema1 = `<select id='thema'>`;
+            htmlThema1 += `<option value="${data[index].themaId}">${data[index].naam}</option>`;
+        }
+        else
+        {
+            htmlThema = `<select id='js-themas'>`;
+            htmlThema += `<option value="all">alle themas</option>`;
+            htmlThema1 = `<select id='thema'>`;
+            htmlThema1 += `<option value="${data[0].themaId}">${data[0].naam}</option>`;
+        }
 
       for (let i = 0; i < data.length; i++)
       {
@@ -421,6 +450,20 @@ const fillInThemas = function (data)
     DropDown3();
     DropDown1();
     //getAPI(thema, niveau);
+}
+
+const showNiveaus = function ()
+{
+    let htmlNiveau = `<select id="niveau">
+        <option value="${niveau}">Niveau ${niveau}</option>
+        <option value="1">Niveau 1</option>
+        <option value="2">Niveau 2</option>
+        <option value="3">Niveau 3</option>
+        </select>`;
+    document.getElementById("js-niveauSelect1").innerHTML = htmlNiveau;
+    document.getElementById("js-niveauSelect").innerHTML = htmlNiveau;
+    DropDown();
+    DropDown2();
 }
 
 const getAPI = async function(thema, niveau)
@@ -640,7 +683,7 @@ const deleteThema = async function (themaId)
     })
 
     setTimeout(() => {
-        getAPI(themaList[0].themaId, 1);
+        getAPI(thema, niveau);
         Swal.fire(
             'Verwijderd!',
             'Het thema en de bijhorende vragen zijn verwijderd.',
@@ -931,6 +974,9 @@ const submitQuestion = async function ()
 {
     if (alleventListenersValid)
     {
+        //thema = themaList[0].themaId;
+        //niveau = 1;
+
         questionValue = document.getElementById("vraag").value;
         correctAnswerValue = document.getElementById("jantw").value;
         wrongAnswer1Value = document.getElementById("vantw1").value;
@@ -939,22 +985,14 @@ const submitQuestion = async function ()
         document.getElementById('js-selectTheme').style.display = 'block';
 
         document.getElementById("js-themaSelect1").innerHTML = ``;
-        let htmlNiveau = `<select id="niveau">
-            <option value="1">Niveau 1</option>
-            <option value="1">Niveau 1</option>
-            <option value="2">Niveau 2</option>
-            <option value="3">Niveau 3</option>
-            </select>`;
-        document.getElementById("js-niveauSelect1").innerHTML = htmlNiveau;
-        document.getElementById("js-niveauSelect").innerHTML = htmlNiveau;
-        DropDown();
-        DropDown2();
+        showNiveaus();
         
+        console.log(thema);
         await getThemas();
-        if (themaList[0] != null)
-        {
-            getAPI(themaList[0].themaId, 1);
-        }
+        // if (themaList[0] != null)
+        // {
+        //     getAPI(thema, niveau);
+        // }
         if (newQuestion)
         {
             document.getElementById('js-validThemeSelect').style.display = 'block';
@@ -966,6 +1004,7 @@ const submitQuestion = async function ()
             document.getElementById('js-validThemeSelectEditQuestion').style.display = 'block';
             yellowButton('js-validThemeSelectEditQuestion');
         }
+        getThemes();
         if (themas.length == 0)
         {
             grayButton("js-validThemeSelect");
@@ -974,7 +1013,6 @@ const submitQuestion = async function ()
         {
             yellowButton("js-validThemeSelect");
         }
-        getThemes();
     }
 }
 
@@ -982,8 +1020,8 @@ const submitTheme = function ()
 {
     //let niveauId = document.getElementById("niveau").value;
     //let themaId = document.getElementById("thema").value;
-    console.log(niveau)
-    console.log(thema)
+    console.log(niveau);
+    console.log(thema);
 
     if (thema != 0)
     {
@@ -1009,10 +1047,9 @@ const submitTheme = function ()
                 document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
                 document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-                console.log(thema)
-                niveau = 1;
-                thema = themaList[0].themaId;
+
                 getAPI(thema, niveau);
+                getThemas();
             }
             else if (xhr.readyState == XMLHttpRequest.DONE)
             {
@@ -1063,10 +1100,11 @@ const submitNewTheme = function ()
 
 const updateQuestion = function ()
 {
-    console.log("got so far")
+    // let niveauId = document.getElementById("niveau").value;
+    // let themaId = document.getElementById("thema").value;
 
-    let niveauId = document.getElementById("niveau").value;
-    let themaId = document.getElementById("thema").value;
+    console.log(niveau);
+    console.log(thema);
 
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", `https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${questionData.vraagId}`);
@@ -1076,8 +1114,8 @@ const updateQuestion = function ()
         "JuistAntwoord": correctAnswerValue,
         "FoutAntwoord1": wrongAnswer1Value,
         "FoutAntwoord2": wrongAnswer2Value,
-        "Niveau": niveauId,
-        "ThemaId": themaId
+        "Niveau": niveau,
+        "ThemaId": thema
     }));
     xhr.onreadystatechange = function ()
     {
@@ -1090,11 +1128,10 @@ const updateQuestion = function ()
             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
             document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
-            if (themaId == thema && niveauId == niveau)
-            {
-                getAPI(thema, niveau);
-            }
-            console.log("get themes");
+            
+            getThemas();
+            showNiveaus();
+            getAPI(thema, niveau);
         }
         else if (xhr.readyState == XMLHttpRequest.DONE)
         {
@@ -1107,6 +1144,7 @@ const updateQuestion = function ()
 
 const getThemes = async function ()
 {
+    console.log(thema);
     themas = [];
     themaIndexes = [];
     try
@@ -1129,7 +1167,7 @@ const showThemes = function ()
 {
     if (themas.length != 0)
     {
-        let htmlTheme = `<option value=${themaIndexes[0]}>${themas[0]}</option>`;
+        let htmlTheme = `<option value=${themaIndexes[thema]}>${themas[thema]}</option>`;
 
         for (let i = 0; i < themas.length; i++)
         {
@@ -1138,35 +1176,41 @@ const showThemes = function ()
 
         let selectThema = document.getElementById("thema");
         selectThema.innerHTML = htmlTheme;
+        console.log(thema)
+        console.log(noNewThemes);
         if (!noNewThemes)
         {
-            selectThema.selectedIndex = themas.length-1;
+            thema = themaList[themaList.length - 1].themaId;
             console.log("selected thema: "+(themas.length-1).toString())
+            console.log(thema);
         }
         else
         {
             if (thema == 'all')
             {
-                thema = themaIndexes[0];
+                //index = themaIndexes[0];
             }
             if (newQuestion)
             {
-                selectThema.selectedIndex = themaIndexes.indexOf(parseInt(thema,10));
+                console.log(themaIndexes.indexOf(parseInt(thema,10)))
+                //index = themaIndexes.indexOf(parseInt(thema,10));
             }
-            else
-            {
-                selectThema.selectedIndex = themaIndexes.indexOf(parseInt(questionData.themaId,10));
-            }
+            // else
+            // {
+            //     thema = themaIndexes.indexOf(parseInt(questionData.themaId,10));
+            // }
         }
+        console.log(thema)
+        getThemas();
 
         let selectNiveau = document.getElementById("niveau");
         if (newQuestion)
         {
-            selectNiveau.selectedIndex = niveau-1;
+            //selectNiveau.selectedIndex = niveau-1;
         }
         else
         {
-            selectNiveau.selectedIndex = questionData.niveau-1;
+            //selectNiveau.selectedIndex = questionData.niveau-1;
         }
     }
     else
@@ -1197,7 +1241,7 @@ const goBackToThemaSelect = function ()
     document.getElementById("js-title").innerHTML = htmlTitle;
 
     yellowButton("js-validThemeSelect");
-    getThemes();
+    getThemes();////yolo
 }
 
 const init = async function()
@@ -1208,9 +1252,7 @@ const init = async function()
     getAPI(thema, niveau);
     //await DropDown1();
     //getAPI(thema,niveau);
-
-    getThemes();
-    console.log(themas);
+    //getThemes();
 
     //AddQuestionButton = document.querySelector('.js-addQuestion');
     //AddQuestionButton.addEventListener('click', addQuestion);

@@ -1069,31 +1069,34 @@ const submitTheme = function ()
 {
     //let niveauId = document.getElementById("niveau").value;
     //let themaId = document.getElementById("thema").value;
-    console.log(niveau);
-    console.log(thema);
-
-    document.getElementById('js-newQuestion').style.display = 'block';
-    document.getElementById('js-selectTheme').style.display = 'none';
-    
-    if (newQuestion)
+    if (thema != 0)
     {
-        document.getElementById('js-validInputs').style.display = 'block';
-        document.getElementById('js-validInputs2').style.display = 'none';
+        console.log(niveau);
+        console.log(thema);
 
-        document.getElementById("vraag").value = '';
-        document.getElementById("jantw").value = '';
-        document.getElementById("vantw1").value = '';
-        document.getElementById("vantw2").value = '';
-    
-        eventListenersValid = [false, false, false, false];
-        alleventListenersValid = false;
-        grayButton('js-validInputs');
-    }
-    else
-    {
-        document.getElementById('js-validInputs').style.display = 'none';
-        document.getElementById('js-validInputs2').style.display = 'block';
-        yellowButton('js-validInputs2');
+        document.getElementById('js-newQuestion').style.display = 'block';
+        document.getElementById('js-selectTheme').style.display = 'none';
+        
+        if (newQuestion)
+        {
+            document.getElementById('js-validInputs').style.display = 'block';
+            document.getElementById('js-validInputs2').style.display = 'none';
+
+            document.getElementById("vraag").value = '';
+            document.getElementById("jantw").value = '';
+            document.getElementById("vantw1").value = '';
+            document.getElementById("vantw2").value = '';
+        
+            eventListenersValid = [false, false, false, false];
+            alleventListenersValid = false;
+            grayButton('js-validInputs');
+        }
+        else
+        {
+            document.getElementById('js-validInputs').style.display = 'none';
+            document.getElementById('js-validInputs2').style.display = 'block';
+            yellowButton('js-validInputs2');
+        }
     }
 
     // if (thema != 0)
@@ -1311,6 +1314,7 @@ const newTheme = function ()
 
 const goBackToThemaSelect = function ()
 {
+    noNewThemes = true;
     document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
     document.getElementById('js-title').style.display = 'block';
     document.getElementById('myBtn').style.display = 'block';
@@ -1320,7 +1324,7 @@ const goBackToThemaSelect = function ()
     document.getElementById("js-title").innerHTML = htmlTitle;
 
     yellowButton("js-validThemeSelect");
-    getThemes();////yolo
+    getThemes();
 }
 
 const init = async function()

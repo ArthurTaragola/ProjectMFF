@@ -114,16 +114,6 @@ const getData = function()
 
         questionList.splice(randomQuestion, 1); //verwijder 1 vraag uit de lijst
     }
-    else
-    {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "dit thema heeft geen vragen"
-        })
-        goToLogin = document.querySelector('.swal2-confirm');
-        goToLogin.addEventListener('click', function () {window.location.href = "thema's.html"});
-    }
 }
 
 const shuffle = function(list)
@@ -307,6 +297,17 @@ const init = async function()
         pointsTeam1 = 0;
         pointsTeam2 = 0;
         await getAPI();
+        if (amountOfQuestions == 0)
+        {
+            document.getElementById('js-loadbar').innerHTML = '';
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "dit thema heeft geen vragen"
+            })
+            goToThemas = document.querySelector('.swal2-confirm');
+            goToThemas.addEventListener('click', function () {window.location.href = "thema's.html"});
+        }
     }
     else
     {
@@ -317,9 +318,12 @@ const init = async function()
         getData();
     }
 
-    setTimeout(() => {showProgress();}, 200);
-    loadbar();
-    setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
+    if (amountOfQuestions != 0)
+    {
+        setTimeout(() => {showProgress();}, 200);
+        loadbar();
+        setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);

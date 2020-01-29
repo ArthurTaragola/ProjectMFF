@@ -116,8 +116,13 @@ const getData = function()
     }
     else
     {
-        alert("dit thema heeft geen vragen");
-        window.location.href = "thema's.html";
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "dit thema heeft geen vragen"
+        })
+        goToLogin = document.querySelector('.swal2-confirm');
+        goToLogin.addEventListener('click', function () {window.location.href = "thema's.html"});
     }
 }
 

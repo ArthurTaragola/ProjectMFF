@@ -315,6 +315,11 @@ input[type=checkbox]:checked + label {
     grid-template-rows: auto auto auto auto auto auto; */
 }
 
+.c-card-reg{
+    height: 560px;
+    padding-bottom: 0;
+}
+
 .c-card-item__input{
     width: 94%;
     font-size: 16px;
@@ -352,7 +357,7 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__btnregistreren{
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .c-card-item__form{

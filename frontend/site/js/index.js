@@ -21,9 +21,9 @@ const popup = function()
         title: '<strong>Information</strong>',
         icon: 'info',
         html:
-          'Bekijk de werking van het spel in volgende ' +
-          '<a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">instructie video.</a> ' +
-          'Vogel <b>icons</b> kan je hier vinden <a target="_blank" href="https://www.flaticon.com/packs/bird-collection">hier.</a><br>' + 
+          'Bekijk de werking van het spel in <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">deze</a> ' +
+          'instructie video. ' +
+          'Vogel <b>icons</b> kan je <a target="_blank" href="https://www.flaticon.com/packs/bird-collection">hier</a> vinden.<br>' + 
           '<b>Soundeffects</b> vind je <a target="_blank" href="https://freesound.org/home/">hier</a>',
         showCloseButton: true,
         showCancelButton: false,

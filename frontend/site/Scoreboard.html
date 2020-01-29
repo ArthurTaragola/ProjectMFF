@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,12 @@
 </head>
 <body>
     <div class="c-grid">
-        <div class="c-grid__item u-grid-col-span-2"></div>
+        <div class="c-grid__item u-grid-col-span-2 position-home">
+            <a href="quiz.html" id="js-home" class="c-card-item__home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/><path d="M0 0h24v24H0z" fill="none" margin-right="100px"/></svg>
+                <span class="c-home-text">Home</span>
+            </a>
+        </div>
         <div class="c-grid__item u-grid-col-span-2">
             <h1 id="js-title" class="c-title">Tussenstand!</h1>
         </div>
@@ -39,9 +44,9 @@
             
                 <canvas id="myChart" width="50" height="20"></canvas>
                 
-                <img src="img/bird1.png" id="bird1" style="display: none;"> <!--!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!-->
-                <img src="img/bird2.png" id="bird2" style="display: none;"> <!--!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!-->
-                <img src="img/crown.png" id="crown" style="display: none;"> <!--!!!!!!!!!!!!!!!!! zet in css !!!!!!!!!!!!!!!!!-->
+                <img src="img/bird1.png" id="bird1" class="c-score-vogel"> 
+                <img src="img/bird2.png" id="bird2" class="c-score-vogel">
+                <img src="img/crown.png" id="crown" class="c-score-vogel">
         </div>
 
         <div class="c-grid__item u-grid-col-span-1"></div>

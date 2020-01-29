@@ -149,6 +149,10 @@ input[type=checkbox]:checked + label {
     text-align: left;
 }
 
+.c-score-vogel{
+    display: none;
+}
+
 .c-vragen{
     font-size: 48px;
 }
@@ -517,6 +521,21 @@ input:focus {
     left: 50%;
     margin-left: -80px;
   }
+
+ .swal2-html-container{
+     color: var(--color-text-alpha);
+ }
+
+ .swal2-title{
+     color:  var(--color-text-alpha);
+ }
+
+  .swal2-html-container :link
+  {
+      text-decoration: underline !important;
+  }
+
+  
 
   .testklasse{
       border: solid 1px black;

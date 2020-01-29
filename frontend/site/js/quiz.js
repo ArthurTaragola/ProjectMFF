@@ -1,4 +1,5 @@
 let leerkrachtData
+let leerkrachtId = localStorage.getItem("leerkrachtId");
 
 let customHeaders = new Headers();
 customHeaders.append('Accept', 'application/json');
@@ -26,6 +27,31 @@ const getAPI = async function()
     FillInData(leerkrachtnaam)
 }
 
+const checkthemas = async function()
+{
+    try
+    {
+        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
+        if (data.length == 0)
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "U heeft nog geen thema's!",
+                confirmButtonText: "<div>Ok</div>"
+            })
+        }
+        else 
+        {
+            window.location.href = "niveau.html";
+        }
+    }
+    catch(error)
+    {
+        console.error('An error occured', error);
+    }
+}
+
 const FillInData = function(leerkrachtnaam)
 {
     console.log(leerkrachtnaam)
@@ -37,6 +63,8 @@ const init = function()
 {
     console.log("DOM loaded");
     getAPI();
+    startknop = document.querySelector('#js-startknop')
+    startknop.addEventListener('click', checkthemas)
 };
 
 document.addEventListener('DOMContentLoaded', init);

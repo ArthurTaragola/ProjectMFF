@@ -30,17 +30,6 @@ const getThemas = async function ()
     try
     {
         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
-        if (data.length == 0)
-        {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "U heeft nog geen thema's!",
-                confirmButtonText: "<div id='js-goToQuestionList'>Ok</div>"
-            })
-            goToQuestionList = document.querySelector('#js-goToQuestionList');
-            goToQuestionList.addEventListener('click', function() {window.location.href = "vragenbekijken.html";})
-        }
     }
     catch(error)
     {

@@ -20,7 +20,7 @@ const popup = function()
         title: '<strong>Information</strong>',
         icon: 'info',
         html:
-          'Bekijk de werking van het spel in <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">deze</a> ' +
+          'Bekijk de werking van het spel in <a target="_blank" href="https://youtu.be/mdOHzvXLswo">deze</a> ' +
           'instructie video. ' +
           'Vogel <b>icons</b> kan je <a target="_blank" href="https://www.flaticon.com/packs/bird-collection">hier</a> vinden.<br>' + 
           '<b>Soundeffects</b> vind je <a target="_blank" href="https://freesound.org/home/">hier</a>',

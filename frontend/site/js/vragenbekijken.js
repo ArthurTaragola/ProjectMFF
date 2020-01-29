@@ -2,7 +2,7 @@ let customHeaders = new Headers();
 customHeaders.append('Accept', 'application/json');
 
 let questionList;
-let thema = 1;
+let thema = 0;
 let niveau = 1;
 let firstThema = true;
 
@@ -376,7 +376,7 @@ const getThemas = async function()
           themaList.push(data[k]);
           console.log("go in")
       }
-      if (firstThema)
+      if (firstThema && data.length != 0)
       {
           thema = themaList[0].themaId;
           firstThema = false;
@@ -443,7 +443,7 @@ const fillInThemas = function (data)
     }
     else
     {
-      let htmlThema = `<select id='js-themas'><option value=0>Geen themas</option></select>`;
+      let htmlThema = `<select id='thema'><option value=0>Geen themas</option></select>`;
       document.getElementById("js-themaSelect").innerHTML = htmlThema;
       document.getElementById("js-themaSelect1").innerHTML = htmlThema;
     }
@@ -682,14 +682,14 @@ const deleteThema = async function (themaId)
         method: 'DELETE',
     })
 
-    setTimeout(() => {
+    setTimeout(async function() {
+        await getThemas();
         getAPI(thema, niveau);
         Swal.fire(
             'Verwijderd!',
             'Het thema en de bijhorende vragen zijn verwijderd.',
             'success'
         )
-        getThemas();
     }, 500);
 }
 
@@ -1005,7 +1005,7 @@ const submitQuestion = async function ()
             yellowButton('js-validThemeSelectEditQuestion');
         }
         getThemes();
-        if (themas.length == 0)
+        if (themaList.length == 0)
         {
             grayButton("js-validThemeSelect");
         }
@@ -1048,6 +1048,7 @@ const submitTheme = function ()
                 document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
                 document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
 
+                showNiveaus();
                 getAPI(thema, niveau);
                 getThemas();
             }
@@ -1117,7 +1118,7 @@ const updateQuestion = function ()
         "Niveau": niveau,
         "ThemaId": thema
     }));
-    xhr.onreadystatechange = function ()
+    xhr.onreadystatechange = async function ()
     {
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
         {
@@ -1129,7 +1130,7 @@ const updateQuestion = function ()
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;
             document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
             
-            getThemas();
+            getThemes();
             showNiveaus();
             getAPI(thema, niveau);
         }

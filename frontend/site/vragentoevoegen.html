@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ed7272">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Move For Fortune - VragenToevoegen</title>
+
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+
+    <script src="js/vragentoevoegen.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-inline" id='js-addQuestion'>
+            <div id="js-title">
+                <h1 class="card-title">Nieuwe vraag:</h1>
+            </div>
+            <form class= "card-inputs" id="js-newQuestion" action="" onsubmit="return false">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Vraag: </label> <br><br>
+                    <input class= "card-input-field c-input"type="text" id="vraag" required>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="juist">Juist antwoord: </label> <br><br>
+                    <input class= "card-input-field c-input"type="text" id="juistantwoord" required>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Verkeerd antwoord 1: </label> <br><br>
+                    <input class= "card-input-field c-input"type="text" id="verkeerdantwoord1" required>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Verkeerd antwoord 2: </label> <br><br>
+                    <input class= "card-input-field c-input"type="text" id="verkeerdantwoord2" required>
+                </div>
+                <button class= "card-button" id="js-validInputs" onclick="submitQuestion()">Volgende</button> 
+            </form>
+            <form class= "card-inputs2" id='js-selectTheme' action="" onsubmit="return false">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="Niveau">Niveau: </label> <br><br>
+                    <select class="card-input-option c-dropdown" id='niveau'>
+                        <option value="1">Niveau 1</option>
+                        <option value="2">Niveau 2</option>
+                        <option value="3">Niveau 3</option>
+                    </select>
+                </div>
+                <div class= "card-input">
+                    <label class= "card-vraag" for="Thema">Thema:</label> <br><br>
+                    <select class="card-input-option c-dropdown" id='thema'>
+
+                    </select>
+                </div>
+                <div class="card-toevoegen js-newTheme">Voeg een nieuw thema toe</div>
+                <button class= "card-button" id="js-validThemeSelect" onclick="submitTheme()">Toevoegen</button>
+            </form>
+            <form class= "card-inputs3" action="" id='js-addThema' onsubmit="return false">
+                <div class= "card-input">
+                    <label class= "card-vraag" for="vraag">Nieuw thema: </label> <br><br>
+                    <input class= "card-input-field c-input"type="text" id="nieuwthema" required>
+                </div>
+                <button class= "card-thema-toevoegen" id="js-validThemeInput" onclick="submitNewTheme()">Toevoegen</button>
+            </form>
+        </div>
+        <div class="card-thema-toegevoegd" id='js-themaSuccessfullAdded'>
+            <h1 class= "card-toegevoegd">Nieuw thema is <br> succesvol toegevoegd!</h1>
+            <button class= "card-button js-goBackToPreviousPage">Volgende</button>
+        </div>
+        <div class="card-einde" id='js-questionSuccessfullAdded'>
+            <h1 class= "card-toegevoegd">Nieuwe vraag <br> succesvol toegevoegd!</h1>
+            <button class= "card-button js-goBackToList">Volgende</button>
+        </div>
+    </div>
+</body>
+</html>

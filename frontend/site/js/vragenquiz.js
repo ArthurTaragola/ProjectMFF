@@ -20,6 +20,9 @@ let questionList = [];
 let pointsTeam1;
 let pointsTeam2;
 
+let amountOfQuestions;
+let currentQuestion;
+
 let audioTeam1 = new Audio('sounds/Moo.mp3');
 let audioTeam2 = new Audio('sounds/Quack.mp3');
 let audioloading = new Audio('sounds/countdown.aac')
@@ -41,6 +44,11 @@ const loadbar = function()
     });
 }
 
+const showProgress = function()
+{
+    document.getElementById('js-progress').innerHTML = `Vraag ${currentQuestion} van ${amountOfQuestions}`;
+}
+
 const fetchData = function(url)
 {
     return fetch(url, {headers: customHeaders})
@@ -52,7 +60,7 @@ const getAPI = async function()
 {
     team1answered = false;
     team2answered = false;
-    console.log(themaList.length)
+    //console.log(themaList.length)
     for (let i = 0; i < themaList.length; i++)
     {
         try
@@ -68,7 +76,9 @@ const getAPI = async function()
             console.error('An error occured', error);
         }
     }
-    console.log(questionList);
+    //console.log(questionList);
+    amountOfQuestions = questionList.length;
+    localStorage.setItem("amountOfQuestions", JSON.stringify(amountOfQuestions));
     getData();
 }
 
@@ -270,34 +280,39 @@ const bothTeamsAnswered = function()
 
 const goToNewPage = function ()
 {
-    console.log(questionList);
+    //console.log(questionList);
     localStorage.setItem("pointsTeam1", JSON.stringify(pointsTeam1));
     localStorage.setItem("pointsTeam2", JSON.stringify(pointsTeam2));
     localStorage.setItem("questions", JSON.stringify(questionList));
     localStorage.setItem("firstQuestion", JSON.stringify(false));
+    localStorage.setItem("currentQuestion", JSON.stringify(currentQuestion += 1))
     window.location.href = "Scoreboard.html";
 }
 
-const init = function()
+const init = async function()
 {
     console.log("DOM Loaded");
     let firstQuestion = JSON.parse(localStorage.getItem("firstQuestion"));
-    console.log(firstQuestion);
+    //console.log(firstQuestion);
+    currentQuestion = JSON.parse(localStorage.getItem("currentQuestion"));
+    //console.log(currentQuestion);
     if (firstQuestion)
     {
         themaList =  JSON.parse(localStorage.getItem("thema's"));
         pointsTeam1 = 0;
         pointsTeam2 = 0;
-        getAPI();
+        await getAPI();
     }
     else
     {
         questionList = JSON.parse(localStorage.getItem("questions"));
         pointsTeam1 = JSON.parse(localStorage.getItem("pointsTeam1"));
         pointsTeam2 = JSON.parse(localStorage.getItem("pointsTeam2"));
+        amountOfQuestions = JSON.parse(localStorage.getItem("amountOfQuestions"));
         getData();
     }
 
+    setTimeout(() => {showProgress();}, 200);
     loadbar();
     setTimeout(() => {document.addEventListener("keydown", keyPressed, false);}, 10000);
 }

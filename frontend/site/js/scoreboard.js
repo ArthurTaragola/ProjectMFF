@@ -194,6 +194,14 @@ const goToHomePage = function ()
     }
 }
 
+const goHomebutton = function()
+{
+    if(leerkrachtId == 25)
+    {
+        document.getElementById("js-home").href = "index.html";
+    }
+}
+
 const keyPressed = function (e)
 {
     if (e.code == 'Space' || e.key == 'Enter')
@@ -213,6 +221,7 @@ const init = async function()
     pointsTeam2 = JSON.parse(localStorage.getItem("pointsTeam2"));
     questionList = JSON.parse(localStorage.getItem("questions"));
     checkQuestions();
+    goHomebutton();
     await loadGraph();
     document.addEventListener("keydown", keyPressed, false);
     if (!quizIsFinished)

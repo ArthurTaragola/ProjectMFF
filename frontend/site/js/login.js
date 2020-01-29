@@ -121,14 +121,14 @@ const DoSubmit = function()
             }));
         xhr.onreadystatechange = function ()
         {
-            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+            if(xhr.readyState == XMLHttpRequest.DONE)
             {
-                document.getElementById("js-loginButton").innerHTML = "Login";
-                yellowButton();
                 response = xhr.responseText; 
                 console.log(response);
                 if (response == parseInt(response, 10))
                 {
+                    document.getElementById("js-loginButton").innerHTML = "Login";
+                    yellowButton();
                     console.log("succesfull login");
                     localStorage.setItem("leerkrachtId", response);
                     window.location.href = "quiz.html";
@@ -140,7 +140,9 @@ const DoSubmit = function()
                         icon: 'error',
                         title: 'Oops...',
                         text: response
-                      })
+                    })
+                    document.getElementById("js-loginButton").innerHTML = "Login";
+                    yellowButton();
                 }
             }
         }

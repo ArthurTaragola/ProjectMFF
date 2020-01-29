@@ -149,6 +149,10 @@ input[type=checkbox]:checked + label {
     text-align: left;
 }
 
+.c-score-vogel{
+    display: none;
+}
+
 .c-vragen{
     font-size: 48px;
 }
@@ -311,6 +315,11 @@ input[type=checkbox]:checked + label {
     grid-template-rows: auto auto auto auto auto auto; */
 }
 
+.c-card-reg{
+    height: 560px;
+    padding-bottom: 0;
+}
+
 .c-card-item__input{
     width: 94%;
     font-size: 16px;
@@ -324,6 +333,10 @@ input[type=checkbox]:checked + label {
 }
 
 .c-add-question{
+    cursor: pointer;
+}
+
+.c-add-thema{
     cursor: pointer;
 }
 
@@ -344,7 +357,7 @@ input[type=checkbox]:checked + label {
 }
 
 .c-card-item__btnregistreren{
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .c-card-item__form{
@@ -517,6 +530,21 @@ input:focus {
     left: 50%;
     margin-left: -80px;
   }
+
+ .swal2-html-container{
+     color: var(--color-text-alpha);
+ }
+
+ .swal2-title{
+     color:  var(--color-text-alpha);
+ }
+
+  .swal2-html-container :link
+  {
+      text-decoration: underline !important;
+  }
+
+  
 
   .testklasse{
       border: solid 1px black;

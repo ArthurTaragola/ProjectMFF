@@ -153,10 +153,10 @@ function DoSubmit()
                             icon: 'success',
                             title: 'Succes',
                             html: 'Uw account is succesvol aangemaakt! </br> U kunt nu inloggen',
-                            confirmButtonText: "<div id='js-goToLogin'>Ok</div>"
+                            confirmButtonText: "Ok"
                         })
-                        goToLogin = document.querySelector('#js-goToLogin');
-                        goToLogin.addEventListener('click', function() {window.location.href = "login.html";})
+                        goToLogin = document.querySelector('.swal2-confirm');
+                        goToLogin.addEventListener('click', function () {window.location.href = "login.html"});
                     }
                     else
                     {

@@ -14,11 +14,6 @@ let previousid;
 let deleteQuerySelector;
 
 
-let questionValue;
-let correctAnswerValue;
-let wrongAnswer1Value;
-let wrongAnswer2Value;
-
 let themas;
 let themaIndexes;
 
@@ -37,7 +32,7 @@ let leerkrachtId = localStorage.getItem("leerkrachtId");
 
 
 
-const DropDown3 = async function ()
+const DropDown3 = function ()
 {
     //await getThemas();
     var x, i, j, selElmnt, a, b, c;
@@ -118,7 +113,7 @@ const DropDown3 = async function ()
     document.addEventListener("click", closeAllSelect);
 }
 
-const DropDown2 = async function()
+const DropDown2 = function()
 {
   var x, i, j, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
@@ -197,7 +192,7 @@ const DropDown2 = async function()
   document.addEventListener("click", closeAllSelect);
 }
 
-const DropDown1 = async function()
+const DropDown1 = function()
 {
   //await getThemas();
     var x, i, j, selElmnt, a, b, c;
@@ -773,24 +768,26 @@ var finish = document.getElementById("js-buttonQuestionAddedSuccessfully");
 btn.addEventListener("click", function() {
   newQuestion = true;
   modal.style.display = "block";
-  document.getElementById('js-newQuestion').style.display = 'block';
+  document.getElementById('js-newQuestion').style.display = 'none';
   document.getElementById('js-title').style.display = 'block';
   document.getElementById("js-title").innerHTML = `<h1 class="c-title">Nieuwe vraag:</h1>`;
-  document.getElementById('js-selectTheme').style.display = 'none';
+  document.getElementById('js-selectTheme').style.display = 'block';
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
   document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
   finish.style.display = 'none';
 
-  document.getElementById("vraag").value = '';
-  document.getElementById("jantw").value = '';
-  document.getElementById("vantw1").value = '';
-  document.getElementById("vantw2").value = '';
+  showNiveausAndThemas();
 
-  eventListenersValid = [false, false, false, false];
-  alleventListenersValid = false;
-  grayButton('js-validInputs');
+//   document.getElementById("vraag").value = '';
+//   document.getElementById("jantw").value = '';
+//   document.getElementById("vantw1").value = '';
+//   document.getElementById("vantw2").value = '';
+
+//   eventListenersValid = [false, false, false, false];
+//   alleventListenersValid = false;
+  //grayButton('js-validInputs');
 });
 
 // When the user clicks on <span> (x), close the modal
@@ -831,15 +828,17 @@ var finish = document.getElementById("js-buttonQuestionAddedSuccessfully");
 btn.addEventListener("click", function() {
   newQuestion = false;
   modal.style.display = "block";
-  document.getElementById('js-newQuestion').style.display = 'block';
+  document.getElementById('js-newQuestion').style.display = 'none';
   document.getElementById('js-title').style.display = 'block';
   document.getElementById("js-title").innerHTML = `<h1 class="c-title">Vraag aanpassen:</h1>`;
-  document.getElementById('js-selectTheme').style.display = 'none';
+  document.getElementById('js-selectTheme').style.display = 'block';
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-addThema').style.display = 'none';
   document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
   document.getElementById('js-questionAddedSuccessfully').style.display = 'none';
   finish.style.display = 'none';
+
+  showNiveausAndThemas();
   
   if (item2 === '')
   {
@@ -880,8 +879,22 @@ finish.addEventListener("click",function() {
 
 }; //end edit question
 
-
-
+const showNiveausAndThemas = async function()
+{
+    document.getElementById("js-themaSelect1").innerHTML = ``;
+    showNiveaus();
+    
+    await getThemas();
+    getThemes();
+    if (themaList.length == 0)
+    {
+        grayButton("js-validThemeSelect");
+    }
+    else
+    {
+        yellowButton("js-validThemeSelect");
+    }
+}
 
 
 const enableListeners = function()
@@ -970,49 +983,85 @@ const yellowButton = function (buttonId)
 }
 
 
-const submitQuestion = async function ()
+const submitQuestion = function ()
 {
     if (alleventListenersValid)
     {
         //thema = themaList[0].themaId;
         //niveau = 1;
 
-        questionValue = document.getElementById("vraag").value;
-        correctAnswerValue = document.getElementById("jantw").value;
-        wrongAnswer1Value = document.getElementById("vantw1").value;
-        wrongAnswer2Value = document.getElementById("vantw2").value;
-        document.getElementById('js-newQuestion').style.display = 'none';
-        document.getElementById('js-selectTheme').style.display = 'block';
+        let questionValue = document.getElementById("vraag").value;
+        let correctAnswerValue = document.getElementById("jantw").value;
+        let wrongAnswer1Value = document.getElementById("vantw1").value;
+        let wrongAnswer2Value = document.getElementById("vantw2").value;
 
-        document.getElementById("js-themaSelect1").innerHTML = ``;
-        showNiveaus();
+        if (thema != 0)
+        {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                "Vraagstelling": questionValue,
+                "JuistAntwoord": correctAnswerValue,
+                "FoutAntwoord1": wrongAnswer1Value,
+                "FoutAntwoord2": wrongAnswer2Value,
+                "Niveau": niveau,
+                "ThemaId": thema
+            }));
+            xhr.onreadystatechange = function ()
+            {
+                if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+                {
+                    console.log("the question has succesfully been added");
+                    //document.getElementById('js-newQuestion').style.display = 'block';
+                    document.getElementById('js-newQuestion').style.display = 'none';
+                    document.getElementById('js-title').style.display = 'none';
+                    document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
+                    document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
+                    document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
+
+                    showNiveaus();
+                    getAPI(thema, niveau);
+                    getThemas();
+                }
+                else if (xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    console.log("something went wrong, please try again later");
+                }
+            }
+        }
+        // document.getElementById('js-newQuestion').style.display = 'none';
+        // document.getElementById('js-selectTheme').style.display = 'block';
+
+        // document.getElementById("js-themaSelect1").innerHTML = ``;
+        // showNiveaus();
         
-        console.log(thema);
-        await getThemas();
-        // if (themaList[0] != null)
+        // console.log(thema);
+        // await getThemas();
+        // // if (themaList[0] != null)
+        // // {
+        // //     getAPI(thema, niveau);
+        // // }
+        // if (newQuestion)
         // {
-        //     getAPI(thema, niveau);
+        //     document.getElementById('js-validThemeSelect').style.display = 'block';
+        //     document.getElementById('js-validThemeSelectEditQuestion').style.display = 'none';
         // }
-        if (newQuestion)
-        {
-            document.getElementById('js-validThemeSelect').style.display = 'block';
-            document.getElementById('js-validThemeSelectEditQuestion').style.display = 'none';
-        }
-        else
-        {
-            document.getElementById('js-validThemeSelect').style.display = 'none';
-            document.getElementById('js-validThemeSelectEditQuestion').style.display = 'block';
-            yellowButton('js-validThemeSelectEditQuestion');
-        }
-        getThemes();
-        if (themaList.length == 0)
-        {
-            grayButton("js-validThemeSelect");
-        }
-        else
-        {
-            yellowButton("js-validThemeSelect");
-        }
+        // else
+        // {
+        //     document.getElementById('js-validThemeSelect').style.display = 'none';
+        //     document.getElementById('js-validThemeSelectEditQuestion').style.display = 'block';
+        //     yellowButton('js-validThemeSelectEditQuestion');
+        // }
+        // getThemes();
+        // if (themaList.length == 0)
+        // {
+        //     grayButton("js-validThemeSelect");
+        // }
+        // else
+        // {
+        //     yellowButton("js-validThemeSelect");
+        // }
     }
 }
 
@@ -1023,41 +1072,65 @@ const submitTheme = function ()
     console.log(niveau);
     console.log(thema);
 
-    if (thema != 0)
+    document.getElementById('js-newQuestion').style.display = 'block';
+    document.getElementById('js-selectTheme').style.display = 'none';
+    
+    if (newQuestion)
     {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            "Vraagstelling": questionValue,
-            "JuistAntwoord": correctAnswerValue,
-            "FoutAntwoord1": wrongAnswer1Value,
-            "FoutAntwoord2": wrongAnswer2Value,
-            "Niveau": niveau,
-            "ThemaId": thema
-        }));
-        xhr.onreadystatechange = function ()
-        {
-            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
-            {
-                console.log("the question has succesfully been added");
-                //document.getElementById('js-newQuestion').style.display = 'block';
-                document.getElementById('js-selectTheme').style.display = 'none';
-                document.getElementById('js-title').style.display = 'none';
-                document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
-                document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
-                document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
+        document.getElementById('js-validInputs').style.display = 'block';
+        document.getElementById('js-validInputs2').style.display = 'none';
 
-                showNiveaus();
-                getAPI(thema, niveau);
-                getThemas();
-            }
-            else if (xhr.readyState == XMLHttpRequest.DONE)
-            {
-                console.log("something went wrong, please try again later");
-            }
-        }
+        document.getElementById("vraag").value = '';
+        document.getElementById("jantw").value = '';
+        document.getElementById("vantw1").value = '';
+        document.getElementById("vantw2").value = '';
+    
+        eventListenersValid = [false, false, false, false];
+        alleventListenersValid = false;
+        grayButton('js-validInputs');
     }
+    else
+    {
+        document.getElementById('js-validInputs').style.display = 'none';
+        document.getElementById('js-validInputs2').style.display = 'block';
+        yellowButton('js-validInputs2');
+    }
+
+    // if (thema != 0)
+    // {
+    //     let xhr = new XMLHttpRequest();
+    //     xhr.open("POST", "https://moveforfortunefunction.azurewebsites.net/api/v2/vragen");
+    //     xhr.setRequestHeader('Content-Type', 'application/json');
+    //     xhr.send(JSON.stringify({
+    //         "Vraagstelling": questionValue,
+    //         "JuistAntwoord": correctAnswerValue,
+    //         "FoutAntwoord1": wrongAnswer1Value,
+    //         "FoutAntwoord2": wrongAnswer2Value,
+    //         "Niveau": niveau,
+    //         "ThemaId": thema
+    //     }));
+    //     xhr.onreadystatechange = function ()
+    //     {
+    //         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+    //         {
+    //             console.log("the question has succesfully been added");
+    //             //document.getElementById('js-newQuestion').style.display = 'block';
+    //             document.getElementById('js-selectTheme').style.display = 'none';
+    //             document.getElementById('js-title').style.display = 'none';
+    //             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
+    //             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Nieuwe vraag is succesvol toegevoegd!</h1>`;
+    //             document.getElementById("js-buttonQuestionAddedSuccessfully").style.display = 'block';
+
+    //             showNiveaus();
+    //             getAPI(thema, niveau);
+    //             getThemas();
+    //         }
+    //         else if (xhr.readyState == XMLHttpRequest.DONE)
+    //         {
+    //             console.log("something went wrong, please try again later");
+    //         }
+    //     }
+    // }
 }
 
 const submitNewTheme = function ()
@@ -1107,6 +1180,11 @@ const updateQuestion = function ()
     console.log(niveau);
     console.log(thema);
 
+    let questionValue = document.getElementById("vraag").value;
+    let correctAnswerValue = document.getElementById("jantw").value;
+    let wrongAnswer1Value = document.getElementById("vantw1").value;
+    let wrongAnswer2Value = document.getElementById("vantw2").value;
+
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", `https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${questionData.vraagId}`);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -1118,13 +1196,13 @@ const updateQuestion = function ()
         "Niveau": niveau,
         "ThemaId": thema
     }));
-    xhr.onreadystatechange = async function ()
+    xhr.onreadystatechange =  function ()
     {
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
         {
             console.log("the question has succesfully been added");
             //document.getElementById('js-newQuestion').style.display = 'block';
-            document.getElementById('js-selectTheme').style.display = 'none';
+            document.getElementById('js-newQuestion').style.display = 'none';
             document.getElementById('js-title').style.display = 'none';
             document.getElementById('js-questionAddedSuccessfully').style.display = 'block';
             document.getElementById("js-questionAddedSuccessfully").innerHTML = `<h1 class="c-title">Vraag is succesvol aangepast!</h1>`;

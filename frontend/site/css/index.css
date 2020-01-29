@@ -331,6 +331,10 @@ input[type=checkbox]:checked + label {
     cursor: pointer;
 }
 
+.c-add-thema{
+    cursor: pointer;
+}
+
 .c-card-item__person{
     margin: 32px;
     display: flex;

@@ -36,8 +36,11 @@ const getThemas = async function ()
                 icon: 'error',
                 title: 'Oops...',
                 text: "U heeft nog geen thema's!",
-                confirmButtonText: "<a href='vragenbekijken.html' style = 'color: white';>Ok</a>"
-              })
+                confirmButtonText: "Ok"
+            })
+            goToQuestionList = document.querySelector('.swal2-confirm');
+            goToQuestionList.addEventListener('click', function () {window.location.href = "vragenbekijken.html"});
+
         }
     }
     catch(error)

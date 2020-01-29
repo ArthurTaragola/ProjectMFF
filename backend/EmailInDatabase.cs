@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.WebJobs;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
@@ -8,7 +9,8 @@ namespace MoveForFortune
 {
     public class EmailInDatabase
     {
-       public static async Task<bool> EmailokAsync(string email)
+        [FunctionName("EmailInDatabase")]
+        public static async Task<bool> EmailokAsync(string email)
         {
             bool returnValue = false;
             using (SqlConnection connection = new SqlConnection(Environment.GetEnvironmentVariable("ServerConnectionString")))

@@ -36,7 +36,7 @@ const toggleStatus = function(item, thema)
         if (themaList.length == 0)
         {
             oneThemeSelected = false;
-            console.log("leeg");
+            //console.log("leeg");
             grayButton();
         }
     }
@@ -93,6 +93,7 @@ const goToNewPage = function ()
     {
         localStorage.setItem("thema's",  JSON.stringify(themaList));
         localStorage.setItem("firstQuestion",  JSON.stringify(true));
+        localStorage.setItem("currentQuestion", JSON.stringify(1));
         window.location.href = "vragenquiz.html";
     }
     else

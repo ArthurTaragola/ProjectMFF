@@ -22,26 +22,26 @@ const checkValue = function(index)
 {
     if (isEmpty(eventListeners[index].value))
     {
-        console.log('leeg');
+        //console.log('leeg');
         eventListenersValid[index] = false;
         if (alleventListenersValid)
         {
             alleventListenersValid = false;
             grayButton('js-validInputs');
-            console.log("you can't post now");
+            //console.log("you can't post now");
         }
     }
     else
     {
         if (!eventListenersValid[index])
         {
-            console.log('niet leeg');
+            //console.log('niet leeg');
             eventListenersValid[index] = true;
             if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && eventListenersValid[3] && emailValid)
             {
                 alleventListenersValid = true;
                 yellowButton('js-validInputs');
-                console.log("you can post now");
+                //console.log("you can post now");
             }
         }
     }
@@ -56,13 +56,13 @@ const checkEmailAddress = function()
     {
         if (!emailValid)
         {
-            console.log("valid email");
+            //console.log("valid email");
             emailValid = true;
             if (eventListenersValid[0] && eventListenersValid[1] && eventListenersValid[2] && eventListenersValid[3] && emailValid)
             {
                 alleventListenersValid = true;
                 yellowButton('js-validInputs');
-                console.log("you can post now");
+                //console.log("you can post now");
             }
         }
     }
@@ -73,7 +73,7 @@ const checkEmailAddress = function()
             emailValid = false;
             alleventListenersValid = false;
             grayButton('js-validInputs');
-            console.log('Invalid emailaddress');
+            //console.log('Invalid emailaddress');
         }
 	}
 }

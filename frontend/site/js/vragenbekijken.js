@@ -369,27 +369,17 @@ const getThemas = async function()
       for (let k = 0; k < data.length; k++)
       {
           themaList.push(data[k]);
-          console.log("go in")
       }
       if (firstThema && data.length != 0)
       {
           thema = themaList[0].themaId;
           firstThema = false;
       }
-      console.log(thema)
-    //   if (data.length != 0)
-    //   {
-    //     thema = data[0].themaId;
-    //   }
-    //   else
-    //   {
-    //     thema = 0;
-    //   }
       if (data.length == 0)
       {
         thema = 0;
       }
-      console.log(thema);
+      //console.log(thema);
       console.log(themaList);
   }
   catch(error)
@@ -409,8 +399,8 @@ const fillInThemas = function (data)
         if (thema != 'all')
         {
             index = themaList.findIndex(x => x.themaId == thema);
-            console.log(index)
-            console.log(thema)
+            //console.log(index)
+            //console.log(thema)
 
             htmlThema = `<select id='js-themas'>`;
             htmlThema += `<option value="${data[index].themaId}">${data[index].naam}</option>`;
@@ -488,7 +478,7 @@ const getAPI = async function(thema, niveau)
       const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${themaList[j].themaId}`);
       questionList.push(data);
     }
-    console.log(questionList);
+    //console.log(questionList);
     fillInAllQuestions();
   }
 }
@@ -660,7 +650,7 @@ const confirmation = function (thema)
 const deleteThema = async function (themaId)
 {
     //confirmation verwijder elke vraag van dit thema, ook met andere niveaus
-    console.log(themaId);
+    //console.log(themaId);
     for(let i = 1; i < 4; i++)
     {
         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${i}/${themaId}`);
@@ -693,7 +683,7 @@ function myFunction(id, item1, item2 = "")
 {
   if (statuspopup == false)
   {
-    console.log("show");
+    //console.log("show");
     console.log(`.js-delete${id}`);
     console.log(`#js-update${item1}`);
     console.log(`${item2}`);
@@ -709,7 +699,7 @@ function myFunction(id, item1, item2 = "")
   }
   else
   {
-    console.log("hide");
+    //console.log("hide");
     var popup = document.getElementById(`myPopup${previousid}`);
     popup.classList.toggle("show");
     statuspopup = false;
@@ -722,7 +712,7 @@ function myFunction(id, item1, item2 = "")
 
 const deleteQuestion = function (id, getQuestions)
 {
-  console.log(id);
+  //console.log(id);
   fetch('https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/' + id, {
     method: 'DELETE',
   })
@@ -751,7 +741,7 @@ const updateQuestion = function (item1, item2 = '')
 
 const addQuestion = function ()
 {
-    console.log("vraag toevoegen")
+    //console.log("vraag toevoegen")
     // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -849,7 +839,6 @@ btn.addEventListener("click", function() {
       console.log(item1, item2)
     questionData = questionList[item1][item2];
   }
-  console.log();
   document.getElementById("vraag").value = questionData.vraagstelling;
   document.getElementById("jantw").value = questionData.juistAntwoord;
   document.getElementById("vantw1").value = questionData.foutAntwoord1;
@@ -1226,7 +1215,7 @@ const updateQuestion = function ()
 
 const getThemes = async function ()
 {
-    console.log(thema);
+    //console.log(thema);
     themas = [];
     themaIndexes = [];
     try
@@ -1258,42 +1247,42 @@ const showThemes = function ()
 
         let selectThema = document.getElementById("thema");
         selectThema.innerHTML = htmlTheme;
-        console.log(thema)
-        console.log(noNewThemes);
+        //console.log(thema)
+        //console.log(noNewThemes);
         if (!noNewThemes)
         {
             thema = themaList[themaList.length - 1].themaId;
             console.log("selected thema: "+(themas.length-1).toString())
-            console.log(thema);
+            //console.log(thema);
         }
-        else
-        {
-            if (thema == 'all')
-            {
-                //index = themaIndexes[0];
-            }
-            if (newQuestion)
-            {
-                console.log(themaIndexes.indexOf(parseInt(thema,10)))
-                //index = themaIndexes.indexOf(parseInt(thema,10));
-            }
-            // else
-            // {
-            //     thema = themaIndexes.indexOf(parseInt(questionData.themaId,10));
-            // }
-        }
-        console.log(thema)
+        // else
+        // {
+        //     if (thema == 'all')
+        //     {
+        //         //index = themaIndexes[0];
+        //     }
+        //     if (newQuestion)
+        //     {
+        //         console.log(themaIndexes.indexOf(parseInt(thema,10)))
+        //         //index = themaIndexes.indexOf(parseInt(thema,10));
+        //     }
+        //     // else
+        //     // {
+        //     //     thema = themaIndexes.indexOf(parseInt(questionData.themaId,10));
+        //     // }
+        // }
+        //console.log(thema)
         getThemas();
 
-        let selectNiveau = document.getElementById("niveau");
-        if (newQuestion)
-        {
-            //selectNiveau.selectedIndex = niveau-1;
-        }
-        else
-        {
-            //selectNiveau.selectedIndex = questionData.niveau-1;
-        }
+        // let selectNiveau = document.getElementById("niveau");
+        // if (newQuestion)
+        // {
+        //     //selectNiveau.selectedIndex = niveau-1;
+        // }
+        // else
+        // {
+        //     //selectNiveau.selectedIndex = questionData.niveau-1;
+        // }
     }
     else
     {

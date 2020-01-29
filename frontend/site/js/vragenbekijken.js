@@ -369,27 +369,17 @@ const getThemas = async function()
       for (let k = 0; k < data.length; k++)
       {
           themaList.push(data[k]);
-          console.log("go in")
       }
       if (firstThema && data.length != 0)
       {
           thema = themaList[0].themaId;
           firstThema = false;
       }
-      console.log(thema)
-    //   if (data.length != 0)
-    //   {
-    //     thema = data[0].themaId;
-    //   }
-    //   else
-    //   {
-    //     thema = 0;
-    //   }
       if (data.length == 0)
       {
         thema = 0;
       }
-      console.log(thema);
+      //console.log(thema);
       console.log(themaList);
   }
   catch(error)
@@ -409,8 +399,8 @@ const fillInThemas = function (data)
         if (thema != 'all')
         {
             index = themaList.findIndex(x => x.themaId == thema);
-            console.log(index)
-            console.log(thema)
+            //console.log(index)
+            //console.log(thema)
 
             htmlThema = `<select id='js-themas'>`;
             htmlThema += `<option value="${data[index].themaId}">${data[index].naam}</option>`;
@@ -488,7 +478,7 @@ const getAPI = async function(thema, niveau)
       const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${niveau}/${themaList[j].themaId}`);
       questionList.push(data);
     }
-    console.log(questionList);
+    //console.log(questionList);
     fillInAllQuestions();
   }
 }
@@ -585,10 +575,10 @@ const fillInAllQuestions = function ()
   {
     htmlQuestion += `<table class="c-title-table">
     <tr>
-        <th colspan="8" style="text-align: left; background-color: #F5E559">
+        <th colspan="8" style="text-align: left; background-color: #E6CF01">
           ${themaList[i].naam}
         </th>
-        <td style="text-align: right; background-color: #F5E559"">
+        <td style="text-align: right; background-color: #E6CF01">
             <div class="js-deleteThema${themaList[i].themaId}">
                 <svg style="margin-bottom: -4px; margin-right:8px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#08518B" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path fill="none" d="M0 0h24v24H0z"/></svg>
             </div>
@@ -660,7 +650,7 @@ const confirmation = function (thema)
 const deleteThema = async function (themaId)
 {
     //confirmation verwijder elke vraag van dit thema, ook met andere niveaus
-    console.log(themaId);
+    //console.log(themaId);
     for(let i = 1; i < 4; i++)
     {
         const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/${i}/${themaId}`);
@@ -693,7 +683,7 @@ function myFunction(id, item1, item2 = "")
 {
   if (statuspopup == false)
   {
-    console.log("show");
+    //console.log("show");
     console.log(`.js-delete${id}`);
     console.log(`#js-update${item1}`);
     console.log(`${item2}`);
@@ -709,7 +699,7 @@ function myFunction(id, item1, item2 = "")
   }
   else
   {
-    console.log("hide");
+    //console.log("hide");
     var popup = document.getElementById(`myPopup${previousid}`);
     popup.classList.toggle("show");
     statuspopup = false;
@@ -722,7 +712,7 @@ function myFunction(id, item1, item2 = "")
 
 const deleteQuestion = function (id, getQuestions)
 {
-  console.log(id);
+  //console.log(id);
   fetch('https://moveforfortunefunction.azurewebsites.net/api/v1/vragen/' + id, {
     method: 'DELETE',
   })
@@ -751,7 +741,7 @@ const updateQuestion = function (item1, item2 = '')
 
 const addQuestion = function ()
 {
-    console.log("vraag toevoegen")
+    //console.log("vraag toevoegen")
     // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -849,7 +839,6 @@ btn.addEventListener("click", function() {
       console.log(item1, item2)
     questionData = questionList[item1][item2];
   }
-  console.log();
   document.getElementById("vraag").value = questionData.vraagstelling;
   document.getElementById("jantw").value = questionData.juistAntwoord;
   document.getElementById("vantw1").value = questionData.foutAntwoord1;
@@ -1069,31 +1058,34 @@ const submitTheme = function ()
 {
     //let niveauId = document.getElementById("niveau").value;
     //let themaId = document.getElementById("thema").value;
-    console.log(niveau);
-    console.log(thema);
-
-    document.getElementById('js-newQuestion').style.display = 'block';
-    document.getElementById('js-selectTheme').style.display = 'none';
-    
-    if (newQuestion)
+    if (thema != 0)
     {
-        document.getElementById('js-validInputs').style.display = 'block';
-        document.getElementById('js-validInputs2').style.display = 'none';
+        console.log(niveau);
+        console.log(thema);
 
-        document.getElementById("vraag").value = '';
-        document.getElementById("jantw").value = '';
-        document.getElementById("vantw1").value = '';
-        document.getElementById("vantw2").value = '';
-    
-        eventListenersValid = [false, false, false, false];
-        alleventListenersValid = false;
-        grayButton('js-validInputs');
-    }
-    else
-    {
-        document.getElementById('js-validInputs').style.display = 'none';
-        document.getElementById('js-validInputs2').style.display = 'block';
-        yellowButton('js-validInputs2');
+        document.getElementById('js-newQuestion').style.display = 'block';
+        document.getElementById('js-selectTheme').style.display = 'none';
+        
+        if (newQuestion)
+        {
+            document.getElementById('js-validInputs').style.display = 'block';
+            document.getElementById('js-validInputs2').style.display = 'none';
+
+            document.getElementById("vraag").value = '';
+            document.getElementById("jantw").value = '';
+            document.getElementById("vantw1").value = '';
+            document.getElementById("vantw2").value = '';
+        
+            eventListenersValid = [false, false, false, false];
+            alleventListenersValid = false;
+            grayButton('js-validInputs');
+        }
+        else
+        {
+            document.getElementById('js-validInputs').style.display = 'none';
+            document.getElementById('js-validInputs2').style.display = 'block';
+            yellowButton('js-validInputs2');
+        }
     }
 
     // if (thema != 0)
@@ -1223,7 +1215,7 @@ const updateQuestion = function ()
 
 const getThemes = async function ()
 {
-    console.log(thema);
+    //console.log(thema);
     themas = [];
     themaIndexes = [];
     try
@@ -1255,42 +1247,42 @@ const showThemes = function ()
 
         let selectThema = document.getElementById("thema");
         selectThema.innerHTML = htmlTheme;
-        console.log(thema)
-        console.log(noNewThemes);
+        //console.log(thema)
+        //console.log(noNewThemes);
         if (!noNewThemes)
         {
             thema = themaList[themaList.length - 1].themaId;
             console.log("selected thema: "+(themas.length-1).toString())
-            console.log(thema);
+            //console.log(thema);
         }
-        else
-        {
-            if (thema == 'all')
-            {
-                //index = themaIndexes[0];
-            }
-            if (newQuestion)
-            {
-                console.log(themaIndexes.indexOf(parseInt(thema,10)))
-                //index = themaIndexes.indexOf(parseInt(thema,10));
-            }
-            // else
-            // {
-            //     thema = themaIndexes.indexOf(parseInt(questionData.themaId,10));
-            // }
-        }
-        console.log(thema)
+        // else
+        // {
+        //     if (thema == 'all')
+        //     {
+        //         //index = themaIndexes[0];
+        //     }
+        //     if (newQuestion)
+        //     {
+        //         console.log(themaIndexes.indexOf(parseInt(thema,10)))
+        //         //index = themaIndexes.indexOf(parseInt(thema,10));
+        //     }
+        //     // else
+        //     // {
+        //     //     thema = themaIndexes.indexOf(parseInt(questionData.themaId,10));
+        //     // }
+        // }
+        //console.log(thema)
         getThemas();
 
-        let selectNiveau = document.getElementById("niveau");
-        if (newQuestion)
-        {
-            //selectNiveau.selectedIndex = niveau-1;
-        }
-        else
-        {
-            //selectNiveau.selectedIndex = questionData.niveau-1;
-        }
+        // let selectNiveau = document.getElementById("niveau");
+        // if (newQuestion)
+        // {
+        //     //selectNiveau.selectedIndex = niveau-1;
+        // }
+        // else
+        // {
+        //     //selectNiveau.selectedIndex = questionData.niveau-1;
+        // }
     }
     else
     {
@@ -1311,6 +1303,7 @@ const newTheme = function ()
 
 const goBackToThemaSelect = function ()
 {
+    noNewThemes = true;
     document.getElementById('js-themeAddedSuccessfully').style.display = 'none';
     document.getElementById('js-title').style.display = 'block';
     document.getElementById('myBtn').style.display = 'block';
@@ -1320,7 +1313,7 @@ const goBackToThemaSelect = function ()
     document.getElementById("js-title").innerHTML = htmlTitle;
 
     yellowButton("js-validThemeSelect");
-    getThemes();////yolo
+    getThemes();
 }
 
 const init = async function()

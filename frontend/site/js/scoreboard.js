@@ -170,7 +170,7 @@ const goToNewPage = function ()
     }
     else
     {
-        console.log("that's all kids");
+        //console.log("that's all kids");
         if (pointsTeam1 > pointsTeam2)
         {
             console.log("Team 1 wins with a total of "+pointsTeam1);

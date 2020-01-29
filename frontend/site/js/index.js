@@ -16,7 +16,6 @@ const goToRegisterPage = function ()
 
 const popup = function()
 {
-    console.log("okioki")
     Swal.fire({
         title: '<strong>Information</strong>',
         icon: 'info',

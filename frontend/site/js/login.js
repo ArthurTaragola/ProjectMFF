@@ -16,21 +16,21 @@ const checkValue = function()
 {
     if (isEmpty(password.value))
     {
-        console.log('leeg');
+        //console.log('leeg');
         passwordValid = false;
         grayButton('js-validInputs');
-        console.log("you can't post now");
+        //console.log("you can't post now");
     }
     else
     {
         if (!passwordValid)
         {
-            console.log('niet leeg');
+            //console.log('niet leeg');
             passwordValid = true;
             if (passwordValid && emailValid)
             {
                 yellowButton('js-validInputs');
-                console.log("you can post now");
+                //console.log("you can post now");
             }
         }
     }
@@ -45,12 +45,12 @@ const checkEmailAddress = function()
     {
         if (!emailValid)
         {
-            console.log("valid email");
+            //console.log("valid email");
             emailValid = true;
             if (passwordValid && emailValid)
             {
                 yellowButton('js-validInputs');
-                console.log("you can post now");
+                //console.log("you can post now");
             }
         }
     }
@@ -60,7 +60,7 @@ const checkEmailAddress = function()
         {
             emailValid = false;
             grayButton('js-validInputs');
-            console.log('Invalid emailaddress');
+            //console.log('Invalid emailaddress');
         }
 	}
 }
@@ -124,7 +124,7 @@ const DoSubmit = function()
             if(xhr.readyState == XMLHttpRequest.DONE)
             {
                 response = xhr.responseText; 
-                console.log(response);
+                //console.log(response);
                 if (response == parseInt(response, 10))
                 {
                     document.getElementById("js-loginButton").innerHTML = "Login";

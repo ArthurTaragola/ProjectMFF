@@ -153,8 +153,10 @@ function DoSubmit()
                             icon: 'success',
                             title: 'Succes',
                             html: 'Uw account is succesvol aangemaakt! </br> U kunt nu inloggen',
-                            confirmButtonText: "<a href='login.html' style = 'color: white';>Ok</a>"
-                          })
+                            confirmButtonText: "<div id='js-goToLogin'>Ok</div>"
+                        })
+                        goToLogin = document.querySelector('#js-goToLogin');
+                        goToLogin.addEventListener('click', function() {window.location.href = "login.html";})
                     }
                     else
                     {

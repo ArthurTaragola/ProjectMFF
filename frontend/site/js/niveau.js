@@ -25,17 +25,6 @@ const fetchData = function(url)
         .then(r => r.json()) // idem aan: function(r){return r.json()}
         .then(data => data);
 }
-const getThemas = async function ()
-{
-    try
-    {
-        const data = await fetchData(`https://moveforfortunefunction.azurewebsites.net/api/v1/themas/${leerkrachtId}`);
-    }
-    catch(error)
-    {
-        console.error('An error occured', error);
-    }
-}
 
 const init = function()
 {
@@ -47,7 +36,6 @@ const init = function()
     buttonNiveau2.addEventListener('click', function() {goToNewPage(2)});
     buttonNiveau3 = document.querySelector('.js-niveau3');
     buttonNiveau3.addEventListener('click', function() {goToNewPage(3)});
-    getThemas();
 }
 
 document.addEventListener('DOMContentLoaded', init);
